@@ -1,0 +1,14 @@
+generated: '2026-07-20'
+method: searched
+source: https://registry.npmjs.org/live-connect-js
+packages:
+- language: javascript
+  registry: npm
+  name: live-connect-js
+  description: LiveConnect — LiveIntent's first-party identity library for the browser.
+  version: 7.2.0
+  license: Apache-2.0
+  url: https://www.npmjs.com/package/live-connect-js
+  repository: https://github.com/liveintent-berlin/live-connect
+  install: npm install live-connect-js
+  official: true

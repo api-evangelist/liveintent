@@ -1,0 +1,29 @@
+# LiveIntent
+
+> LiveIntent is a people-based email marketing and identity platform serving 2,500+ businesses. It connects marketers and publishers through email-native audience targeting, inventory monetization, and identity resolution across the digital ecosystem. LiveIntent has agreed to be acquired by Zeta Global. The company's primary public developer surface is the open-source LiveConnect first-party identity library rather than a REST API.
+
+## Products
+- People-based email marketing and audience targeting for marketers
+- Email and web inventory monetization for publishers (LiveTag, native ad blueprints)
+- Identity resolution and data solutions (HIRO, email reactivation)
+- LiveConnect first-party identity collection for the browser
+
+## Developer
+- LiveConnect (npm live-connect-js): https://www.npmjs.com/package/live-connect-js
+- LiveConnect source (GitHub): https://github.com/liveintent-berlin/live-connect
+- GitHub organization: https://github.com/LiveIntent
+- Knowledge base / support: https://support.liveintent.com/hc/en-us
+
+## Docs
+- LiveTag implementation and LiveConnect email extension configuration are documented in the knowledge base: https://support.liveintent.com/hc/en-us
+- Partner integrations (Segment, Oracle, Adobe, Merkle, LiveRamp) documented under Partnerships & Integrations in the knowledge base.
+
+## Links
+- Website: https://www.liveintent.com
+- Blog: https://www.liveintent.com/blog/
+- Login: https://platform.liveintent.com/login/
+- Privacy policy: https://www.liveintent.com/privacy-policy/
+
+## Notes
+- No public REST API, OpenAPI specification, MCP server, or OAuth surface is published.
+- Integration is tag-based (LiveTag / LiveConnect JavaScript) plus partner data connectors.
