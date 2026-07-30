@@ -1,8 +1,13 @@
 aid: liveintent
 name: LiveIntent
-description: LiveIntent is a company surfaced as a portfolio company of battery-ventures, bullpen-capital
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: LiveIntent is a people-based email marketing and identity platform serving more than
+  2,500 businesses. It connects marketers and publishers through email-native audience targeting,
+  publisher inventory monetization (LiveTag and native ad blueprints), and identity resolution across
+  the digital ecosystem, including its HIRO first-party data solution and email reactivation services.
+  Its primary public developer surface is the open-source LiveConnect first-party identity library
+  (npm live-connect-js) rather than a REST API, plus partner data integrations with Segment, Oracle,
+  Adobe, Merkle and LiveRamp. LiveIntent has agreed to be acquired by Zeta Global. Backed by Battery
+  Ventures and Bullpen Capital.
 url: https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,11 +16,31 @@ x-backed-by:
 - bullpen-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://www.liveintent.com/favicon.ico
 tags:
 - Company
+- Advertising
+- AdTech
+- Identity
+- Email Marketing
+- Audience
+- Publishers
+- Marketers
+- Data
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -25,3 +50,28 @@ maintainers:
 common:
 - type: Website
   url: https://www.liveintent.com
+- type: Blog
+  url: https://www.liveintent.com/blog/
+- type: Support
+  url: https://support.liveintent.com/hc/en-us
+- type: Documentation
+  url: https://support.liveintent.com/hc/en-us
+- type: Login
+  url: https://platform.liveintent.com/login/
+- type: PrivacyPolicy
+  url: https://www.liveintent.com/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/LiveIntent
+- type: Packages
+  url: packages/liveintent-packages.yml
+- type: SDKs
+  url: packages/liveintent-packages.yml
+- type: DomainSecurity
+  url: security/liveintent-domain-security.yml
+- type: LLMsTxt
+  url: llms/liveintent-llms.txt
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 3
+  pass: local-v1
