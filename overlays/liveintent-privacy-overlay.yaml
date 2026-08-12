@@ -1,0 +1,75 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the LiveIntent Privacy Management API
+  version: 1.0.0
+x-generated: '2026-08-12'
+x-method: generated
+x-source: >-
+  Derived from openapi/liveintent-privacy-openapi.yml, harvested from the
+  embedded Redocly state at https://privacy.liadm.com/api-guide on 2026-08-12.
+  This overlay records API Evangelist annotations only; it never mutates the
+  harvested document.
+extends: openapi/liveintent-privacy-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-source: https://privacy.liadm.com/api-guide
+    x-apievangelist-ownership: >-
+      Verified LiveIntent's own contract despite the liadm.com domain:
+      info.title is "LiveIntent Privacy Management API", and LiveIntent's own
+      knowledge base article at
+      support.liveintent.com/liveintent-privacy-management-api/ links to
+      privacy.liadm.com/api-guide as "LiveIntent's updated Privacy API
+      documentation". liadm.com is LiveIntent's identity-serving domain.
+- target: $.info
+  update:
+    x-apievangelist-gaps:
+      operation_ids: >-
+        None of the 8 operations declares an operationId.
+      examples: No request or response example is present on any operation.
+      deprecation_flags: >-
+        POST /dsr, GET /oath and GET /submit are described in the Legacy tag as
+        "deprecated and should not be used for new integrations" but none
+        carries deprecated: true, so the deprecation is invisible to any tool
+        reading only the document.
+      staging_server_malformed: >-
+        servers[1].url is the bare string "privacy-test.liadm.com" with no
+        scheme, which will break mechanical server resolution.
+      error_registry: >-
+        ApplicationError requires an errorCode string but no enumeration of its
+        values is published.
+      rate_limits: No 429 response is declared on any operation.
+- target: $.servers
+  update:
+    x-apievangelist-note: >-
+      Production is https://privacy.liadm.com. The staging entry is missing its
+      scheme; the host resolves and serves HTTPS at
+      https://privacy-test.liadm.com.
+- target: $.components.securitySchemes.Bearer
+  update:
+    x-apievangelist-note: >-
+      Token issuance is manual — the guide instructs integrators to contact
+      their LiveIntent account team. There is no token endpoint, no OAuth
+      authorization server and no scopes. Authorization is expressed through the
+      account category encoded in DsrScope rather than through scope strings.
+- target: $.components.schemas.DsrScope
+  update:
+    x-apievangelist-note: >-
+      This oneOf is the authorization model, not merely a payload shape. The
+      variant a caller is entitled to use determines the blast radius of a
+      RESTRICT or ERASURE — MediaGroup is a blanket operation over every child
+      Publisher and Advertiser, and Global reaches the whole industry. Treat
+      variant selection as a privileged decision.
+- target: $.components.schemas.NewDataSubjectRequest.properties.callback
+  update:
+    x-apievangelist-note: >-
+      Marked "for internal use only" in the spec. This is the only callback
+      mechanism in LiveIntent's published contracts and it is not offered to
+      partners, so it is not recorded as a webhook surface.
+- target: $.paths['/data-subject-requests']
+  update:
+    x-apievangelist-note: >-
+      Returns 202 Accepted, not 200 — submission is asynchronous and the caller
+      polls GET /data-subject-requests/{transactionId}. There is no idempotency
+      key, so a retried submission creates a second request.

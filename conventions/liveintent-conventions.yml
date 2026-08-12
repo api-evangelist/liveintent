@@ -1,0 +1,150 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  openapi/liveintent-audiences-openapi.yml,
+  openapi/liveintent-privacy-openapi.yml,
+  https://audiences.liveintent.com/api-guide,
+  https://privacy.liadm.com/api-guide,
+  https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+  plus live unauthenticated probes of audiences.liveintent.com and
+  connect.liveintent.com on 2026-08-12.
+authentication:
+  style: bearer-token-in-authorization-header
+  declared_as: apiKey (name Authorization, in header) in both OpenAPI documents
+  detail: authentication/liveintent-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key (or equivalent) parameter appears in either OpenAPI
+    document, and neither the Audiences API guide nor the Privacy Management API
+    guide documents a retry-safety contract. POST /audiences, POST /eventtrackers
+    and POST /urltrackers are all non-idempotent creates with no client-supplied
+    request key. POST /data-subject-requests returns 202 Accepted with a
+    server-generated transactionId, so a retried submission creates a second
+    request.
+  note: >-
+    Because idempotency is genuinely absent, NO `Idempotency` pointer is wired
+    into apis.yml. This is a real gap in the contract, not a capture gap.
+pagination:
+  styles:
+  - api: Audiences API
+    style: offset
+    endpoints: ['GET /audiences', 'GET /audiences/{audienceId}/uploads', 'POST /search/audiences']
+    request_params:
+      page: {in: query, type: integer, note: 1-indexed page number}
+      pageSize: {in: query, type: integer}
+    response_schema: OffsetPaginatedAudiences / OffsetPaginatedAudienceUploads
+  - api: Audiences API
+    style: cursor
+    endpoints: ['POST /search/audiences/v2']
+    request_params:
+      next: {in: body, type: string, note: opaque cursor returned by the previous page}
+      pageSize: {in: body, type: integer, default: 30}
+    response_schema: CursorPage
+    note: >-
+      v2 of the audience search supersedes the offset-paginated v1. Both are
+      published; v1 is not marked deprecated in the spec.
+  - api: Privacy Management API
+    style: none
+    note: >-
+      POST /search/data-subject-requests returns a DataSubjectRequestSearchResult
+      with no pagination parameters declared.
+filtering:
+  api: Audiences API
+  style: json-filter-tree
+  detail: >-
+    POST /search/audiences and /search/audiences/v2 accept a composable boolean
+    filter tree built from the schemas `and`, `or`, `not`, `eq`,
+    `accountIdMatches`, `nameMatches`, `dataProviderIdMatches`, `ruleIdMatches`,
+    `hasMetadata` and `status`, over typed value nodes (Str, Num, Bool, Arr,
+    Obj, Null, Json). Scalar filters are also exposed as IntFilter, LongFilter,
+    StringFilter and MetadataFilter.
+  note: >-
+    This is the richest convention in LiveIntent's surface and has no equivalent
+    on the Privacy or Reporting APIs.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata:
+  supported: true
+  api: Audiences API
+  detail: >-
+    Audiences carry arbitrary key/value metadata (UpsertMetadataRequestDTO,
+    AudienceMetadataDTO, AudienceWithMetadataDTO) and metadata is queryable via
+    the hasMetadata / MetadataFilter search nodes.
+request_tracing:
+  request_id_header: null
+  evidence: >-
+    No request-id or correlation-id response header is documented, and none was
+    returned on the live 401 responses observed on 2026-08-12.
+  correlation:
+    api: Privacy Management API
+    field: transactionId
+    detail: >-
+      A privacy request is tracked by the server-issued transactionId returned
+      on submission and used to read status via
+      GET /data-subject-requests/{transactionId}. This is a business identifier,
+      not a transport trace id.
+versioning:
+  scheme: mixed
+  detail: >-
+    No global version prefix. The Audiences API versions individual endpoints
+    in the path (/search/audiences vs /search/audiences/v2); the Privacy
+    Management API versions by moving traffic from Legacy endpoints (/dsr,
+    /oath, /submit) to current ones (/data-subject-requests). Both OpenAPI
+    documents declare info.version 1.0.0.
+  detail_artifact: lifecycle/liveintent-lifecycle.yml
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  media_type: application/json
+  shape: '{"errors": [{"httpStatus": <int>, "message": <string>, "errorCode": <string>}]}'
+  schema: ApplicationError (identical in both OpenAPI documents)
+  observed:
+    url: https://audiences.liveintent.com/audiences
+    http_status: 401
+    body: '{"errors":[{"httpStatus":401,"message":"Token not provided","errorCode":"unauthorized"}]}'
+  note: >-
+    The envelope is an array under `errors`, so more than one ApplicationError
+    can be returned per response. Errors are NOT RFC 9457 problem+json — there
+    is no `type` URI, no `title`, and the media type is application/json.
+    The Reporting API does not share this envelope: connect.liveintent.com
+    returned a bare text/plain "Unauthorized" body on the same probe.
+  detail_artifact: errors/liveintent-problem-types.yml
+rate_limit_signaling:
+  documented: false
+  headers: []
+  detail_artifact: rate-limits/liveintent-rate-limits.yml
+content_negotiation:
+  request: application/json
+  response: application/json
+  exceptions:
+  - endpoint: GET /submit (Privacy Management API, Legacy)
+    response: image/gif
+    note: Returns a blank GIF — a pixel-style opt-out endpoint, not a JSON API call.
+  - endpoint: GET /data-subject-report/{transactionId}
+    response: 303 redirect to a signed report download URL
+async_semantics:
+  api: Privacy Management API
+  detail: >-
+    POST /data-subject-requests returns 202 Accepted, not 200 — submission is
+    asynchronous. The caller polls
+    GET /data-subject-requests/{transactionId} for the outcome. There is no
+    webhook or callback for completion.
+bulk_upload:
+  api: Audiences API
+  detail: >-
+    Audience membership is uploaded out-of-band: POST
+    /audiences/{audienceId}/signed-urls mints signed upload URLs
+    (SignedUploadUrlResponse) that the client PUTs data to directly, and
+    GET /audiences/{audienceId}/uploads reports per-upload status
+    (UploadStatus). The bytes never transit the LiveIntent API host.
+cross_links:
+  authentication: authentication/liveintent-authentication.yml
+  errors: errors/liveintent-problem-types.yml
+  lifecycle: lifecycle/liveintent-lifecycle.yml
+  rate_limits: rate-limits/liveintent-rate-limits.yml
+  sandbox: sandbox/liveintent-sandbox.yml
+  data_model: data-model/liveintent-data-model.yml

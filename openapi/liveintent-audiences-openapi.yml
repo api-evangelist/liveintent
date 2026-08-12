@@ -1,0 +1,1645 @@
+openapi: 3.0.0
+info:
+  title: Audiences API
+  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating
+    and managing audiences. The API enables a high level of automation, which helps LiveIntent partners
+    increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent
+    partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience).
+    This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call
+    the endpoints.
+
+
+    '
+  version: 1.0.0
+servers:
+- url: https://audiences-staging.bln.liveintent.com
+  description: 'staging
+
+
+    '
+- url: https://audiences.liveintent.com
+  description: 'production
+
+
+    '
+security:
+- Bearer: []
+paths:
+  /audiences:
+    description: 'Create a new audience.
+
+
+      List audiences for the specified account, or all audiences if no accountId is provided.
+
+
+      '
+    get:
+      description: 'List audiences for the specified account, or all audiences if no accountId is provided.
+
+
+        '
+      parameters:
+      - name: page
+        in: query
+        description: 'the page number
+
+
+          '
+        schema:
+          type: integer
+          format: int32
+        allowReserved: false
+        style: form
+      - name: pageSize
+        in: query
+        description: 'the page size
+
+
+          '
+        schema:
+          type: integer
+          format: int32
+        allowReserved: false
+        style: form
+      - name: updatedAfter
+        in: query
+        description: 'filter for audiences updated after the provided timestamp (in milliseconds since
+          epoch)
+
+
+          '
+        schema:
+          type: integer
+          format: int64
+        allowReserved: false
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffsetPaginatedAudiences'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to list audiences.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to list audiences.
+
+
+                  '
+    post:
+      description: 'Create a new audience.
+
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAudienceRequest'
+        required: true
+      responses:
+        '201':
+          description: 'The audience has been created successfully
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceData'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to create audience.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to create audience.
+
+
+                  '
+  /audiences/{audienceId}:
+    description: 'Update the specified audience.
+
+
+      Get the specified audience.
+
+
+      '
+    get:
+      description: 'Get the specified audience.
+
+
+        '
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceData'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '404':
+          description: 'Audience not found.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Audience not found.
+
+
+                  '
+        '500':
+          description: 'Failed to retrieve audience.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to retrieve audience.
+
+
+                  '
+    patch:
+      description: 'Update the specified audience.
+
+
+        '
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAudienceRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceData'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '404':
+          description: 'Audience not found.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Audience not found.
+
+
+                  '
+        '500':
+          description: 'Failed to update audience.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to update audience.
+
+
+                  '
+  /audiences/{audienceId}/counts:
+    description: 'Get counts for the specified audience.
+
+
+      '
+    get:
+      description: 'Get counts for the specified audience.
+
+
+        '
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceCounts'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '404':
+          description: 'Audience not found.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Audience not found.
+
+
+                  '
+        '500':
+          description: 'Failed to retrieve audience counts.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to retrieve audience counts.
+
+
+                  '
+  /audiences/{audienceId}/signed-urls:
+    description: 'Create signed URLs for uploading audience data to the specified audience.
+
+
+      '
+    post:
+      description: 'Create signed URLs for uploading audience data to the specified audience.
+
+
+        '
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSignedUrlRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignedUploadUrlResponse'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/ApplicationError'
+                  description: 'Invalid request parameters.
+
+
+                    '
+                - $ref: '#/components/schemas/ApplicationError'
+                  description: 'Invalid upload query params: identifierType / action
+
+
+                    '
+                description: ''
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to generate signed URLs.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to generate signed URLs.
+
+
+                  '
+  /audiences/{audienceId}/uploads:
+    description: 'List uploads for the specified audience.
+
+
+      '
+    get:
+      description: 'List uploads for the specified audience.
+
+
+        '
+      parameters:
+      - name: page
+        in: query
+        description: 'the page number
+
+
+          '
+        schema:
+          type: integer
+          format: int32
+        allowReserved: false
+        style: form
+      - name: pageSize
+        in: query
+        description: 'the page size
+
+
+          '
+        schema:
+          type: integer
+          format: int32
+        allowReserved: false
+        style: form
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffsetPaginatedAudienceUploads'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+  /eventtrackers:
+    description: 'Create a new event tracker audience.
+
+
+      '
+    post:
+      description: 'Create a new event tracker audience.
+
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAudiencePayload'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAudienceResponse'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to create event tracker audience.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to create event tracker audience.
+
+
+                  '
+  /search/audiences:
+    description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+      '
+    post:
+      description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+        '
+      parameters:
+      - name: accountId
+        in: query
+        description: 'the account id
+
+
+          '
+        schema:
+          type: integer
+          format: int64
+        allowReserved: false
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceSearchRequest'
+              description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffsetPaginatedAudiences'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+  /search/audiences/v2:
+    description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+      '
+    post:
+      description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+        '
+      parameters:
+      - name: accountId
+        in: query
+        description: 'the account id
+
+
+          '
+        schema:
+          type: integer
+          format: int64
+        allowReserved: false
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceSearchRequestV2'
+              description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CursorPage'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+  /trackers:
+    description: 'Update conversion trackers and rule for audiences.
+
+
+      '
+    patch:
+      description: 'Update conversion trackers and rule for audiences.
+
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConversionTrackersAndRulePayload'
+        required: true
+      responses:
+        '200':
+          description: 'Operation successful
+
+
+            '
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to update conversion trackers and rule.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to update conversion trackers and rule.
+
+
+                  '
+  /urltrackers:
+    description: 'Create a new URL tracker audience.
+
+
+      '
+    post:
+      description: 'Create a new URL tracker audience.
+
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAudiencePayload'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAudienceResponse'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to create URL tracker audience.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to create URL tracker audience.
+
+
+                  '
+components:
+  schemas:
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    AttributionWindow:
+      type: object
+      properties:
+        pcc:
+          type: integer
+          format: int64
+        pvc:
+          type: integer
+          format: int64
+      required:
+      - pcc
+      - pvc
+    AudienceCount:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        totalCount:
+          type: integer
+          format: int64
+        matchCount:
+          type: integer
+          format: int64
+      required:
+      - date
+      - totalCount
+      - matchCount
+    AudienceCounts:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceCount'
+      required:
+      - entries
+    AudienceData:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - createdAt
+      - updatedAt
+      - status
+      - metadata
+    AudienceFilter:
+      oneOf:
+      - type: object
+        properties:
+          and:
+            $ref: '#/components/schemas/and'
+        additionalProperties: false
+        required:
+        - and
+      - type: object
+        properties:
+          or:
+            $ref: '#/components/schemas/or'
+        additionalProperties: false
+        required:
+        - or
+      - type: object
+        properties:
+          not:
+            $ref: '#/components/schemas/not'
+        additionalProperties: false
+        required:
+        - not
+      - type: object
+        properties:
+          dataProviderIdMatches:
+            $ref: '#/components/schemas/dataProviderIdMatches'
+        additionalProperties: false
+        required:
+        - dataProviderIdMatches
+      - type: object
+        properties:
+          hasMetadata:
+            $ref: '#/components/schemas/hasMetadata'
+        additionalProperties: false
+        required:
+        - hasMetadata
+      - type: object
+        properties:
+          accountIdMatches:
+            $ref: '#/components/schemas/accountIdMatches'
+        additionalProperties: false
+        required:
+        - accountIdMatches
+      - type: object
+        properties:
+          nameMatches:
+            $ref: '#/components/schemas/nameMatches'
+        additionalProperties: false
+        required:
+        - nameMatches
+      - type: object
+        properties:
+          ruleIdMatches:
+            $ref: '#/components/schemas/ruleIdMatches'
+        additionalProperties: false
+        required:
+        - ruleIdMatches
+      - type: object
+        properties:
+          status:
+            $ref: '#/components/schemas/status'
+        additionalProperties: false
+        required:
+        - status
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
+    AudienceSearchRequest:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 1
+        pageSize:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 30
+        matches:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AudienceFilter'
+          description: If not set, this field defaults to the value of the default annotation.
+        includeInternal:
+          type: boolean
+          description: If not set, this field defaults to the value of the default annotation.
+          default: false
+    AudienceSearchRequestV2:
+      type: object
+      properties:
+        next:
+          type:
+          - string
+          - 'null'
+          description: If not set, this field defaults to the value of the default annotation.
+        pageSize:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 30
+        matches:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AudienceFilter'
+          description: If not set, this field defaults to the value of the default annotation.
+        includeInternal:
+          type: boolean
+          description: If not set, this field defaults to the value of the default annotation.
+          default: false
+    AudienceUpload:
+      type: object
+      properties:
+        uploadedHashesCount:
+          type: integer
+          format: int64
+        lastUpdate:
+          type: string
+          format: date-time
+        invalidHashesCount:
+          type: integer
+          format: int64
+        notificationEmail:
+          type:
+          - string
+          - 'null'
+        estimatedDuplicateCount:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/UploadStatus'
+        uploadType:
+          type: string
+        action:
+          type: string
+        scheduleAt:
+          type: string
+          format: date-time
+      required:
+      - status
+      - action
+      - uploadType
+      - lastUpdate
+      - scheduleAt
+      - estimatedDuplicateCount
+      - uploadedHashesCount
+      - invalidHashesCount
+    AudienceWithMetadataDTO:
+      type: object
+      properties:
+        deletesAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        externalAudienceId:
+          type:
+          - string
+          - 'null'
+        iabCategory:
+          type:
+          - string
+          - 'null'
+        archivesAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        dataProviderPrefix:
+          type: string
+        additionalAttributes:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DynamicAudienceAttributesDTO'
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+        internal:
+          type: boolean
+        replacementId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        archived:
+          type: boolean
+        zetaTaxonomyNodeId:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+      required:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - dataProviderPrefix
+      - createdAt
+      - archived
+      - status
+      - internal
+      - metadata
+      - updatedAt
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    CreateAudiencePayload:
+      type: object
+      properties:
+        attributionWindow:
+          $ref: '#/components/schemas/AttributionWindow'
+        body:
+          $ref: '#/components/schemas/Json'
+        name:
+          type: string
+        appIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        pixelId:
+          type: string
+        accountId:
+          type: integer
+          format: int64
+        audienceTtl:
+          type: integer
+          format: int32
+        conversionId:
+          type: integer
+          format: int64
+      required:
+      - conversionId
+      - pixelId
+      - accountId
+      - appIds
+      - name
+      - attributionWindow
+      - audienceTtl
+      - body
+    CreateAudienceRequest:
+      type: object
+      properties:
+        dataProviderId:
+          type: integer
+          format: int32
+        name:
+          type: string
+        accountId:
+          type: integer
+          format: int64
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/UpsertMetadataRequestDTO'
+          description: If not set, this field defaults to the value of the default annotation.
+          default: {}
+      required:
+      - dataProviderId
+      - name
+      - accountId
+    CreateAudienceResponse:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int32
+        audience:
+          $ref: '#/components/schemas/AudienceWithMetadataDTO'
+      required:
+      - ruleId
+      - audience
+    CreateSignedUrlRequest:
+      type: object
+      properties:
+        uploadName:
+          type:
+          - string
+          - 'null'
+        notificationEmail:
+          type:
+          - string
+          - 'null'
+        identifierType:
+          type: string
+        action:
+          type: string
+      required:
+      - identifierType
+      - action
+    CursorPage:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceData'
+        next:
+          type:
+          - string
+          - 'null'
+      required:
+      - items
+    DynamicAudienceAttributesDTO:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int64
+        ttl:
+          type: integer
+          format: int32
+      required:
+      - ruleId
+      - ttl
+    IntFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    Json:
+      oneOf:
+      - type: object
+        properties:
+          Arr:
+            $ref: '#/components/schemas/Arr'
+        additionalProperties: false
+        required:
+        - Arr
+      - type: object
+        properties:
+          'Null':
+            $ref: '#/components/schemas/Null'
+        additionalProperties: false
+        required:
+        - 'Null'
+      - type: object
+        properties:
+          Bool:
+            $ref: '#/components/schemas/Bool'
+        additionalProperties: false
+        required:
+        - Bool
+      - type: object
+        properties:
+          Num:
+            $ref: '#/components/schemas/Num'
+        additionalProperties: false
+        required:
+        - Num
+      - type: object
+        properties:
+          Str:
+            $ref: '#/components/schemas/Str'
+        additionalProperties: false
+        required:
+        - Str
+      - type: object
+        properties:
+          Obj:
+            $ref: '#/components/schemas/Obj'
+        additionalProperties: false
+        required:
+        - Obj
+    LongFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    MetadataFilter:
+      oneOf:
+      - type: object
+        properties:
+          nameMatches:
+            $ref: '#/components/schemas/nameMatches'
+        additionalProperties: false
+        required:
+        - nameMatches
+    'Null':
+      type: object
+      properties: {}
+    Num:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+      required:
+      - value
+    Obj:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
+      required:
+      - fields
+    OffsetPaginatedAudienceUploads:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceUpload'
+        totalCount:
+          type: integer
+          format: int32
+      required:
+      - entries
+      - page
+      - pages
+      - pageSize
+      - totalCount
+    OffsetPaginatedAudiences:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceData'
+        totalCount:
+          type: integer
+          format: int32
+      required:
+      - entries
+      - page
+      - pages
+      - pageSize
+      - totalCount
+    SignedUploadUrlResponse:
+      type: object
+      properties:
+        signedUrl:
+          type: string
+      required:
+      - signedUrl
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    StatusUpdateDTO:
+      type: string
+      enum:
+      - Activate
+      - Archive
+    Str:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    StringFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    UpdateAudienceRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        status:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StatusUpdateDTO'
+    UpdateConversionTrackersAndRulePayload:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        accountId:
+          type: integer
+          format: int64
+        pvc:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        audienceId:
+          type: integer
+          format: int64
+        ruleId:
+          type: integer
+          format: int32
+        pcc:
+          type:
+          - integer
+          - 'null'
+          format: int64
+      required:
+      - accountId
+      - audienceId
+      - ruleId
+    UploadStatus:
+      type: string
+      enum:
+      - Pending
+      - Running
+      - Finished
+      - Error
+    UpsertMetadataRequestDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+      required:
+      - data
+    Value:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    accountIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LongFilter'
+      required:
+      - value
+    and:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - values
+    dataProviderIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/IntFilter'
+      required:
+      - value
+    eq:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+      required:
+      - value
+    hasMetadata:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/MetadataFilter'
+      required:
+      - value
+    nameMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/StringFilter'
+      required:
+      - value
+    not:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - value
+    or:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - values
+    ruleIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LongFilter'
+      required:
+      - value
+    status:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Value'
+      required:
+      - value
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'For accessing internal endpoints an access token is required. It needs to be sent
+        as a Bearer token in the _Authorization_ header.
+
+
+        '
+      name: Authorization
+      in: header

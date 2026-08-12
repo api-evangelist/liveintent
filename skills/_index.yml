@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  Generated from openapi/liveintent-audiences-openapi.yml,
+  openapi/liveintent-privacy-openapi.yml and
+  https://support.liveintent.com/connecting-to-liveintents-reporting-api/.
+  No provider-published Agent Skills or AGENTS.md exists — the LiveIntent GitHub
+  organization (41 public repositories, read 2026-08-12) contains none.
+note: >-
+  Neither LiveIntent OpenAPI declares an operationId on any operation, so every
+  skill grounds its steps in HTTP method plus path as published in the contract.
+  No operationIds were invented.
+skills:
+- file: liveintent-create-and-populate-audience.md
+  name: Create and populate a LiveIntent custom audience
+  api: openapi/liveintent-audiences-openapi.yml
+  operations:
+  - POST /audiences
+  - POST /audiences/{audienceId}/signed-urls
+  - GET /audiences/{audienceId}/uploads
+  - GET /audiences/{audienceId}/counts
+  - GET /audiences/{audienceId}
+- file: liveintent-search-audiences.md
+  name: Search LiveIntent audiences with the filter tree
+  api: openapi/liveintent-audiences-openapi.yml
+  operations:
+  - POST /search/audiences/v2
+  - POST /search/audiences
+  - GET /audiences
+- file: liveintent-submit-privacy-request.md
+  name: Submit a LiveIntent data subject request
+  api: openapi/liveintent-privacy-openapi.yml
+  operations:
+  - POST /data-subject-requests/test
+  - POST /data-subject-requests
+  - GET /data-subject-requests/{transactionId}
+  - GET /data-subject-report/{transactionId}
+  - POST /search/data-subject-requests
+- file: liveintent-pull-reporting-data.md
+  name: Pull LiveIntent reporting data
+  api: null
+  api_note: >-
+    The Reporting API has no published OpenAPI. This skill is grounded in
+    LiveIntent's own knowledge-base article rather than in a spec.
+  operations:
+  - POST /auth/login/
+  - POST /reporting/api/executeQuery
+not_covered:
+- api: Programmatic Bidding API
+  reason: >-
+    LiveIntent is the caller on this surface, not the callee — it sends OpenRTB
+    2.5 bid requests to a DSP-supplied bidding URL. There is no LiveIntent
+    endpoint for an agent to call, so there is no skill to write.
+- api: Ads API
+  reason: >-
+    Monitored as a component on status.liveintent.com but has no public
+    documentation or specification. Nothing to ground a skill in.

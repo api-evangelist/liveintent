@@ -1,0 +1,57 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  openapi/liveintent-privacy-openapi.yml,
+  openapi/liveintent-audiences-openapi.yml,
+  https://privacy.liadm.com/api-guide,
+  https://audiences.liveintent.com/api-guide, the LiveIntent GitHub
+  organization, and /asyncapi.yaml probes on every LiveIntent host.
+  Searched 2026-08-12.
+spec_type: none
+asyncapi_published: false
+webhooks_published: false
+result: none
+note: >-
+  LiveIntent publishes no AsyncAPI document and no partner-facing webhook
+  catalog. Neither OpenAPI document declares a `webhooks` object or an OpenAPI
+  `callbacks` block on any operation, and no event, streaming or subscription
+  surface is documented in either API guide. Because there is no advertised
+  event surface, NO `AsyncAPI` and NO `Webhooks` pointer is wired into apis.yml.
+  Per the pipeline contract this is not a penalty — a provider with no event
+  surface is not scored against the asyncapi family — it is a recorded absence.
+callback_affordances:
+- api: Privacy Management API
+  field: callback
+  schema: NewDataSubjectRequest.callback
+  type: [string, 'null']
+  description: >-
+    "For internal use only. Callback url that should be invoked when ACCESS
+    request processing has been completed."
+  published_to_partners: false
+  note: >-
+    This is the only callback mechanism anywhere in LiveIntent's published
+    contracts, and the spec explicitly marks it internal-only. It is recorded
+    here for completeness but deliberately NOT treated as an advertised webhook
+    surface — emitting a `Webhooks` pointer from an internal-use-only field
+    would credit LiveIntent with a partner event surface it does not offer.
+- api: Audiences API
+  field: notificationEmail
+  schema: AudienceUpload.notificationEmail
+  type: [string, 'null']
+  description: >-
+    An address notified about the outcome of an audience upload. Email
+    notification, not a machine-consumable event.
+  published_to_partners: true
+polling_model:
+  detail: >-
+    Both asynchronous flows are polled rather than pushed. A privacy request
+    returns 202 Accepted with a transactionId that the caller polls via
+    GET /data-subject-requests/{transactionId}; an audience upload is tracked by
+    polling GET /audiences/{audienceId}/uploads for a status of Pending,
+    Running, Finished or Error. An agent integrating with LiveIntent must
+    implement polling loops for both.
+probed:
+- {url: 'https://audiences.liveintent.com/asyncapi.yaml', status: 404}
+- {url: 'https://privacy.liadm.com/asyncapi.yaml', status: 404}
+- {url: 'https://www.liveintent.com/asyncapi.yaml', status: 404}
+- {url: 'https://api.github.com/orgs/LiveIntent/repos', status: 200, finding: '41 public repositories, none containing an AsyncAPI document or an event catalog'}

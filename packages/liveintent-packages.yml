@@ -1,14 +1,106 @@
-generated: '2026-07-20'
+generated: '2026-08-12'
 method: searched
-source: https://registry.npmjs.org/live-connect-js
+source: >-
+  registry.npmjs.org, pypi.org, repo.packagist.org and the LiveIntent GitHub
+  organization (https://github.com/LiveIntent). Versions and publish dates read
+  from each registry's unauthenticated metadata endpoint on 2026-08-12.
+note: >-
+  LiveIntent publishes no client SDK for its three documented HTTP APIs
+  (Audiences, Privacy Management, Reporting). Every first-party package below is
+  either the LiveConnect browser identity library or the li-privacy CLI. All of
+  them are last-published 2024-2025 or earlier and their GitHub repositories are
+  archived, which is a decay signal against APIs that are still live and
+  answering (audiences.liveintent.com returned HTTP 401 on 2026-08-12).
 packages:
 - language: javascript
   registry: npm
   name: live-connect-js
   description: LiveConnect — LiveIntent's first-party identity library for the browser.
   version: 7.2.0
+  published: '2025-01-20'
   license: Apache-2.0
   url: https://www.npmjs.com/package/live-connect-js
   repository: https://github.com/liveintent-berlin/live-connect
   install: npm install live-connect-js
   official: true
+  status: repository-archived
+  note: >-
+    Source repository github.com/LiveIntent/live-connect was archived 2025-01-27.
+- language: javascript
+  registry: npm
+  name: live-connect-common
+  description: Interfaces and basic helpers for LiveConnect projects.
+  version: 4.1.0
+  published: '2024-10-31'
+  license: Apache-2.0
+  url: https://www.npmjs.com/package/live-connect-common
+  repository: https://github.com/LiveIntent/live-connect-common
+  install: npm install live-connect-common
+  official: true
+  status: repository-archived
+- language: javascript
+  registry: npm
+  name: live-connect-handlers
+  description: Default implementations of LiveConnect handlers.
+  version: 3.1.0
+  published: '2024-10-31'
+  license: Apache-2.0
+  url: https://www.npmjs.com/package/live-connect-handlers
+  repository: https://github.com/LiveIntent/live-connect-handlers
+  install: npm install live-connect-handlers
+  official: true
+  status: repository-archived
+- language: python
+  registry: pypi
+  name: li-privacy
+  description: >-
+    CLI and sample application to interact with the LiveIntent Privacy
+    Management API.
+  version: 1.3.2
+  published: '2021-04-13'
+  license: Apache-2.0
+  url: https://pypi.org/project/li-privacy/
+  repository: https://github.com/LiveIntent/li-privacy
+  homepage: https://link.liveintent.com/privacy-api
+  install: pip install li-privacy
+  official: true
+  covers_api: openapi/liveintent-privacy-openapi.yml
+  status: repository-archived
+  note: >-
+    The only first-party client for any of LiveIntent's documented HTTP APIs.
+    Last published 2021-04-13; repository archived 2021-04-13. The Privacy
+    Management API it wraps is still documented and live at privacy.liadm.com,
+    so this SDK is roughly five years behind the contract.
+- language: php
+  registry: packagist
+  name: liveintent/sdk-php
+  description: LiveIntent SDK PHP.
+  version: null
+  published: null
+  url: https://packagist.org/packages/liveintent/sdk-php
+  repository: https://github.com/LiveIntent/sdk-php
+  install: composer require liveintent/sdk-php
+  official: true
+  status: abandoned
+  note: >-
+    Marked `abandoned: true` by Packagist (7,220 lifetime downloads);
+    repo.packagist.org/packages/liveintent/sdk-php returned HTTP 404 on
+    2026-08-12 so no version or publish date could be read from the registry.
+    The GitHub repository was archived 2025-02-14.
+registries_checked:
+- registry: npm
+  found: 3
+- registry: pypi
+  found: 1
+- registry: packagist
+  found: 1
+- registry: rubygems
+  found: 0
+- registry: crates.io
+  found: 0
+- registry: nuget
+  found: 0
+- registry: maven-central
+  found: 0
+- registry: pkg.go.dev
+  found: 0

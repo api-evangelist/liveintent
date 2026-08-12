@@ -1,0 +1,36 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.liveintent.com/page-sitemap.xml (full page inventory),
+  https://www.liveintent.com/get-started/, and the four API documentation
+  surfaces. Searched 2026-08-12.
+plan_count: 0
+plans: []
+pricing_url: null
+free_tier: false
+self_service_signup: false
+note: >-
+  LiveIntent publishes no pricing of any kind. Its full page sitemap contains no
+  /pricing page and no plans page; the commercial entry points are
+  /get-started/, /get-started/book-meeting/ and /get-in-touch/, all of which are
+  contact and meeting-booking forms. This is consistent with the business model
+  — LiveIntent is an ad exchange and identity platform whose marketer and
+  publisher relationships are negotiated, and whose APIs are partner APIs whose
+  access tokens are issued by an account team rather than bought. There is no
+  developer plan to record, so plan_count is 0 by observation, not by omission.
+commercial_model:
+  type: enterprise-negotiated
+  revenue_basis: >-
+    Advertising spend and publisher revenue share on the exchange, not API
+    metering. No API is sold as a metered product.
+  api_access: >-
+    Both spec-bearing API guides state that an access token is obtained by
+    contacting your LiveIntent account team. API access follows a signed partner
+    relationship; it is not purchasable and not self-service.
+entry_points:
+- {url: 'https://www.liveintent.com/get-started/', kind: contact-form, status: 200}
+- {url: 'https://www.liveintent.com/get-started/book-meeting/', kind: meeting-booking, status: 200}
+- {url: 'https://www.liveintent.com/get-in-touch/', kind: contact-form, status: 200}
+probed:
+- {url: 'https://www.liveintent.com/pricing/', status: 404}
+- {url: 'https://www.liveintent.com/page-sitemap.xml', status: 200, finding: 'no pricing or plans page present in the sitemap'}

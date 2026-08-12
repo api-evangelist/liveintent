@@ -42,6 +42,19 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-LiveIntent is a company surfaced as a portfolio company of battery-ventures, bullpen-capital and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+LiveIntent is a people-based email marketing, advertising and identity platform. It publishes four
+partner APIs, two of which carry machine-readable OpenAPI 3.0.0 definitions:
+
+| API | Contract | Base URL |
+|---|---|---|
+| [Audiences API](https://audiences.liveintent.com/api-guide) | OpenAPI 3.0.0 — 12 operations, 48 schemas | `https://audiences.liveintent.com` |
+| [Privacy Management API](https://privacy.liadm.com/api-guide) | OpenAPI 3.0.0 — 8 operations, 17 schemas | `https://privacy.liadm.com` |
+| [Reporting API](https://support.liveintent.com/connecting-to-liveintents-reporting-api/) | Documented only — no spec published | `https://connect.liveintent.com` |
+| [Programmatic Bidding API](https://support.liveintent.com/programmatic-bidding-api/) | IAB OpenRTB 2.5 + Native 1.1/1.2 | DSP-supplied bidding URL |
+
+Neither OpenAPI document was published at a standalone URL — both were harvested from the Redocly
+state embedded in LiveIntent's own rendered API guides. All API access is bearer-token based and
+provisioned by a LiveIntent account team; there is no self-service signup, no published pricing, and
+no OAuth authorization server. LiveIntent has been acquired by Zeta Global.
 
 Backed by: battery-ventures, bullpen-capital — https://www.liveintent.com

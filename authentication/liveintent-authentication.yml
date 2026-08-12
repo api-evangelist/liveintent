@@ -1,0 +1,96 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  openapi/liveintent-audiences-openapi.yml,
+  openapi/liveintent-privacy-openapi.yml, plus the provider auth documentation
+  listed under docs[] below.
+docs:
+- https://audiences.liveintent.com/api-guide
+- https://privacy.liadm.com/api-guide
+- https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+summary:
+  types: [apiKey, http]
+  api_key_in: [header]
+  oauth2_flows: []
+  note: >-
+    All three documented LiveIntent APIs authenticate with an opaque bearer
+    token in the Authorization header. Two of them declare it in OpenAPI as an
+    apiKey scheme named "Bearer" in the header rather than as http/bearer, which
+    is why derive-authentication.py reports type apiKey. There is no OAuth 2.0
+    authorization server, no scopes, no OIDC discovery document and no
+    /.well-known/oauth-authorization-server on any LiveIntent host (all probed
+    404 or 401 on 2026-08-12), so scopes/ is intentionally not emitted.
+schemes:
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: >-
+    For accessing internal endpoints an access token is required. It needs to be
+    sent as a Bearer token in the Authorization header.
+  sources:
+  - openapi/liveintent-audiences-openapi.yml
+  - openapi/liveintent-privacy-openapi.yml
+apis:
+- api: Audiences API
+  scheme: Bearer
+  location: header
+  header: 'Authorization: Bearer {token}'
+  token_issuance: >-
+    Not documented publicly. The API guide states only that an access token is
+    required; issuance is handled by the LiveIntent account team.
+  spec: openapi/liveintent-audiences-openapi.yml
+  observed:
+    url: https://audiences.liveintent.com/audiences
+    http_status: 401
+    body: '{"errors":[{"httpStatus":401,"message":"Token not provided","errorCode":"unauthorized"}]}'
+    fetched: '2026-08-12'
+- api: Privacy Management API
+  scheme: Bearer
+  location: header
+  header: 'Authorization: Bearer {token}'
+  token_issuance: >-
+    "To get an access token, contact your account team at LiveIntent. Then use
+    the provided access token as a bearer token in the Authorization header"
+    (privacy.liadm.com/api-guide, Authentication section). Tokens are issued by
+    a human, not by a token endpoint.
+  spec: openapi/liveintent-privacy-openapi.yml
+  authorization_model: >-
+    Account-category scoped rather than scope-scoped. A caller acts as a Media
+    Group (blanket over all child Publishers and Advertisers), a Publisher
+    (its publisherId plus related advertiserIds), an Advertiser (its
+    advertiserId only), or Global (authorized third-party agents submitting
+    industry-wide requests). The token carries the category; there is no
+    scope string.
+- api: Reporting API
+  scheme: http-bearer
+  location: header
+  header: 'Authorization: Bearer {token}'
+  token_endpoint: https://connect.liveintent.com/auth/login/
+  token_request: >-
+    POST /auth/login/ with application/json body {"username": "...",
+    "password": "..."} — a LiveIntent platform username and password pair.
+  token_response_fields: [token, username, userID, refreshToken]
+  token_lifetime: 12 hours
+  refresh: >-
+    A refreshToken is returned alongside the access token; the docs describe the
+    access token as revoked after 12 hours.
+  docs: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+  note: >-
+    LiveIntent's knowledge base calls this "OAuth2", but the documented flow is a
+    username/password login endpoint returning a bearer token — it is a
+    resource-owner-password-style login, not an RFC 6749 authorization server.
+    No authorize endpoint, no client_id, no scopes, and no discovery document
+    are published. Recorded here as observed rather than as the docs label it.
+  observed:
+    url: https://connect.liveintent.com/reporting/api/executeQuery
+    http_status: 401
+    body: Unauthorized
+    fetched: '2026-08-12'
+- api: Programmatic Bidding API
+  scheme: none
+  note: >-
+    Server-to-server OpenRTB 2.5. LiveIntent is the exchange and sends bid
+    requests to a DSP-supplied bidding URL; the DSP does not authenticate to a
+    LiveIntent endpoint, so there is no client credential on this surface.
+  docs: https://support.liveintent.com/programmatic-bidding-api/

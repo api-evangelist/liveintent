@@ -1,29 +1,80 @@
 # LiveIntent
 
-> LiveIntent is a people-based email marketing and identity platform serving 2,500+ businesses. It connects marketers and publishers through email-native audience targeting, inventory monetization, and identity resolution across the digital ecosystem. LiveIntent has agreed to be acquired by Zeta Global. The company's primary public developer surface is the open-source LiveConnect first-party identity library rather than a REST API.
+> LiveIntent is a people-based email marketing, advertising and identity platform serving more than 2,500 businesses. It connects marketers and publishers through email-native audience targeting, publisher inventory monetization (LiveTag and native ad blueprints), and identity resolution across the digital ecosystem. LiveIntent has been acquired by Zeta Global. It publishes four APIs — three of them documented, two of them with machine-readable OpenAPI definitions — plus the open-source LiveConnect first-party identity library.
 
-## Products
-- People-based email marketing and audience targeting for marketers
-- Email and web inventory monetization for publishers (LiveTag, native ad blueprints)
-- Identity resolution and data solutions (HIRO, email reactivation)
-- LiveConnect first-party identity collection for the browser
+Generated 2026-08-12 by the API Evangelist enrichment pipeline from LiveIntent's own public documentation. Not published by LiveIntent.
 
-## Developer
-- LiveConnect (npm live-connect-js): https://www.npmjs.com/package/live-connect-js
-- LiveConnect source (GitHub): https://github.com/liveintent-berlin/live-connect
-- GitHub organization: https://github.com/LiveIntent
-- Knowledge base / support: https://support.liveintent.com/hc/en-us
+## APIs
+
+- [Audiences API](https://audiences.liveintent.com/api-guide): Programmatically create and manage LiveIntent custom audiences — create, search, upload members via signed URLs, read match counts, and create event, URL and conversion trackers. Base URL https://audiences.liveintent.com. Bearer token in the Authorization header. 12 operations, OpenAPI 3.0.0.
+- [Privacy Management API](https://privacy.liadm.com/api-guide): Submit GDPR and CCPA data subject requests — opt-out of sale (RESTRICT), delete (ERASURE) and access (ACCESS) — scoped to your account category on the LiveIntent ad exchange. Base URL https://privacy.liadm.com. Bearer token. 8 operations, OpenAPI 3.0.0. Includes a dedicated test-submission endpoint.
+- [Reporting API](https://support.liveintent.com/connecting-to-liveintents-reporting-api/): Query publisher and advertiser reporting metrics with splits, filters and absolute or dynamic date intervals. Base URL https://connect.liveintent.com. Username/password login returns a 12-hour bearer token. No OpenAPI published.
+- [Programmatic Bidding API](https://support.liveintent.com/programmatic-bidding-api/): LiveIntent's exchange-side OpenRTB integration for DSPs — a subset of IAB OpenRTB 2.5 plus OpenRTB Native 1.1 and 1.2. LiveIntent calls a DSP-supplied bidding URL with tmax=150ms; no-bid is HTTP 204. No OpenAPI published.
+
+## Specs
+
+- [Audiences API OpenAPI 3.0.0](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/openapi/liveintent-audiences-openapi.yml): Harvested 2026-08-12 from the Redocly-rendered API guide. 12 operations, 48 schemas.
+- [Privacy Management API OpenAPI 3.0.0](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/openapi/liveintent-privacy-openapi.yml): Harvested 2026-08-12 from the Redocly-rendered API guide. 8 operations, 17 schemas.
+
+## Authentication
+
+- All three callable APIs use an opaque bearer token in the `Authorization` header.
+- There is no OAuth 2.0 authorization server, no scopes, no OIDC discovery and no `/.well-known/` document on any LiveIntent host.
+- Audiences and Privacy tokens are issued by the LiveIntent account team; there is no token endpoint.
+- Reporting tokens come from `POST https://connect.liveintent.com/auth/login/` with a platform username and password, and expire after 12 hours.
+- Auth profile: [authentication/liveintent-authentication.yml](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/authentication/liveintent-authentication.yml)
+
+## Conventions
+
+- Errors use a proprietary envelope, not RFC 9457: `{"errors":[{"httpStatus","message","errorCode"}]}` — an array. The Reporting API does not use it at all and returns bare `text/plain`.
+- Pagination is offset (`page`, `pageSize`) on most Audiences endpoints and cursor (`next`, `pageSize` default 30) on `POST /search/audiences/v2`.
+- No idempotency key exists on any operation. Creates and privacy submissions are not retry-safe.
+- No rate limits are published, no `429` is declared anywhere, and no rate-limit response headers are documented.
+- Asynchronous flows (privacy requests, audience uploads) are polled. There is no partner webhook surface.
+- Full detail: [conventions/liveintent-conventions.yml](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/conventions/liveintent-conventions.yml)
+
+## Agent Skills
+
+- [Create and populate a custom audience](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/skills/liveintent-create-and-populate-audience.md)
+- [Search audiences with the filter tree](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/skills/liveintent-search-audiences.md)
+- [Submit a data subject request](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/skills/liveintent-submit-privacy-request.md)
+- [Pull reporting data](https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/skills/liveintent-pull-reporting-data.md)
+
+## SDKs and tools
+
+- [li-privacy](https://pypi.org/project/li-privacy/): LiveIntent's first-party Python CLI for the Privacy Management API. v1.3.2, published 2021-04-13, repository archived. The only first-party client for any LiveIntent API.
+- [live-connect-js](https://www.npmjs.com/package/live-connect-js): LiveConnect first-party browser identity library. v7.2.0, published 2025-01-20, Apache-2.0, repository archived.
+- [live-connect-common](https://www.npmjs.com/package/live-connect-common): v4.1.0, 2024-10-31.
+- [live-connect-handlers](https://www.npmjs.com/package/live-connect-handlers): v3.1.0, 2024-10-31.
+- [liveintent/sdk-php](https://packagist.org/packages/liveintent/sdk-php): marked abandoned on Packagist.
+- No SDK is published for the Audiences API or the Reporting API in any language.
+
+## Operations
+
+- Status page: https://status.liveintent.com — Atlassian Statuspage, machine-readable at https://status.liveintent.com/api/v2/summary.json. Monitored components include Reporting API, Programmatic Bidding API, Audience API and Ads API.
+- No SLA or uptime target is published.
+- No changelog, release notes or versioning history is published.
+- No deprecation policy, no Sunset/Deprecation headers. Three Privacy API endpoints are tagged "Legacy" and described as deprecated in prose only.
 
 ## Docs
-- LiveTag implementation and LiveConnect email extension configuration are documented in the knowledge base: https://support.liveintent.com/hc/en-us
-- Partner integrations (Segment, Oracle, Adobe, Merkle, LiveRamp) documented under Partnerships & Integrations in the knowledge base.
+
+- Knowledge base: https://support.liveintent.com/hc/en-us
+- LiveIntent APIs section: https://support.liveintent.com/hc/en-us/sections/360009709692-LiveIntent-APIs
+- LiveTag parameter guide: https://support.liveintent.com/livetag-parameter-guide/
 
 ## Links
+
 - Website: https://www.liveintent.com
 - Blog: https://www.liveintent.com/blog/
-- Login: https://platform.liveintent.com/login/
+- Platform login: https://platform.liveintent.com/login/
+- Get started (contact): https://www.liveintent.com/get-started/
+- Support: https://support.liveintent.com/hc/en-us
+- GitHub organization: https://github.com/LiveIntent
 - Privacy policy: https://www.liveintent.com/privacy-policy/
 
 ## Notes
-- No public REST API, OpenAPI specification, MCP server, or OAuth surface is published.
-- Integration is tag-based (LiveTag / LiveConnect JavaScript) plus partner data connectors.
+
+- No MCP server, A2A agent card, GraphQL endpoint, gRPC service, AsyncAPI document or partner webhook catalog is published. Every `/.well-known/` path returns 404 (or 401 on the authenticated Reporting host).
+- No pricing or plans are published. API access follows a negotiated partner relationship; tokens are issued by an account team, not purchased.
+- No trust center, security.txt, vulnerability disclosure policy or named security certification could be found. LiveIntent's published compliance posture is privacy-regime conformance — GDPR, CCPA, Global Privacy Control and the IAB Europe TCF Global Vendor List.
+- The Zeta Global acquisition is already visible in the contract: `AudienceWithMetadataDTO` carries a `zetaTaxonomyNodeId` field, and some knowledge-base content now serves from knowledgebase.zetaglobal.com/liveintent. Documentation URLs recorded here carry migration risk.

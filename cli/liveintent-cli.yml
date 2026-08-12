@@ -1,0 +1,90 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://github.com/LiveIntent/li-privacy (README.md and li_privacy/*.py on
+  branch master), https://pypi.org/project/li-privacy/ and
+  https://privacy.liadm.com/api-guide. Searched 2026-08-12.
+name: li-privacy
+official: true
+description: >-
+  LiveIntent's first-party command-line client for the Privacy Management API.
+  It submits opt-out and deletion data subject requests for one user or a file
+  of users, generates and manages the RSA signing key pair the legacy privacy
+  endpoints authenticate with, and can target the staging environment.
+covers_api: openapi/liveintent-privacy-openapi.yml
+language: python
+license: Apache-2.0
+version: 1.3.2
+published: '2021-04-13'
+status: archived
+status_note: >-
+  The GitHub repository was archived 2021-04-13 and the PyPI package has not
+  been republished since. It remains the only first-party client for any
+  LiveIntent API. Note that it drives the RSA-signed legacy request model, while
+  the current Privacy Management API documented at privacy.liadm.com
+  authenticates with a bearer token issued by the account team — so the CLI and
+  the current contract have diverged.
+install:
+- method: pip
+  command: pip install li-privacy
+- method: pip-user
+  command: pip install --user li-privacy
+requirements:
+- python
+- pip
+configuration:
+  file: config.json
+  flag: --config
+  fields: [domain_name, key_id, signing_key, scope, staging, callback_url, request_id, hostname]
+  key_generation: >-
+    `li-privacy init` prompts for the company domain name, a key identifier
+    (default key1) and a private RSA signing key path; pressing ENTER at the key
+    prompts generates a fresh RSA key pair as {domain}.key and {domain}.key.pub.
+  provisioning: >-
+    The generated config.json and {domain}.key.pub are emailed to
+    privacy@liveintent.com to provision the account. The private key never
+    leaves the integrator.
+commands:
+- name: init
+  description: sets account configuration and generates keys
+  flags: ['--config', '--domain_name', '--key_id', '--signing_key']
+- name: optout
+  description: submits an optout request for a user
+  args: [user or hash or path to a file of users]
+  flags: ['--config', '--scope', '--callback_url', '--staging', '--request_id', '--verbose/-v']
+  note: >-
+    A bare email address is automatically hashed as MD5, SHA1 and SHA256 before
+    submission, so one address submits three identifier records.
+- name: delete
+  description: submits a deletion request for a user
+  args: [user or hash or path to a file of users]
+  flags: ['--config', '--scope', '--callback_url', '--staging', '--request_id', '--verbose/-v']
+  note: Same parameters as optout; maps to the ERASURE action.
+- name: ping
+  description: submits a ping request to validate keys and connection
+  flags: ['--config', '--staging', '--verbose/-v']
+- name: hash
+  description: hashes entries from a file
+  args: [file]
+  flags: ['--type md5|sha1|sha256']
+global_flags:
+- {flag: '--version', description: 'prints the client version'}
+- {flag: '--staging', description: 'send to staging environment instead of production'}
+- {flag: '--verbose, -v', description: 'verbose output'}
+flows:
+- name: provision signing keys
+  steps: ['li-privacy init', 'email config.json and {domain}.key.pub to privacy@liveintent.com', 'wait for account provisioning']
+- name: practice against staging
+  steps: ['li-privacy init and enter dailyplanet.com at the domain prompt', 'li-privacy optout user@domain.com --config dailyplanet.json']
+  note: >-
+    LiveIntent publishes an example account, dailyplanet.com, whose generated
+    keys are valid only in staging and execute no live transactions. This is the
+    one set of published test credentials in LiveIntent's entire surface — see
+    sandbox/liveintent-sandbox.yml.
+- name: bulk opt-out
+  steps: ['li-privacy optout path/to/users.txt']
+  note: >-
+    One email or hash per line. A TSV report is written alongside the input file
+    as {file}.{timestamp}.tsv.
+response_shape: '{"reference": "<ULID>", "read": <int>, "imported": <int>}'
+package: packages/liveintent-packages.yml

@@ -1,0 +1,119 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://audiences.liveintent.com/api-guide (servers[]),
+  https://privacy.liadm.com/api-guide (servers[] and the test endpoint), plus
+  DNS/TLS probes on 2026-08-12.
+summary: >-
+  LiveIntent publishes staging hosts for both spec-bearing APIs and one
+  explicit test endpoint on the Privacy Management API. There is no self-service
+  sandbox: staging access still requires a token issued by the LiveIntent
+  account team, and no test credentials, test identifiers or fixture values are
+  published anywhere.
+self_service: false
+test_live_separation:
+  style: separate-host
+  detail: >-
+    Test and production are separated by hostname, not by key prefix or a mode
+    flag. No key-prefix convention (test_ / live_) is documented for any
+    LiveIntent API.
+environments:
+- api: Audiences API
+  environment: staging
+  base_url: https://audiences-staging.bln.liveintent.com
+  source: 'openapi servers[] description: "staging"'
+  resolves: true
+  tls_version: TLSv1.2
+  probed: '2026-08-12'
+- api: Audiences API
+  environment: production
+  base_url: https://audiences.liveintent.com
+  source: 'openapi servers[] description: "production"'
+  resolves: true
+  tls_version: TLSv1.2
+  probed: '2026-08-12'
+- api: Privacy Management API
+  environment: staging
+  base_url: https://privacy-test.liadm.com
+  source: 'openapi servers[] description: "Privacy server staging"'
+  resolves: true
+  probed: '2026-08-12'
+  note: >-
+    The spec records this server entry as the bare string
+    "privacy-test.liadm.com" with no scheme — an OpenAPI defect that will break
+    any client that resolves servers[] mechanically. The host itself resolves
+    and answers over HTTPS.
+- api: Privacy Management API
+  environment: production
+  base_url: https://privacy.liadm.com
+  source: 'openapi servers[] description: "Privacy server production"'
+  resolves: true
+  probed: '2026-08-12'
+test_endpoints:
+- api: Privacy Management API
+  operation: POST /data-subject-requests/test
+  spec: openapi/liveintent-privacy-openapi.yml
+  purpose: >-
+    "Submit a test request" — accepts the same RESTRICT, ERASURE and ACCESS
+    data subject requests as the production submission endpoint without
+    committing them, so an integrator can validate payload shape and account
+    entitlement before submitting a real privacy request.
+  note: >-
+    This is a first-class test affordance declared in the contract itself rather
+    than a separate sandbox environment, and it is the strongest testing
+    primitive LiveIntent publishes.
+test_credentials:
+  published: partial
+  detail: >-
+    No test token is published for the Audiences API or the Reporting API — both
+    guides state that access tokens are obtained by contacting the LiveIntent
+    account team, which applies to staging as well as production. The Privacy
+    Management API is the exception: LiveIntent publishes an example account.
+  example_account:
+    domain: dailyplanet.com
+    api: Privacy Management API (legacy RSA-signed model)
+    obtained_by: 'li-privacy init, entering dailyplanet.com at the domain prompt'
+    config_file: dailyplanet.json
+    usage: 'li-privacy optout user@domain.com --config dailyplanet.json'
+    scope: >-
+      "These example keys are only valid in the staging environment which does
+      not execute live transactions" (li_privacy/InitProcessor.py). The client
+      forces staging=True for this account.
+    source: https://github.com/LiveIntent/li-privacy
+    note: >-
+      The key pair is generated locally by the CLI rather than distributed as a
+      literal secret, so there is no published private key to record here and
+      none was copied into this repo.
+test_values:
+  published: partial
+  detail: >-
+    No test audience id, test transactionId, seed data or magic identifier is
+    published for any API. The li-privacy README does show example MD5 hash and
+    ULID reference values in its sample output, but those are illustrative
+    output, not inputs LiveIntent guarantees. Nothing was invented for this
+    artifact.
+  identifier_hashing:
+    detail: >-
+      A bare email address passed to li-privacy is hashed as MD5, SHA1 and
+      SHA256 before submission, so one address produces three identifier
+      records. Useful for constructing valid test payloads without needing
+      LiveIntent-supplied fixtures.
+time_simulation:
+  supported: false
+fixture_tooling:
+- name: li-privacy
+  type: cli
+  language: python
+  install: pip install li-privacy
+  detail: >-
+    LiveIntent's own CLI ships a sample application for exercising the Privacy
+    Management API, which is the closest thing to a published fixture harness.
+    Last released 2021-04-13 and the repository is archived.
+  artifact: cli/liveintent-cli.yml
+console:
+  url: https://platform.liveintent.com/login/
+  public: false
+  detail: >-
+    The LiveIntent platform UI is login-gated with no public demo or interactive
+    API console. The Redocly-rendered API guides are reference documentation
+    only — they carry no "try it" execution surface.

@@ -1,0 +1,45 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://audiences.liveintent.com/api-guide, https://privacy.liadm.com/api-guide,
+  https://support.liveintent.com/hc/en-us, https://status.liveintent.com/history,
+  https://www.liveintent.com/page-sitemap.xml and the LiveIntent GitHub
+  organization. Searched 2026-08-12.
+result: none
+changelog_published: false
+scheme: null
+current_version: '1.0.0'
+entries: []
+note: >-
+  LiveIntent publishes no API changelog, release notes page or versioning
+  history. Neither API guide carries a "What's new" or "Changelog" section, the
+  knowledge base has no release-notes category, and there is no changelog page
+  in the site sitemap. Both OpenAPI documents have been at info.version 1.0.0
+  for as long as they have been published, so the declared version carries no
+  change signal either. Because nothing dated is published, no `ChangeLog`
+  pointer is wired into apis.yml.
+change_signals_available:
+  detail: >-
+    The only dated, machine-readable history LiveIntent exposes for its APIs is
+    incident history on its status page — which reports availability, not
+    contract change.
+  status_history:
+    url: https://status.liveintent.com/history
+    http_status: 200
+    machine_readable: https://status.liveintent.com/api/v2/summary.json
+  in_contract_evolution:
+  - signal: 'POST /search/audiences/v2 published alongside POST /search/audiences'
+    interpretation: >-
+      The audience search contract was revised (offset paging replaced by cursor
+      paging) and both revisions are live. No date is attached to either.
+  - signal: 'Legacy tag on POST /dsr, GET /oath, GET /submit'
+    interpretation: >-
+      Three Privacy Management API endpoints have been superseded by
+      POST /data-subject-requests. No deprecation date or removal date is given.
+  - signal: 'zetaTaxonomyNodeId field on AudienceWithMetadataDTO'
+    interpretation: >-
+      The Zeta Global acquisition has already reached the published data model.
+      Undated and undocumented in prose.
+probed:
+- {url: 'https://www.liveintent.com/page-sitemap.xml', status: 200, finding: 'no changelog or release-notes page'}
+- {url: 'https://status.liveintent.com/history', status: 200, finding: 'incident history only'}

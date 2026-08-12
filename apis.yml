@@ -1,12 +1,16 @@
 aid: liveintent
 name: LiveIntent
-description: LiveIntent is a people-based email marketing and identity platform serving more than
-  2,500 businesses. It connects marketers and publishers through email-native audience targeting,
-  publisher inventory monetization (LiveTag and native ad blueprints), and identity resolution across
-  the digital ecosystem, including its HIRO first-party data solution and email reactivation services.
-  Its primary public developer surface is the open-source LiveConnect first-party identity library
-  (npm live-connect-js) rather than a REST API, plus partner data integrations with Segment, Oracle,
-  Adobe, Merkle and LiveRamp. LiveIntent has agreed to be acquired by Zeta Global. Backed by Battery
+description: LiveIntent is a people-based email marketing, advertising and identity platform serving
+  more than 2,500 businesses. It connects marketers and publishers through email-native audience
+  targeting, publisher inventory monetization (LiveTag and native ad blueprints), and identity
+  resolution across the digital ecosystem, including its HIRO first-party data solution and email
+  reactivation services. LiveIntent publishes four partner APIs — an Audiences API and a Privacy
+  Management API, both backed by OpenAPI 3.0.0 definitions rendered through Redocly; a Reporting API
+  for publisher and advertiser metrics; and a Programmatic Bidding API implementing a subset of IAB
+  OpenRTB 2.5 with OpenRTB Native 1.1 and 1.2 — alongside the open-source LiveConnect first-party
+  identity library (npm live-connect-js) and partner data integrations with Segment, Oracle, Adobe,
+  Merkle and LiveRamp. All API access is bearer-token based and provisioned by a LiveIntent account
+  team rather than self-service. LiveIntent has been acquired by Zeta Global. Backed by Battery
   Ventures and Bullpen Capital.
 url: https://raw.githubusercontent.com/api-evangelist/liveintent/refs/heads/main/apis.yml
 x-type: company
@@ -14,8 +18,8 @@ x-source: vc-portfolio
 x-backed-by:
 - battery-ventures
 - bullpen-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: enrichment-pipeline
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -29,7 +33,7 @@ accessModel:
   method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-20'
+modified: '2026-08-12'
 image: https://www.liveintent.com/favicon.ico
 tags:
 - Company
@@ -41,13 +45,120 @@ tags:
 - Publishers
 - Marketers
 - Data
-apis: []
+apis:
+- aid: liveintent:audiences
+  name: LiveIntent Audiences API
+  description: Programmatically create and manage LiveIntent custom audiences. Partners create an
+    audience, mint a signed URL to upload member hashes out of band, poll upload status, read daily
+    total and match counts, and create event, URL and conversion trackers that build audiences
+    dynamically. Search is expressed as a composable boolean filter tree with both offset-paginated
+    (v1) and cursor-paginated (v2) endpoints. Authentication is an opaque bearer token in the
+    Authorization header, issued by the LiveIntent account team; there is no token endpoint and no
+    OAuth scopes. OpenAPI 3.0.0 with 12 operations and 48 schemas.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Audience
+  - Advertising
+  - AdTech
+  - Identity
+  - Data
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-audiences-openapi.yml
+  - type: Overlay
+    url: overlays/liveintent-audiences-overlay.yaml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+- aid: liveintent:privacy
+  name: LiveIntent Privacy Management API
+  description: Submit data subject requests to LiveIntent programmatically to satisfy CCPA and GDPR
+    obligations. Supports RESTRICT (opt out of sale), ERASURE (delete) and ACCESS (produce a report)
+    actions against hashed emails and LiveIntent first-party cookie identifiers, scoped by the
+    caller's account category on the LiveIntent ad exchange (Advertiser, Publisher, MediaGroup,
+    PublisherMediaGroup or Global). Submission is asynchronous, returning 202 with a transactionId
+    the caller polls. A dedicated test-submission endpoint validates payloads without committing
+    them. Authentication is a bearer token issued by the LiveIntent account team. OpenAPI 3.0.0 with
+    8 operations and 17 schemas.
+  humanURL: https://privacy.liadm.com/api-guide
+  baseURL: https://privacy.liadm.com
+  tags:
+  - Privacy
+  - Compliance
+  - GDPR
+  - CCPA
+  - Identity
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-privacy-openapi.yml
+  - type: Overlay
+    url: overlays/liveintent-privacy-overlay.yaml
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+  x-domain-note: Served from liadm.com rather than liveintent.com. LiveIntent's own knowledge-base
+    article at support.liveintent.com/liveintent-privacy-management-api/ links to
+    privacy.liadm.com/api-guide as "LiveIntent's updated Privacy API documentation", and the spec's
+    info.title reads "LiveIntent Privacy Management API"; liadm.com is LiveIntent's identity-serving
+    domain.
+- aid: liveintent:reporting
+  name: LiveIntent Reporting API
+  description: Query LiveIntent publisher and advertiser reporting data. A single executeQuery
+    endpoint accepts a report type, an absolute or dynamic date interval, a granularity of day, week,
+    month or all, plus splits, metrics and equals/not-equals filters, and returns an array of
+    timestamped event objects. Authentication is a username and password login endpoint that returns
+    a bearer token valid for 12 hours alongside a refresh token. LiveIntent's documentation describes
+    this as OAuth2, but no authorization endpoint, client identifier, scopes or discovery document
+    are published. No OpenAPI definition is published for this API.
+  humanURL: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+  baseURL: https://connect.liveintent.com
+  tags:
+  - Reporting
+  - Analytics
+  - Advertising
+  - Publishers
+  - Marketers
+  properties:
+  - type: Documentation
+    url: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+  - type: AgentSkill
+    url: skills/liveintent-pull-reporting-data.md
+  x-spec-status: No machine-readable definition published. The endpoints, request body fields and
+    enumerated values recorded in this repo come from LiveIntent's own knowledge-base article.
+- aid: liveintent:programmatic-bidding
+  name: LiveIntent Programmatic Bidding API
+  description: LiveIntent's exchange-side real-time bidding integration for demand-side platforms. It
+    implements a subset of the IAB OpenRTB API Specification 2.5 together with OpenRTB Native Ads 1.1
+    and 1.2, passing x-openrtb-version 2.5 on the request header and applying an implicit tmax of
+    150ms. Supported request objects include Bid Request, Impression, Banner, Site, App, Device,
+    User, Publisher, Geo, Data, Segment, PMP, Deal and Native Markup Request; responses use
+    BidResponse, SeatBid, Bid and Native Markup Response. A no-bid is signalled with HTTP 204 and an
+    empty body.
+  humanURL: https://support.liveintent.com/programmatic-bidding-api/
+  tags:
+  - Advertising
+  - AdTech
+  - OpenRTB
+  - Programmatic
+  - Publishers
+  properties:
+  - type: Documentation
+    url: https://support.liveintent.com/programmatic-bidding-api/
+  x-base-url-status: missing-by-design
+  x-base-url-note: No LiveIntent-hosted base URL exists for this API and none is published. LiveIntent
+    is the caller on this surface — the DSP supplies a bidding URL to LiveIntent, which posts OpenRTB
+    bid requests to it. Recorded as absent rather than guessed from the domain.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/liveintent-agentic-access.yml
+- type: Authentication
+  url: authentication/liveintent-authentication.yml
 - type: Website
   url: https://www.liveintent.com
 - type: Blog
@@ -70,8 +181,108 @@ common:
   url: security/liveintent-domain-security.yml
 - type: LLMsTxt
   url: llms/liveintent-llms.txt
+- type: APIReference
+  url: https://support.liveintent.com/hc/en-us/sections/360009709692-LiveIntent-APIs
+- type: SignUp
+  url: https://www.liveintent.com/get-started/
+- type: StatusPage
+  url: https://status.liveintent.com
+- type: Lifecycle
+  url: lifecycle/liveintent-lifecycle.yml
+- type: Conventions
+  url: conventions/liveintent-conventions.yml
+- type: ErrorCatalog
+  url: errors/liveintent-problem-types.yml
+- type: Conformance
+  url: conformance/liveintent-conformance.yml
+- type: DataModel
+  url: data-model/liveintent-data-model.yml
+- type: Sandbox
+  url: sandbox/liveintent-sandbox.yml
+- type: CLI
+  url: cli/liveintent-cli.yml
+- type: Components
+  url: components/liveintent-components.yml
+- type: Plans
+  url: plans/liveintent-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/liveintent-rate-limits.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/liveintent-audiences-overlay.yaml
+- type: Overlay
+  url: overlays/liveintent-privacy-overlay.yaml
+x-pointers-deliberately-withheld:
+  note: >-
+    Artifacts below exist in the repo and record a VERIFIED ABSENCE. No canonical
+    pointer is emitted for them, because the pointer would assert the provider
+    serves a surface it does not. Recorded here so a later pass does not "fix"
+    the omission.
+  withheld:
+  - type: WellKnown
+    artifact: well-known/liveintent-well-known.yml
+    reason: every /.well-known/ path returned 404 (or 401) on all four LiveIntent hosts
+  - type: SecurityTxt
+    artifact: well-known/liveintent-well-known.yml
+    reason: no security.txt is served on any host
+  - type: AgentCard
+    reason: '/.well-known/agent-card.json and /.well-known/agent.json both 404 on every host'
+  - type: MCPServer
+    reason: no MCP server is published; a derived candidate tool list was deliberately not written
+  - type: AsyncAPI
+    artifact: asyncapi/liveintent-events.yml
+    reason: no AsyncAPI document exists
+  - type: Webhooks
+    artifact: asyncapi/liveintent-events.yml
+    reason: >-
+      the only callback field in any spec is marked "for internal use only"; no
+      partner webhook catalog is published
+  - type: Idempotency
+    artifact: conventions/liveintent-conventions.yml
+    reason: no idempotency key exists on any of the 20 operations
+  - type: ChangeLog
+    artifact: changelog/liveintent-changelog.yml
+    reason: no dated changelog or release notes are published
+  - type: Deprecation
+    artifact: lifecycle/liveintent-lifecycle.yml
+    reason: >-
+      three Privacy API endpoints are tagged Legacy and called deprecated in
+      prose, but no deprecation policy, sunset date or RFC 8594 header is published
+  - type: Compliance
+    artifact: conformance/liveintent-conformance.yml
+    reason: >-
+      privacy-regime conformance (GDPR/CCPA/GPC/IAB TCF) is real and recorded,
+      but no named security certification or compliance program is published
+  - type: Security
+    reason: probe-security-programs.py found no vulnerability disclosure policy or bug bounty
+  - type: TrustCenter
+    reason: trust.liveintent.com does not resolve; /security/ and /trust/ return 404
+  - type: OAuthScopes
+    reason: no OAuth 2.0 authorization server and no scopes on any API
+  - type: ToolCrosswalk
+    reason: requires an MCP or GraphQL surface to bind OpenAPI operations to; neither exists
+  - type: Pricing
+    artifact: plans/liveintent-plans-pricing.yml
+    reason: no pricing page exists in the site sitemap
+  - type: TermsOfService
+    reason: https://www.liveintent.com/terms-of-service/ returned 404 and no ToS page is in the sitemap
+x-coverage:
+  state: covered
+  reason: contract-discovery-succeeded
+  detail: >-
+    Two real OpenAPI 3.0.0 definitions were recovered from the __redoc_state
+    embedded in LiveIntent's own Redocly-rendered API guides after every
+    standalone spec path (/openapi.json, /openapi.yaml, /swagger.json) returned
+    404 — the prior round's "no REST API" finding was wrong.
+  evidence:
+  - {url: 'https://audiences.liveintent.com/api-guide', status: 200}
+  - {url: 'https://privacy.liadm.com/api-guide', status: 200}
+  - {url: 'https://audiences.liveintent.com/audiences', status: 401}
+  - {url: 'https://status.liveintent.com/api/v2/summary.json', status: 200}
+  checked: '2026-08-12'
 x-enrichment:
-  date: '2026-07-20'
+  date: '2026-08-12'
   status: enriched
-  artifacts_added: 3
+  artifacts_added: 26
   pass: local-v1

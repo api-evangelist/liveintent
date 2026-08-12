@@ -1,0 +1,49 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://audiences.liveintent.com/api-guide,
+  https://privacy.liadm.com/api-guide,
+  https://support.liveintent.com/connecting-to-liveintents-reporting-api/,
+  https://support.liveintent.com/programmatic-bidding-api/, plus the two
+  harvested OpenAPI documents. Searched 2026-08-12.
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  LiveIntent publishes no rate limits for any of its four APIs. The two
+  spec-bearing APIs declare no 429 response anywhere across their 20 operations
+  (documented statuses are 200, 201, 202, 303, 400, 401, 403, 404 and 500), no
+  X-RateLimit-* or RateLimit-* header is documented, and no Retry-After
+  behaviour is described. The Reporting API guide documents only the 12-hour
+  access-token expiry and a 401 on a missing or expired token — it says nothing
+  about request volume. This is an honest zero: an agent calling LiveIntent has
+  no documented throttling contract and no runtime signal to back off on.
+adjacent_limits:
+- api: Programmatic Bidding API
+  kind: timeout
+  value: tmax=150ms
+  detail: >-
+    Not a rate limit — the OpenRTB bid-request timeout LiveIntent applies when
+    calling a DSP's bidding URL. Recorded here because it is the only
+    quantified runtime budget LiveIntent publishes on any API.
+  source: https://support.liveintent.com/programmatic-bidding-api/
+- api: Reporting API
+  kind: credential-lifetime
+  value: 12 hours
+  detail: >-
+    Access token expiry, after which the token is revoked and requests return
+    401. A session bound, not a request-rate bound.
+  source: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
+- api: Audiences API
+  kind: pagination-default
+  value: 'pageSize default 30 (POST /search/audiences/v2)'
+  detail: >-
+    Default page size on the cursor-paginated audience search. No maximum
+    pageSize is documented on any paginated endpoint.
+  source: openapi/liveintent-audiences-openapi.yml
+probed:
+- url: https://audiences.liveintent.com/audiences
+  http_status: 401
+  headers_observed: no rate-limit headers returned on the unauthenticated response
+  fetched: '2026-08-12'

@@ -1,0 +1,94 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://status.liveintent.com/ and its Statuspage summary API,
+  https://privacy.liadm.com/api-guide (Legacy tag),
+  https://audiences.liveintent.com/api-guide, plus the two harvested OpenAPI
+  documents. Probed 2026-08-12.
+versioning:
+  scheme: per-endpoint-path
+  current: '1.0.0'
+  detail: >-
+    Neither API carries a global version prefix in its base path. Both OpenAPI
+    documents declare info.version 1.0.0. The Audiences API versions an
+    individual endpoint when its contract changes —
+    POST /search/audiences (offset paged) and POST /search/audiences/v2
+    (cursor paged) are both published and both current. The Privacy Management
+    API versions by segregating superseded endpoints under a Legacy tag.
+  docs: https://audiences.liveintent.com/api-guide
+deprecation:
+  policy_url: https://privacy.liadm.com/api-guide
+  policy_published: false
+  sunset_header: false
+  detail: >-
+    LiveIntent publishes no dated deprecation policy, no sunset timeline and no
+    RFC 8594 Sunset/Deprecation headers. What it does publish is a Legacy
+    section in the Privacy Management API guide stating the endpoints under it
+    "are deprecated and should not be used for new integrations". That is a
+    named, documented deprecation of specific operations — but with no removal
+    date and no header signal, an agent cannot detect the deprecation at
+    runtime.
+  machine_readable: false
+  note: >-
+    The Legacy operations are described as deprecated in prose but are NOT
+    marked `deprecated: true` in the OpenAPI document, so the deprecation is
+    invisible to any tool that reads only the spec.
+deprecated_operations:
+- operation: openapi/liveintent-privacy-openapi.yml#POST /dsr
+  spec_deprecated_flag: false
+  evidence: 'tagged "Legacy" — "deprecated and should not be used for new integrations"'
+  replacement: POST /data-subject-requests
+- operation: openapi/liveintent-privacy-openapi.yml#GET /oath
+  spec_deprecated_flag: false
+  evidence: 'tagged "Legacy" — query-parameter submission returning a redirect'
+  replacement: POST /data-subject-requests
+- operation: openapi/liveintent-privacy-openapi.yml#GET /submit
+  spec_deprecated_flag: false
+  evidence: 'tagged "Legacy" — returns a blank GIF'
+  replacement: POST /data-subject-requests
+status_page:
+  url: https://status.liveintent.com
+  platform: Atlassian Statuspage
+  machine_readable: true
+  summary_api: https://status.liveintent.com/api/v2/summary.json
+  history: https://status.liveintent.com/history
+  http_status: 200
+  fetched: '2026-08-12'
+  components:
+  - Reporting API
+  - Programmatic Bidding API
+  - Audience API
+  - Ads API
+  - 'LiveTag: Exchange'
+  - 'LiveTag: Direct Sold and House'
+  - Scheduled Reports
+  - Platform UI
+  - Platform Health
+  - Configuration Delivery
+  - Ad Serving
+  - Reporting Services
+  note: >-
+    The status page is the most authoritative public inventory of LiveIntent's
+    API surface — it names four APIs as monitored components. Three of them
+    (Reporting, Programmatic Bidding, Audience) have public documentation. The
+    fourth, "Ads API", is monitored but has no public documentation, developer
+    portal entry or specification that could be found on 2026-08-12; it is
+    recorded here as an undocumented surface rather than given an apis[] entry.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: >-
+    No SLA or uptime commitment is published on the status page or anywhere on
+    liveintent.com. Statuspage exposes uptime history per component but no
+    contractual target.
+support:
+  url: https://support.liveintent.com/hc/en-us
+  email: support@liveintent.com
+  source: https://privacy.liadm.com/api-guide (Getting started section)
+corporate:
+  acquisition: >-
+    LiveIntent has been acquired by Zeta Global. Some LiveIntent knowledge-base
+    content is already being served from knowledgebase.zetaglobal.com/liveintent,
+    which is a migration risk for every documentation URL recorded in this repo.
+  evidence: https://knowledgebase.zetaglobal.com/liveintent/

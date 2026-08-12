@@ -1,0 +1,156 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/liveintent-audiences-openapi.yml (48 schemas) and
+  openapi/liveintent-privacy-openapi.yml (17 schemas), enriched from
+  https://audiences.liveintent.com/api-guide and
+  https://privacy.liadm.com/api-guide.
+note: >-
+  Two disjoint domains. The Audiences API models advertising audiences owned by
+  an account and fed by bulk uploads and trackers; the Privacy Management API
+  models data subject requests scoped to an ad-exchange account category. No
+  schema, identifier or $ref is shared between the two specs — they are separate
+  data cores that happen to share an error envelope.
+id_conventions:
+  style: opaque-integer
+  detail: >-
+    Every identifier in both APIs is a bare integer (accountId, dataProviderId,
+    audience id, ruleId, publisher/advertiser/mediaGroup id) with no type
+    prefix. The one exception is the Privacy API's transactionId, which is a
+    string. There is no prefixed-id convention to key on, so an agent cannot
+    tell an audienceId from an accountId by looking at the value.
+domains:
+- name: audiences
+  spec: openapi/liveintent-audiences-openapi.yml
+  base_url: https://audiences.liveintent.com
+  root_entity: Audience
+- name: privacy
+  spec: openapi/liveintent-privacy-openapi.yml
+  base_url: https://privacy.liadm.com
+  root_entity: DataSubjectRequest
+entities:
+- name: Audience
+  domain: audiences
+  schemas: [AudienceData, AudienceWithMetadataDTO, CreateAudienceRequest, CreateAudienceResponse, UpdateAudienceRequest, CreateAudiencePayload]
+  id_field: id
+  id_type: integer
+  fields: [id, name, accountId, dataProviderId, dataProviderPrefix, status, metadata, externalAudienceId, iabCategory, internal, archived, archivesAt, deletesAt, deletedAt, replacementId, zetaTaxonomyNodeId, additionalAttributes, createdAt, updatedAt]
+  status_enum: [Active, Archived, Deleted]
+  operations: [GET /audiences, POST /audiences, 'GET /audiences/{audienceId}', 'PATCH /audiences/{audienceId}']
+  note: >-
+    AudienceWithMetadataDTO carries a `zetaTaxonomyNodeId` field — the Zeta
+    Global acquisition is already visible inside LiveIntent's published data
+    model, not only in its corporate messaging.
+- name: Account
+  domain: audiences
+  id_field: accountId
+  id_type: integer
+  materialised: false
+  note: >-
+    Referenced by every audience and by the search filters, but no account
+    resource is exposed by this API — there is no GET /accounts. It is a
+    foreign key into the LiveIntent platform.
+- name: DataProvider
+  domain: audiences
+  id_field: dataProviderId
+  id_type: integer
+  materialised: false
+  note: >-
+    Referenced on create and queryable via dataProviderIdMatches, but no data
+    provider resource is exposed. `dataProviderPrefix` is returned on the
+    audience.
+- name: AudienceMetadata
+  domain: audiences
+  schemas: [AudienceMetadataDTO, UpsertMetadataRequestDTO]
+  fields: [data, updatedAt]
+  note: Free-form JSON attached to an audience and queryable via hasMetadata / MetadataFilter.
+- name: AudienceUpload
+  domain: audiences
+  schemas: [AudienceUpload, OffsetPaginatedAudienceUploads, SignedUploadUrlResponse, CreateSignedUrlRequest]
+  fields: [uploadType, action, status, uploadedHashesCount, invalidHashesCount, estimatedDuplicateCount, notificationEmail, scheduleAt, lastUpdate]
+  status_enum: [Pending, Running, Finished, Error]
+  operations: ['POST /audiences/{audienceId}/signed-urls', 'GET /audiences/{audienceId}/uploads']
+- name: AudienceCount
+  domain: audiences
+  schemas: [AudienceCount, AudienceCounts]
+  fields: [date, totalCount, matchCount]
+  operations: ['GET /audiences/{audienceId}/counts']
+  note: A daily time series of total vs matched members for one audience.
+- name: DynamicAudienceAttributes
+  domain: audiences
+  schemas: [DynamicAudienceAttributesDTO]
+  fields: [ruleId, ttl]
+  note: Attached to tracker-backed (dynamic) audiences rather than uploaded ones.
+- name: Tracker
+  domain: audiences
+  schemas: [UpdateConversionTrackersAndRulePayload]
+  id_field: ruleId
+  operations: [POST /eventtrackers, POST /urltrackers, PATCH /trackers]
+  variants: [event tracker, URL tracker, conversion tracker]
+  note: >-
+    Trackers create audiences dynamically from observed events or URL visits.
+    The three tracker endpoints all mint or update audiences, so Tracker is a
+    creation mechanism for Audience rather than a separately readable resource
+    — there is no GET /trackers.
+- name: DataSubjectRequest
+  domain: privacy
+  schemas: [DataSubjectRequest, NewDataSubjectRequest, DataSubjectRequestWithReport, DataSubjectResponse, DataSubjectRequestSearch, DataSubjectRequestSearchResult]
+  id_field: transactionId
+  id_type: string
+  fields: [transactionId, action, scope, jurisdiction, emailHashes, liveIntentFpcs, submitter, callback, status, userId, createdAt, downloadUrl]
+  action_enum: [RESTRICT, ERASURE, ACCESS]
+  jurisdiction_enum: [EU_PRIVACY, US_PRIVACY]
+  operations: [POST /data-subject-requests, 'POST /data-subject-requests/test', 'GET /data-subject-requests/{transactionId}', POST /search/data-subject-requests]
+- name: DsrScope
+  domain: privacy
+  schemas: [DsrScope, SimpleDsrScope, Advertiser, Publisher, MediaGroup, PublisherMediaGroup, Global]
+  kind: discriminated-union
+  variants:
+  - {variant: Advertiser, fields: [id]}
+  - {variant: Publisher, fields: [id]}
+  - {variant: MediaGroup, fields: [id]}
+  - {variant: PublisherMediaGroup, fields: [pid, mid]}
+  - {variant: Global, fields: []}
+  note: >-
+    A oneOf over the caller's account category on the LiveIntent ad exchange.
+    Scope is the authorization model for this API — the blast radius of a
+    RESTRICT or ERASURE is decided by which variant the token is entitled to
+    use. Global is reserved for authorized third-party agents submitting
+    industry-wide requests.
+- name: DataSubjectReport
+  domain: privacy
+  schemas: [DataSubjectRequestWithReport]
+  fields: [downloadUrl]
+  operations: ['GET /data-subject-report/{transactionId}']
+  note: >-
+    ACCESS requests produce a report fetched through a 303 redirect to a signed,
+    expiring download URL. A 403 on that redirect means the signature expired.
+relationships:
+- {from: Audience, to: Account, kind: belongs_to, via: accountId, confidence: high}
+- {from: Audience, to: DataProvider, kind: belongs_to, via: dataProviderId, confidence: high}
+- {from: Audience, to: AudienceMetadata, kind: has_one, via: metadata, confidence: high}
+- {from: Audience, to: AudienceUpload, kind: has_many, via: 'GET /audiences/{audienceId}/uploads', confidence: high}
+- {from: Audience, to: AudienceCount, kind: has_many, via: 'GET /audiences/{audienceId}/counts', confidence: high}
+- {from: Audience, to: Audience, kind: has_one, via: replacementId, confidence: medium, note: 'A replaced audience points at its successor; the field is nullable and undocumented.'}
+- {from: Audience, to: DynamicAudienceAttributes, kind: has_one, via: additionalAttributes, confidence: medium}
+- {from: DynamicAudienceAttributes, to: Tracker, kind: belongs_to, via: ruleId, confidence: high}
+- {from: Tracker, to: Audience, kind: has_one, via: 'POST /eventtrackers, POST /urltrackers create an audience', confidence: high}
+- {from: DataSubjectRequest, to: DsrScope, kind: has_one, via: scope, confidence: high}
+- {from: DataSubjectRequest, to: DataSubjectReport, kind: has_one, via: transactionId, confidence: high, note: 'ACCESS action only.'}
+- {from: DsrScope, to: Publisher, kind: has_one, via: 'oneOf variant', confidence: high}
+- {from: DsrScope, to: Advertiser, kind: has_one, via: 'oneOf variant', confidence: high}
+- {from: DsrScope, to: MediaGroup, kind: has_one, via: 'oneOf variant', confidence: high}
+- {from: PublisherMediaGroup, to: Publisher, kind: belongs_to, via: pid, confidence: high}
+- {from: PublisherMediaGroup, to: MediaGroup, kind: belongs_to, via: mid, confidence: high}
+subject_identifiers:
+- {field: emailHashes, domain: privacy, kind: hashed-email, note: 'The join key across LiveIntent''s identity graph.'}
+- {field: liveIntentFpcs, domain: privacy, kind: first-party-cookie, alias: DUID, note: 'LiveIntent first-party cookie identifiers.'}
+query_layer:
+  domain: audiences
+  schemas: [AudienceSearchRequest, AudienceSearchRequestV2, AudienceFilter, and, or, not, eq, accountIdMatches, nameMatches, dataProviderIdMatches, ruleIdMatches, hasMetadata, status, IntFilter, LongFilter, StringFilter, MetadataFilter, Value, Str, Num, Bool, Arr, Obj, Null, Json]
+  note: >-
+    23 of the Audiences API's 48 schemas exist purely to express the boolean
+    filter tree used by the two search endpoints. The searchable data model is
+    materially richer than the readable one.
+pagination_wrappers: [OffsetPaginatedAudiences, OffsetPaginatedAudienceUploads, CursorPage]
+render: null

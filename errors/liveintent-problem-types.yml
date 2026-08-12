@@ -1,0 +1,156 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/liveintent-audiences-openapi.yml and
+  openapi/liveintent-privacy-openapi.yml (4xx/5xx responses), enriched from
+  https://audiences.liveintent.com/api-guide and
+  https://privacy.liadm.com/api-guide, plus one live unauthenticated probe of
+  https://audiences.liveintent.com/audiences on 2026-08-12.
+format: proprietary
+rfc9457: false
+envelope:
+  media_type: application/json
+  shape: '{"errors": [{"httpStatus": <int>, "message": <string>, "errorCode": <string>}]}'
+  schema: ApplicationError
+  required_fields: [httpStatus, message, errorCode]
+  array: true
+  note: >-
+    Both specs declare the identical ApplicationError schema and return it as an
+    array under `errors`. There is no `type` URI and no `title`, so this is not
+    RFC 9457 problem+json. Only one errorCode value has been observed on the
+    wire ("unauthorized"); LiveIntent publishes no errorCode registry, so the
+    catalog below is keyed on HTTP status rather than on error code.
+observed:
+- url: https://audiences.liveintent.com/audiences
+  http_status: 401
+  content_type: application/json
+  body: '{"errors":[{"httpStatus":401,"message":"Token not provided","errorCode":"unauthorized"}]}'
+  fetched: '2026-08-12'
+- url: https://connect.liveintent.com/reporting/api/executeQuery
+  http_status: 401
+  content_type: text/plain
+  body: Unauthorized
+  fetched: '2026-08-12'
+  note: >-
+    The Reporting API does not use the ApplicationError envelope. It returns a
+    bare text/plain body, so an agent cannot parse a machine-readable reason
+    from a Reporting API failure.
+problems:
+- status: 400
+  title: Invalid request parameters
+  api: Audiences API
+  occurrences: 12
+  schema: ApplicationError
+  remediation: >-
+    Validate the request body against the operation schema. On the search
+    endpoints this most often means a malformed filter tree node.
+  source_operations:
+  - openapi/liveintent-audiences-openapi.yml#GET /audiences
+  - openapi/liveintent-audiences-openapi.yml#POST /audiences
+  - openapi/liveintent-audiences-openapi.yml#PATCH /audiences/{audienceId}
+  - openapi/liveintent-audiences-openapi.yml#POST /search/audiences
+  - openapi/liveintent-audiences-openapi.yml#POST /search/audiences/v2
+- status: 401
+  title: Authentication credentials were missing or incorrect
+  api: Audiences API
+  occurrences: 12
+  schema: ApplicationError
+  observed_error_code: unauthorized
+  observed_message: Token not provided
+  remediation: >-
+    Send Authorization: Bearer {token}. Tokens are issued by the LiveIntent
+    account team; there is no self-service token endpoint on this API.
+  source_operations:
+  - openapi/liveintent-audiences-openapi.yml#GET /audiences
+- status: 404
+  title: Audience not found
+  api: Audiences API
+  occurrences: 3
+  schema: ApplicationError
+  source_operations:
+  - openapi/liveintent-audiences-openapi.yml#GET /audiences/{audienceId}
+  - openapi/liveintent-audiences-openapi.yml#PATCH /audiences/{audienceId}
+  - openapi/liveintent-audiences-openapi.yml#GET /audiences/{audienceId}/counts
+- status: 500
+  title: Operation failed
+  api: Audiences API
+  occurrences: 9
+  schema: ApplicationError
+  variants:
+  - {operation: GET /audiences, description: Failed to list audiences.}
+  - {operation: POST /audiences, description: Failed to create audience.}
+  - {operation: 'GET /audiences/{audienceId}', description: 'Failed to retrieve audience.'}
+  - {operation: 'PATCH /audiences/{audienceId}', description: 'Failed to update audience.'}
+  - {operation: 'GET /audiences/{audienceId}/counts', description: 'Failed to retrieve audience counts.'}
+  - {operation: 'POST /audiences/{audienceId}/signed-urls', description: 'Failed to generate signed URLs.'}
+  - {operation: POST /eventtrackers, description: Failed to create event tracker audience.}
+  - {operation: PATCH /trackers, description: Failed to update conversion trackers and rule.}
+  - {operation: POST /urltrackers, description: Failed to create URL tracker audience.}
+  remediation: >-
+    Retry with backoff. Note there is no idempotency key on the create
+    operations, so a retry after a 500 may produce a duplicate audience.
+- status: 400
+  title: Invalid request body or missing required fields
+  api: Privacy Management API
+  occurrences: 4
+  schema: ApplicationError
+  variants:
+  - {operation: 'GET /data-subject-report/{transactionId}', description: 'Missing required query parameters.'}
+  - {operation: GET /submit, description: Missing dataSubjectRequest parameter.}
+  - {operation: GET /oath, description: Missing dsr parameter.}
+  source_operations:
+  - openapi/liveintent-privacy-openapi.yml#POST /data-subject-requests
+- status: 401
+  title: Missing bearer token
+  api: Privacy Management API
+  occurrences: 7
+  schema: ApplicationError
+  remediation: >-
+    Send Authorization: Bearer {token} obtained from your LiveIntent account
+    team.
+  source_operations:
+  - openapi/liveintent-privacy-openapi.yml#POST /data-subject-requests
+- status: 403
+  title: Invalid or expired bearer token
+  api: Privacy Management API
+  occurrences: 8
+  schema: ApplicationError
+  variants:
+  - {operation: 'GET /data-subject-report/{transactionId}', description: 'Invalid signature or link expired.'}
+  remediation: >-
+    Request a fresh token from the account team. On the report-download
+    redirect, 403 means the signed URL itself has expired — re-issue it via
+    GET /data-subject-report/{transactionId}.
+  note: >-
+    The Privacy Management API distinguishes 401 (no token) from 403 (bad or
+    expired token); the Audiences API collapses both into 401.
+- status: 404
+  title: Not found
+  api: Privacy Management API
+  occurrences: 3
+  schema: ApplicationError
+  variants:
+  - {operation: 'GET /data-subject-report/{transactionId}', description: 'Report not found.'}
+  - {operation: POST /data-subject-requests, description: The provided account cannot be used.}
+  note: >-
+    On POST /data-subject-requests a 404 means the account category on the token
+    is not entitled to act for the requested scope — an authorization failure
+    reported as a not-found.
+- status: 500
+  title: Internal server error
+  api: Privacy Management API
+  occurrences: 8
+  schema: ApplicationError
+coverage:
+  apis_with_error_schema: 2
+  apis_without_error_schema: 2
+  apis_without_error_schema_detail: >-
+    The Reporting API and the Programmatic Bidding API publish no error schema.
+    The Bidding API's only documented failure mode is an HTTP 204 no-bid with an
+    empty body (OpenRTB 2.5).
+  statuses_documented: [400, 401, 403, 404, 500]
+  statuses_missing: [409, 422, 429]
+  gap: >-
+    No 429 response is declared anywhere in either spec, which is consistent
+    with LiveIntent publishing no rate limits at all — an agent has no
+    documented signal for throttling on any LiveIntent API.

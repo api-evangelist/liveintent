@@ -1,0 +1,74 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the LiveIntent Audiences API
+  version: 1.0.0
+x-generated: '2026-08-12'
+x-method: generated
+x-source: >-
+  Derived from openapi/liveintent-audiences-openapi.yml, harvested from the
+  embedded Redocly state at https://audiences.liveintent.com/api-guide on
+  2026-08-12. This overlay records API Evangelist annotations only; it never
+  mutates the harvested document.
+extends: openapi/liveintent-audiences-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-source: https://audiences.liveintent.com/api-guide
+    x-apievangelist-source-form: >-
+      Extracted from the __redoc_state JSON embedded in the Redocly-rendered API
+      guide. LiveIntent serves no standalone spec URL — /openapi.json,
+      /openapi.yaml and /swagger.json all returned 404 on audiences.liveintent.com.
+    x-apievangelist-ownership: >-
+      Verified LiveIntent's own contract: info.description names LiveIntent
+      partners and Custom Audiences, and both servers[] entries are on
+      liveintent.com.
+- target: $.info
+  update:
+    x-apievangelist-gaps:
+      operation_ids: >-
+        None of the 12 operations declares an operationId. Every tool that binds
+        by operationId — SDK generators, Arazzo workflows, MCP tool forges — has
+        nothing to bind to, so operations must be addressed by method plus path.
+      summaries: No operation declares a summary or description.
+      tags: >-
+        The document declares no tags[] and no operation is tagged, so the
+        reference cannot be grouped.
+      examples: >-
+        No request or response example is present on any operation or schema.
+      error_registry: >-
+        ApplicationError carries a required errorCode string but no enumeration
+        of its values is published.
+      rate_limits: >-
+        No 429 response is declared on any operation and no rate-limit headers
+        are documented.
+      idempotency: >-
+        No Idempotency-Key parameter on any of the six POST/PATCH operations.
+- target: $.servers
+  update:
+    x-apievangelist-note: >-
+      Two servers are declared, staging first and production second. A client
+      that takes servers[0] by default will target
+      audiences-staging.bln.liveintent.com. The production base is
+      https://audiences.liveintent.com.
+- target: $.components.securitySchemes.Bearer
+  update:
+    x-apievangelist-note: >-
+      Modelled as an apiKey scheme in the Authorization header rather than as
+      type http / scheme bearer. Functionally a bearer token; the declaration
+      form means generic tooling will not recognise it as HTTP bearer auth.
+    x-apievangelist-observed:
+      url: https://audiences.liveintent.com/audiences
+      http_status: 401
+      body: '{"errors":[{"httpStatus":401,"message":"Token not provided","errorCode":"unauthorized"}]}'
+      fetched: '2026-08-12'
+- target: $.components.schemas.AudienceWithMetadataDTO
+  update:
+    x-apievangelist-note: >-
+      Carries zetaTaxonomyNodeId, evidence that the Zeta Global acquisition has
+      reached the published data model.
+- target: $.paths['/search/audiences']
+  update:
+    x-apievangelist-note: >-
+      Superseded in practice by /search/audiences/v2, which replaces offset
+      paging with a cursor. Neither is marked deprecated in the document.

@@ -1,0 +1,50 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTP probes of every LiveIntent host on 2026-08-12
+result: none
+note: >-
+  Every /.well-known/ path was probed on all four LiveIntent hosts and NONE
+  returned a document. www.liveintent.com answers 404 with the WordPress
+  404 page; audiences.liveintent.com and privacy.liadm.com answer a bare 404;
+  api.liveintent.com / connect.liveintent.com answer 401 "Unauthorized" to every
+  path including /.well-known/*, so nothing is served anonymously there either.
+  Because no path returned a real document, NO WellKnown and NO SecurityTxt
+  pointer is wired into apis.yml — this file records a verified absence, not a
+  presence.
+hosts:
+- host: https://www.liveintent.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://audiences.liveintent.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://privacy.liadm.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://connect.liveintent.com
+  note: >-
+    Reporting API host (shares 34.226.98.242 with api.liveintent.com). Returns
+    401 text/plain "Unauthorized" for every path, including /.well-known/*, so
+    the discovery surface is authenticated rather than absent.
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/agent-card.json, status: 401}
+  - {path: /.well-known/agent.json, status: 401}

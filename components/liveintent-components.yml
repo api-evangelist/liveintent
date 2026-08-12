@@ -1,0 +1,82 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.liveintent.com/livetag-parameter-guide/,
+  https://github.com/LiveIntent (public repository inventory read from the
+  GitHub API on 2026-08-12), https://www.npmjs.com/package/live-connect-js.
+note: >-
+  LiveIntent's client-side surface is tag- and script-based rather than a UI
+  component library: there are no web components, no embeddable dashboards and
+  no hosted prebuilt screens. What it ships are browser scripts that collect
+  identity and render ad inventory. They are catalogued here because for
+  LiveIntent this IS the integration surface most partners actually deploy —
+  materially more partners embed LiveTag or LiveConnect than call the three
+  HTTP APIs.
+families:
+- name: LiveTag
+  kind: embed-tag
+  description: >-
+    LiveIntent's ad tag, embedded in an email or web template to render
+    exchange, direct-sold and house inventory. Configured through URL
+    parameters documented in the LiveTag parameter guide.
+  docs: https://support.liveintent.com/livetag-parameter-guide/
+  distribution: tag
+  registry: null
+  version: null
+  published: null
+  version_note: >-
+    Distributed as a hosted tag with no pinned version in the embed URL, so a
+    publisher cannot tell which build they are serving and neither can we. No
+    registry metadata endpoint exists for it.
+  status_components: ['LiveTag: Exchange', 'LiveTag: Direct Sold and House']
+  status_page: https://status.liveintent.com
+- name: LiveConnect
+  kind: browser-library
+  description: >-
+    First-party identity collection library for the browser. Collects and
+    resolves first-party identifiers (DUIDs) on the publisher's own domain and
+    is the open-source core of LiveIntent's identity offering.
+  packages:
+  - {registry: npm, name: live-connect-js, version: 7.2.0, published: '2025-01-20'}
+  - {registry: npm, name: live-connect-common, version: 4.1.0, published: '2024-10-31'}
+  - {registry: npm, name: live-connect-handlers, version: 3.1.0, published: '2024-10-31'}
+  repository: https://github.com/LiveIntent/live-connect
+  license: Apache-2.0
+  status: repository-archived
+  artifact: packages/liveintent-packages.yml
+- name: LiveIntent identity module for Prebid.js
+  kind: header-bidding-module
+  description: >-
+    LiveIntent's identity submodule for Prebid.js, which supplies resolved
+    identifiers into the header-bidding auction. LiveIntent maintains public
+    forks of Prebid.js, prebid-server, prebid-server-java and the Prebid.org
+    site.
+  repositories:
+  - https://github.com/LiveIntent/Prebid.js
+  - https://github.com/LiveIntent/prebid-server
+  - https://github.com/LiveIntent/prebid-server-java
+  tooling:
+  - name: lipid
+    description: LiveIntent Prebid Identity Debugger — a browser-side debugging aid for the identity module.
+    repository: https://github.com/LiveIntent/lipid
+    status: archived
+    archived: '2025-04-01'
+- name: HIRO measurement script
+  kind: measurement-script
+  description: >-
+    Client-side measurement script for the HIRO first-party data integration.
+  repository: https://github.com/LiveIntent/HIRO
+  language: javascript
+  status: archived
+  archived: '2025-08-22'
+  version: null
+  version_note: >-
+    Never published to a package registry; distributed as a script the
+    integration guide has the publisher paste in. No version metadata exists to
+    read.
+ui_components:
+  published: false
+  detail: >-
+    No web components, element library, embedded dashboard or hosted prebuilt UI
+    is published. The only LiveIntent user interface is the login-gated platform
+    at https://platform.liveintent.com/login/.
