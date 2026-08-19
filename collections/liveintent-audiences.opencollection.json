@@ -1,0 +1,265 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audiences API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GET /audiences",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences",
+        "params": [
+          {
+            "name": "page",
+            "value": "",
+            "type": "query",
+            "description": "the page number\n\n"
+          },
+          {
+            "name": "pageSize",
+            "value": "",
+            "type": "query",
+            "description": "the page size\n\n"
+          },
+          {
+            "name": "updatedAfter",
+            "value": "",
+            "type": "query",
+            "description": "filter for audiences updated after the provided timestamp (in milliseconds since epoch)\n\n"
+          }
+        ]
+      },
+      "docs": "List audiences for the specified account, or all audiences if no accountId is provided.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /audiences",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a new audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "GET /audiences/{audienceId}",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences/:audienceId",
+        "params": [
+          {
+            "name": "audienceId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get the specified audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "PATCH /audiences/{audienceId}",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences/:audienceId",
+        "params": [
+          {
+            "name": "audienceId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update the specified audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "GET /audiences/{audienceId}/counts",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences/:audienceId/counts",
+        "params": [
+          {
+            "name": "audienceId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get counts for the specified audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /audiences/{audienceId}/signed-urls",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences/:audienceId/signed-urls",
+        "params": [
+          {
+            "name": "audienceId",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create signed URLs for uploading audience data to the specified audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "GET /audiences/{audienceId}/uploads",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://audiences-staging.bln.liveintent.com/audiences/:audienceId/uploads",
+        "params": [
+          {
+            "name": "page",
+            "value": "",
+            "type": "query",
+            "description": "the page number\n\n"
+          },
+          {
+            "name": "pageSize",
+            "value": "",
+            "type": "query",
+            "description": "the page size\n\n"
+          },
+          {
+            "name": "audienceId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "List uploads for the specified audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /eventtrackers",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/eventtrackers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a new event tracker audience.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /search/audiences",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/search/audiences",
+        "params": [
+          {
+            "name": "accountId",
+            "value": "",
+            "type": "query",
+            "description": "the account id\n\n"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Search for audiences matching the provided criteria, with optional account scoping.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /search/audiences/v2",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/search/audiences/v2",
+        "params": [
+          {
+            "name": "accountId",
+            "value": "",
+            "type": "query",
+            "description": "the account id\n\n"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Search for audiences matching the provided criteria, with optional account scoping.\n\n"
+    },
+    {
+      "info": {
+        "name": "PATCH /trackers",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://audiences-staging.bln.liveintent.com/trackers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update conversion trackers and rule for audiences.\n\n"
+    },
+    {
+      "info": {
+        "name": "POST /urltrackers",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://audiences-staging.bln.liveintent.com/urltrackers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a new URL tracker audience.\n\n"
+    }
+  ],
+  "bundled": true
+}

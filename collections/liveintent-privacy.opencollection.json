@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LiveIntent Privacy Management API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API references",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /data-subject-report/{transactionId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://privacy.liadm.com/data-subject-report/:transactionId",
+            "params": [
+              {
+                "name": "expiresAt",
+                "value": "",
+                "type": "query",
+                "description": "Expiration timestamp for the signed URL\n\n"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "query",
+                "description": "Signature for URL validation\n\n"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "# Get a customer data report URL\n\nFor internal use only. This endpoint redirects to the report download URL using the signed URL parameters.\n\n\n- API references\n"
+        },
+        {
+          "info": {
+            "name": "POST /data-subject-requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://privacy.liadm.com/data-subject-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered"
+        },
+        {
+          "info": {
+            "name": "POST /data-subject-requests/test",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://privacy.liadm.com/data-subject-requests/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly genera"
+        },
+        {
+          "info": {
+            "name": "GET /data-subject-requests/{transactionId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://privacy.liadm.com/data-subject-requests/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "# Get a customer data report\n\nFor internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.\n\n\n- API references\n"
+        },
+        {
+          "info": {
+            "name": "POST /search/data-subject-requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://privacy.liadm.com/search/data-subject-requests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "# Search Data Subject Requests\n\nFor internal use only. This endpoint lets you search for previously submitted Data Subject Requests.\n\n\n- API references\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Legacy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "POST /dsr",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://privacy.liadm.com/dsr",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT's `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.\n\n- Legacy\n"
+        },
+        {
+          "info": {
+            "name": "GET /oath",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://privacy.liadm.com/oath",
+            "params": [
+              {
+                "name": "dataSubjectRequest",
+                "value": "",
+                "type": "query",
+                "description": "JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.\n\n"
+              }
+            ]
+          },
+          "docs": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n"
+        },
+        {
+          "info": {
+            "name": "GET /submit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://privacy.liadm.com/submit",
+            "params": [
+              {
+                "name": "dsr",
+                "value": "",
+                "type": "query",
+                "description": "JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.\n\n"
+              }
+            ]
+          },
+          "docs": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

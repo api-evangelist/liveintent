@@ -1,0 +1,3289 @@
+{
+  "item": [
+    {
+      "id": "050836f7-5aeb-4356-a5d8-25297a9113bd",
+      "name": "List audiences for the specified account, or all audiences if no accountId is provided.\n\n",
+      "request": {
+        "name": "List audiences for the specified account, or all audiences if no accountId is provided.\n\n",
+        "description": {
+          "content": "List audiences for the specified account, or all audiences if no accountId is provided.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<integer>",
+              "description": "the page number\n\n"
+            },
+            {
+              "disabled": false,
+              "key": "pageSize",
+              "value": "<integer>",
+              "description": "the page size\n\n"
+            },
+            {
+              "disabled": false,
+              "key": "updatedAfter",
+              "value": "<long>",
+              "description": "filter for audiences updated after the provided timestamp (in milliseconds since epoch)\n\n"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "6583825f-30ac-41a6-a84a-ac57a595f0ba",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "updatedAfter",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"entries\": [\n    {\n      \"id\": 6910,\n      \"name\": \"string\",\n      \"accountId\": 6241,\n      \"dataProviderId\": 4967,\n      \"createdAt\": \"1975-12-24T16:02:14.886Z\",\n      \"updatedAt\": \"1987-06-15T07:39:27.000Z\",\n      \"status\": \"Archived\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1993-11-21T17:39:13.146Z\"\n        },\n        \"key_1\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1947-10-20T15:57:50.338Z\"\n        },\n        \"key_2\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1976-11-26T20:04:25.188Z\"\n        }\n      }\n    },\n    {\n      \"id\": 1633,\n      \"name\": \"string\",\n      \"accountId\": 5740,\n      \"dataProviderId\": 3773,\n      \"createdAt\": \"1958-11-17T19:46:36.829Z\",\n      \"updatedAt\": \"1974-04-04T16:30:55.282Z\",\n      \"status\": \"Deleted\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1982-09-11T06:28:32.228Z\"\n        },\n        \"key_1\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1985-09-07T01:16:41.878Z\"\n        }\n      }\n    }\n  ],\n  \"page\": 399,\n  \"pages\": 6500,\n  \"pageSize\": 9381,\n  \"totalCount\": 5509\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d1883c5b-3c12-4d4c-a944-237786ecb3d6",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "updatedAfter",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0a610f8c-1f8d-4016-be7e-3fb99b3e3a59",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "updatedAfter",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "30d96695-c682-4d93-a1fc-8aa81881b064",
+          "name": "Failed to list audiences.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "updatedAfter",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "98bcbbb4-6d99-4e1e-8cd3-74bf6a22e273",
+      "name": "Create a new audience.\n\n",
+      "request": {
+        "name": "Create a new audience.\n\n",
+        "description": {
+          "content": "Create a new audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"dataProviderId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"metadata\": {}\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "00275b81-11e9-4875-bdb6-5a3ea41d4fbc",
+          "name": "The audience has been created successfully\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataProviderId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 8781,\n  \"name\": \"string\",\n  \"accountId\": 5099,\n  \"dataProviderId\": 4978,\n  \"createdAt\": \"1993-06-18T14:40:09.496Z\",\n  \"updatedAt\": \"1999-09-12T11:05:40.546Z\",\n  \"status\": \"Archived\",\n  \"metadata\": {\n    \"key_0\": {\n      \"data\": {\n        \"Arr\": {\n          \"elements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"updatedAt\": \"1990-05-16T04:28:31.693Z\"\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "362aeff6-1dfe-4a03-93ac-5effea7338d5",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataProviderId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a12f4332-fa04-4039-a98a-17764ceb8214",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataProviderId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a6dd07db-f9d4-44ae-b061-f52170843298",
+          "name": "Failed to create audience.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataProviderId\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"metadata\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "cbc4db4f-3745-435c-92e8-58f31ae09f33",
+      "name": "Get the specified audience.\n\n",
+      "request": {
+        "name": "Get the specified audience.\n\n",
+        "description": {
+          "content": "Get the specified audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences",
+            ":audienceId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<long>",
+              "key": "audienceId",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "7e931adf-0057-435b-84dd-0ecac961e405",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 8781,\n  \"name\": \"string\",\n  \"accountId\": 5099,\n  \"dataProviderId\": 4978,\n  \"createdAt\": \"1993-06-18T14:40:09.496Z\",\n  \"updatedAt\": \"1999-09-12T11:05:40.546Z\",\n  \"status\": \"Archived\",\n  \"metadata\": {\n    \"key_0\": {\n      \"data\": {\n        \"Arr\": {\n          \"elements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"updatedAt\": \"1990-05-16T04:28:31.693Z\"\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8c559fbd-3567-4641-932c-e8292a71adec",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a180b553-0a3a-47a0-9c48-2ca4cdca5d51",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3ca5b95b-1ef6-4cfb-81d5-7506c29b6cd5",
+          "name": "Audience not found.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4f79127a-a1fe-48f9-a9ad-889357f86f59",
+          "name": "Failed to retrieve audience.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "b027a68c-bbf5-4157-9bb5-4603882fee34",
+      "name": "Update the specified audience.\n\n",
+      "request": {
+        "name": "Update the specified audience.\n\n",
+        "description": {
+          "content": "Update the specified audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences",
+            ":audienceId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<long>",
+              "key": "audienceId",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PATCH",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "55bc4ff0-a4a1-4b82-a6ff-dc3887c0bdfc",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": 8781,\n  \"name\": \"string\",\n  \"accountId\": 5099,\n  \"dataProviderId\": 4978,\n  \"createdAt\": \"1993-06-18T14:40:09.496Z\",\n  \"updatedAt\": \"1999-09-12T11:05:40.546Z\",\n  \"status\": \"Archived\",\n  \"metadata\": {\n    \"key_0\": {\n      \"data\": {\n        \"Arr\": {\n          \"elements\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"updatedAt\": \"1990-05-16T04:28:31.693Z\"\n    }\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8159f70b-2d98-4bd8-9965-d51aaa6010b6",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "f1b2f9d2-aafe-458c-a9e7-9e054c173d36",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "f9afabb1-8ddc-4a6e-988b-3dd918045428",
+          "name": "Audience not found.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5c3b567b-3dab-494d-bb52-222f2bc450dd",
+          "name": "Failed to update audience.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string,null>\",\n  \"status\": \"<null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "962775f2-d9ac-4a08-b99e-0d328b6ce1af",
+      "name": "Get counts for the specified audience.\n\n",
+      "request": {
+        "name": "Get counts for the specified audience.\n\n",
+        "description": {
+          "content": "Get counts for the specified audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences",
+            ":audienceId",
+            "counts"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<long>",
+              "key": "audienceId",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "44b1d182-779e-4c4c-ad21-5f373d054af0",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"entries\": [\n    {\n      \"date\": \"1982-09-03\",\n      \"totalCount\": 3,\n      \"matchCount\": 749\n    },\n    {\n      \"date\": \"2024-04-26\",\n      \"totalCount\": 4231,\n      \"matchCount\": 8658\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a571c99b-e98b-41bb-93e8-014f1f5083e6",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4cbb38a8-4a55-4b78-895b-61258b891259",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "2e481a61-7100-4b16-b4c3-3b02055c5bad",
+          "name": "Audience not found.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "dad24b91-8c36-446b-8b7f-e2c3d83a9006",
+          "name": "Failed to retrieve audience counts.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "b72a6b2f-7761-4fdd-977b-96665f132cf4",
+      "name": "Create signed URLs for uploading audience data to the specified audience.\n\n",
+      "request": {
+        "name": "Create signed URLs for uploading audience data to the specified audience.\n\n",
+        "description": {
+          "content": "Create signed URLs for uploading audience data to the specified audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences",
+            ":audienceId",
+            "signed-urls"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<long>",
+              "key": "audienceId",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"identifierType\": \"<string>\",\n  \"action\": \"<string>\",\n  \"uploadName\": \"<string,null>\",\n  \"notificationEmail\": \"<string,null>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "c0829474-87d3-4d4c-9904-77f8f8947285",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "signed-urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierType\": \"<string>\",\n  \"action\": \"<string>\",\n  \"uploadName\": \"<string,null>\",\n  \"notificationEmail\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"signedUrl\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "864e8401-657c-4385-a976-dfb0df0dd8d7",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "signed-urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierType\": \"<string>\",\n  \"action\": \"<string>\",\n  \"uploadName\": \"<string,null>\",\n  \"notificationEmail\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "51becea2-f832-4823-8c83-443e801ddb81",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "signed-urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierType\": \"<string>\",\n  \"action\": \"<string>\",\n  \"uploadName\": \"<string,null>\",\n  \"notificationEmail\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8bb3bc75-1469-4105-9301-d84537414fa2",
+          "name": "Failed to generate signed URLs.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "signed-urls"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifierType\": \"<string>\",\n  \"action\": \"<string>\",\n  \"uploadName\": \"<string,null>\",\n  \"notificationEmail\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "423686f5-2c06-4c18-a50f-369ccd2c76e8",
+      "name": "List uploads for the specified audience.\n\n",
+      "request": {
+        "name": "List uploads for the specified audience.\n\n",
+        "description": {
+          "content": "List uploads for the specified audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "audiences",
+            ":audienceId",
+            "uploads"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<integer>",
+              "description": "the page number\n\n"
+            },
+            {
+              "disabled": false,
+              "key": "pageSize",
+              "value": "<integer>",
+              "description": "the page size\n\n"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<long>",
+              "key": "audienceId",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "406f454b-2ac2-43d3-bc7e-0fa78135bcd5",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"entries\": [\n    {\n      \"status\": \"Error\",\n      \"action\": \"string\",\n      \"uploadType\": \"string\",\n      \"lastUpdate\": \"1985-05-15T10:24:03.456Z\",\n      \"scheduleAt\": \"1978-12-18T19:03:47.037Z\",\n      \"estimatedDuplicateCount\": 6467,\n      \"uploadedHashesCount\": 1947,\n      \"invalidHashesCount\": 3737,\n      \"notificationEmail\": \"string\"\n    },\n    {\n      \"status\": \"Finished\",\n      \"action\": \"string\",\n      \"uploadType\": \"string\",\n      \"lastUpdate\": \"1980-08-16T18:09:32.830Z\",\n      \"scheduleAt\": \"2018-07-31T08:19:48.500Z\",\n      \"estimatedDuplicateCount\": 7082,\n      \"uploadedHashesCount\": 8793,\n      \"invalidHashesCount\": 2621,\n      \"notificationEmail\": null\n    }\n  ],\n  \"page\": 3026,\n  \"pages\": 3246,\n  \"pageSize\": 4489,\n  \"totalCount\": 4290\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c97870e6-bd72-4b76-952c-12e2e722d940",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "6a6f6fb9-d533-4158-85a5-a004325c4ef9",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "audiences",
+                ":audienceId",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "audienceId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c351aa46-66d5-4221-9808-86d6e5e7d541",
+      "name": "Create a new event tracker audience.\n\n",
+      "request": {
+        "name": "Create a new event tracker audience.\n\n",
+        "description": {
+          "content": "Create a new event tracker audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "eventtrackers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "9c1c7f2a-922e-4090-bcfc-5ef9b37dec44",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eventtrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ruleId\": 4344,\n  \"audience\": {\n    \"id\": 2241,\n    \"name\": \"string\",\n    \"accountId\": 1428,\n    \"dataProviderId\": 5160,\n    \"dataProviderPrefix\": \"string\",\n    \"createdAt\": \"2013-05-20T12:16:38.612Z\",\n    \"archived\": false,\n    \"status\": \"Deleted\",\n    \"internal\": false,\n    \"metadata\": {\n      \"key_0\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1952-11-26T15:59:38.223Z\"\n      },\n      \"key_1\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1946-09-27T16:01:06.478Z\"\n      },\n      \"key_2\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1956-05-04T15:06:49.972Z\"\n      }\n    },\n    \"updatedAt\": \"1946-09-10T13:59:52.492Z\",\n    \"deletesAt\": null,\n    \"deletedAt\": null,\n    \"externalAudienceId\": \"string\",\n    \"iabCategory\": \"string\",\n    \"archivesAt\": \"1974-06-06T04:21:45.511Z\",\n    \"additionalAttributes\": null,\n    \"replacementId\": null,\n    \"zetaTaxonomyNodeId\": null\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "87ccf312-9b23-4e45-8f8a-efc4be0da4c1",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eventtrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d3ded71f-971e-4d7f-8ab5-5a7595857706",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eventtrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d5f5ebbe-a54a-4ba7-8632-e0f3be0c5d20",
+          "name": "Failed to create event tracker audience.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "eventtrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "1fa07066-f8d9-4afb-a0b9-233aeffe640f",
+      "name": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+      "request": {
+        "name": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+        "description": {
+          "content": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "search",
+            "audiences"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "accountId",
+              "value": "<long>",
+              "description": "the account id\n\n"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"page\": 1,\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "606f4e64-4845-4615-b10d-a0236d3fba94",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": 1,\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"entries\": [\n    {\n      \"id\": 6631,\n      \"name\": \"string\",\n      \"accountId\": 7978,\n      \"dataProviderId\": 6605,\n      \"createdAt\": \"1975-09-07T04:42:10.132Z\",\n      \"updatedAt\": \"2009-10-05T17:52:39.321Z\",\n      \"status\": \"Deleted\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1978-06-01T16:18:15.440Z\"\n        }\n      }\n    },\n    {\n      \"id\": 470,\n      \"name\": \"string\",\n      \"accountId\": 561,\n      \"dataProviderId\": 3592,\n      \"createdAt\": \"1989-12-22T06:46:19.320Z\",\n      \"updatedAt\": \"1987-04-17T03:54:31.274Z\",\n      \"status\": \"Deleted\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1999-02-26T01:07:47.756Z\"\n        },\n        \"key_1\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"2005-05-06T11:44:03.195Z\"\n        }\n      }\n    }\n  ],\n  \"page\": 136,\n  \"pages\": 6903,\n  \"pageSize\": 4067,\n  \"totalCount\": 2299\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "21e4d5ab-9d0a-4823-aa04-e0deff9f67c9",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": 1,\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "28683046-543b-4425-ad85-3f8bae4043d8",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": 1,\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "8156e623-22a5-4b9d-9b23-9223208f715a",
+      "name": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+      "request": {
+        "name": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+        "description": {
+          "content": "Search for audiences matching the provided criteria, with optional account scoping.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "search",
+            "audiences",
+            "v2"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "accountId",
+              "value": "<long>",
+              "description": "the account id\n\n"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"next\": \"<string,null>\",\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "e425f79e-c894-4007-b4bb-10539ffe72f0",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"next\": \"<string,null>\",\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"items\": [\n    {\n      \"id\": 8825,\n      \"name\": \"string\",\n      \"accountId\": 8361,\n      \"dataProviderId\": 3829,\n      \"createdAt\": \"2006-07-21T06:37:50.070Z\",\n      \"updatedAt\": \"1957-06-11T11:10:07.532Z\",\n      \"status\": \"Archived\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"2017-06-13T07:57:55.734Z\"\n        },\n        \"key_1\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1959-09-02T20:25:06.204Z\"\n        },\n        \"key_2\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"1992-08-16T08:25:44.739Z\"\n        }\n      }\n    },\n    {\n      \"id\": 2165,\n      \"name\": \"string\",\n      \"accountId\": 2635,\n      \"dataProviderId\": 2814,\n      \"createdAt\": \"2022-10-22T14:18:56.308Z\",\n      \"updatedAt\": \"1984-02-16T18:33:13.882Z\",\n      \"status\": \"Deleted\",\n      \"metadata\": {\n        \"key_0\": {\n          \"data\": {\n            \"Arr\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"updatedAt\": \"2015-09-12T10:31:36.370Z\"\n        }\n      }\n    }\n  ],\n  \"next\": null\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "3bf9e851-a122-48d1-83c9-66b9ad4e011f",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"next\": \"<string,null>\",\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9c01c67d-5bf4-4d79-8216-2b02353a6418",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "search",
+                "audiences",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "accountId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"next\": \"<string,null>\",\n  \"pageSize\": 30,\n  \"matches\": \"<null>\",\n  \"includeInternal\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "490f61e3-1c55-4d27-b86f-93492cdffd3f",
+      "name": "Update conversion trackers and rule for audiences.\n\n",
+      "request": {
+        "name": "Update conversion trackers and rule for audiences.\n\n",
+        "description": {
+          "content": "Update conversion trackers and rule for audiences.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "trackers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "PATCH",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountId\": \"<long>\",\n  \"audienceId\": \"<long>\",\n  \"ruleId\": \"<integer>\",\n  \"name\": \"<string,null>\",\n  \"pvc\": \"<integer,null-int64>\",\n  \"pcc\": \"<integer,null-int64>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "842d5b56-92e1-4e14-b0a8-47da03af1bd2",
+          "name": "Operation successful\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": \"<long>\",\n  \"audienceId\": \"<long>\",\n  \"ruleId\": \"<integer>\",\n  \"name\": \"<string,null>\",\n  \"pvc\": \"<integer,null-int64>\",\n  \"pcc\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "null",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "dfd7566f-cb22-46ae-9295-9c7660187ef2",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": \"<long>\",\n  \"audienceId\": \"<long>\",\n  \"ruleId\": \"<integer>\",\n  \"name\": \"<string,null>\",\n  \"pvc\": \"<integer,null-int64>\",\n  \"pcc\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "182afbb1-fb66-44c9-9c8a-92895dd2ce3b",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": \"<long>\",\n  \"audienceId\": \"<long>\",\n  \"ruleId\": \"<integer>\",\n  \"name\": \"<string,null>\",\n  \"pvc\": \"<integer,null-int64>\",\n  \"pcc\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "4ec712ea-e703-4d3d-9683-d1468867815d",
+          "name": "Failed to update conversion trackers and rule.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountId\": \"<long>\",\n  \"audienceId\": \"<long>\",\n  \"ruleId\": \"<integer>\",\n  \"name\": \"<string,null>\",\n  \"pvc\": \"<integer,null-int64>\",\n  \"pcc\": \"<integer,null-int64>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "01fea2a0-340a-4e91-a7bf-ed38692c0f3e",
+      "name": "Create a new URL tracker audience.\n\n",
+      "request": {
+        "name": "Create a new URL tracker audience.\n\n",
+        "description": {
+          "content": "Create a new URL tracker audience.\n\n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "urltrackers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "37e5f1a4-3ae3-4316-9350-c86454276150",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "urltrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"ruleId\": 4344,\n  \"audience\": {\n    \"id\": 2241,\n    \"name\": \"string\",\n    \"accountId\": 1428,\n    \"dataProviderId\": 5160,\n    \"dataProviderPrefix\": \"string\",\n    \"createdAt\": \"2013-05-20T12:16:38.612Z\",\n    \"archived\": false,\n    \"status\": \"Deleted\",\n    \"internal\": false,\n    \"metadata\": {\n      \"key_0\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1952-11-26T15:59:38.223Z\"\n      },\n      \"key_1\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1946-09-27T16:01:06.478Z\"\n      },\n      \"key_2\": {\n        \"data\": {\n          \"Arr\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"updatedAt\": \"1956-05-04T15:06:49.972Z\"\n      }\n    },\n    \"updatedAt\": \"1946-09-10T13:59:52.492Z\",\n    \"deletesAt\": null,\n    \"deletedAt\": null,\n    \"externalAudienceId\": \"string\",\n    \"iabCategory\": \"string\",\n    \"archivesAt\": \"1974-06-06T04:21:45.511Z\",\n    \"additionalAttributes\": null,\n    \"replacementId\": null,\n    \"zetaTaxonomyNodeId\": null\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "738e974e-5cb0-4c7e-adc9-775bdd166c1b",
+          "name": "Invalid request parameters.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "urltrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "95f7af32-f968-4803-a31b-206104793e19",
+          "name": "Authentication credentials were missing or incorrect.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "urltrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "7a45ac17-7f98-47ce-836c-0f71e8a58560",
+          "name": "Failed to create URL tracker audience.\n\n",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "urltrackers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"conversionId\": \"<long>\",\n  \"pixelId\": \"<string>\",\n  \"accountId\": \"<long>\",\n  \"appIds\": [\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"attributionWindow\": {\n    \"pcc\": \"<long>\",\n    \"pvc\": \"<long>\"\n  },\n  \"audienceTtl\": \"<integer>\",\n  \"body\": {\n    \"Arr\": {\n      \"elements\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Json detected>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"httpStatus\": 4245,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://audiences-staging.bln.liveintent.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bfc36fb9-75f0-4599-ac52-d2030d657751",
+    "name": "Audiences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.\n\n",
+      "type": "text/plain"
+    }
+  }
+}

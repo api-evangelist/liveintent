@@ -1,0 +1,2441 @@
+{
+  "item": [
+    {
+      "id": "e6644275-df46-4a44-8b2c-9eacb5c8de3b",
+      "name": "Overview",
+      "description": {
+        "content": "The LiveIntent Privacy Management API is a programmatic interface enabling submission of data privacy requests\nto keep you compliant with privacy regulations, such as the [the California Consumer Privacy Act (CCPA)](https://oag.ca.gov/privacy/ccpa)\nand [the General Data Protection Regulation (GDPR)](https://gdpr.eu/), that provide rights to individuals by\ngiving them control over the collection, processing, use, and deletion of their personal data.\n\nIf you are a partner of LiveIntent and your business operates within a jurisdiction covered by CCPA or GDPR, the LiveIntent\nPrivacy Management API will help you implement privacy compliance into your workflows. The Privacy Management\nAPI lets you integrate with LiveIntent and submit the following data subject requests through the API:\n\n- Opt-out (of sale): Restricts the collection and sharing of personal information or users.\n- Delete/erase: Deletes collected personal information.\n- Access/disclose: For internal use only. Provides personal user data report.\n\n\n",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "ba26cf21-da8c-404f-b30b-7e37ff534f01",
+      "name": "Authentication",
+      "description": {
+        "content": "The Privacy Management API utilizes access tokens for request authentication.\nThese access tokens grant you the necessary privileges to access the privacy API endpoints,\nallowing LiveIntent to identify the sender of a request and verify their access rights.\n\nTo get an access token, contact your account team at LiveIntent. Then use the provided access\ntoken as a bearer token in the _Authorization_ header when sending request to any of the endpoints.\n\n\n",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "317f782c-bade-48b8-b319-9c1a1b1682d4",
+      "name": "Getting started",
+      "description": {
+        "content": "## API user categories\n\nYou can interact with the LiveIntent Privacy API as a partner, depending on the user categories you belong to on the LiveIntent ad exchange platform.\n\n- Media Group: A Media Group can have multiple Publishers and Advertisers under it. As a Media Group, any operation you perform on LiveIntent Privacy API is a blanket operation reaching all the Publishers and Advertisers connected to your account id.\n- Publisher: A Publisher can have a relationship with multiple Advertisers. As a Publisher that performs user privacy management operations, your operations are specifically for the _publisherId_ and all related _advertiserId_.\n- Advertiser: As an Advertiser, the user privacy management operations you perform are specific to your _advertiserId_.\n- Global: For use by authorized third party agents submitting industry-wide privacy requests on behalf of consumers.\n\nThese user account categories are considered types of Account in the LiveIntent ad exchange platform. If you are new to LiveIntent and would like to learn more, please contact your account manager. If you need help setting up an appropriate partner account for your business, email our support team at support@liveintent.com. \n\n\n",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "32c76bab-539b-4f74-9aa1-1e8b53614f14",
+      "name": "API references",
+      "description": {
+        "content": "This API reference describes how to interact with the Privacy Management API.\n\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "70f435e1-94d1-461e-b7c7-1396d4aa51cb",
+          "name": "# Get a customer data report URL\n\nFor internal use only. This endpoint redirects to the report download URL using the signed URL parameters.\n\n\n- API references\n",
+          "request": {
+            "name": "# Get a customer data report URL\n\nFor internal use only. This endpoint redirects to the report download URL using the signed URL parameters.\n\n\n- API references\n",
+            "description": {
+              "content": "# Get a customer data report URL\n\nFor internal use only. This endpoint redirects to the report download URL using the signed URL parameters.\n\n\n- API references\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-subject-report",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "expiresAt",
+                  "value": "<string>",
+                  "description": "(Required) Expiration timestamp for the signed URL\n\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature",
+                  "value": "<string>",
+                  "description": "(Required) Signature for URL validation\n\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e889b0e7-eee3-4353-a088-8f60ca1022e6",
+              "name": "Redirects to the report download URL\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-report",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expiresAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "See Other",
+              "code": 303,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ff51a67-d37d-412e-9c6b-8a42e2c87d1c",
+              "name": "Missing required query parameters.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-report",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expiresAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fb9e7ec-65c8-4039-a3c3-e513806e7377",
+              "name": "Invalid signature or link expired.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-report",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expiresAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0694077-18a0-4fa6-907b-8c5babd2ba0a",
+              "name": "Report not found.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-report",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expiresAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3772f73f-9912-407f-a42f-0976147e1d82",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-report",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "expiresAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "42682e00-7a0a-451c-a23e-21560826cfad",
+          "name": "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+          "request": {
+            "name": "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+            "description": {
+              "content": "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-subject-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efd6d9a0-0439-4ad6-beaf-0097c348311f",
+              "name": "Request has been accepted\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "281e6909-44d1-49a2-a368-1f5f11cdef4b",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ccbb1c3-289f-44cb-a716-dc85ac236307",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab9e99de-6875-463a-b872-68084a774676",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1718f280-6796-4b97-9726-5d10acf6a250",
+          "name": "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+          "request": {
+            "name": "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+            "description": {
+              "content": "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-subject-requests",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a34764a-2746-4f61-a96c-bbf941674eec",
+              "name": "Request has been accepted\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84c5a5d1-a061-4195-b993-8b1d8ca59a6a",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbe719b8-bd3a-4002-a052-21e21159be86",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57ce4871-0f26-437e-8ca3-af933110d18e",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"action\": \"<string>\",\n  \"jurisdiction\": \"<string,null>\",\n  \"scope\": \"<null>\",\n  \"callback\": \"<string,null>\",\n  \"submitter\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9230ca41-c257-464d-974c-e2d4785e354d",
+          "name": "# Get a customer data report\n\nFor internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.\n\n\n- API references\n",
+          "request": {
+            "name": "# Get a customer data report\n\nFor internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.\n\n\n- API references\n",
+            "description": {
+              "content": "# Get a customer data report\n\nFor internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.\n\n\n- API references\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data-subject-requests",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ae6f413-9563-4d55-89ef-e5c3ca030532",
+              "name": "The report\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"action\": \"<string>\",\n  \"scope\": {\n    \"Advertiser\": {\n      \"id\": 3585\n    }\n  },\n  \"status\": \"string\",\n  \"emailHashes\": [\n    \"string\"\n  ],\n  \"createdAt\": \"string\",\n  \"jurisdiction\": null,\n  \"downloadUrl\": null,\n  \"callback\": null,\n  \"submitter\": null,\n  \"userId\": 5698\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47121682-ee40-4a1a-9249-781ad7a9d283",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11ac4d4a-ecaa-4781-8df9-c5f0ce177bd1",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab675991-fce2-4ba0-a51c-409bfbb7f88c",
+              "name": "The provided account cannot be used.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "579655db-0e3a-4d10-8d9a-3993db42c5d9",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data-subject-requests",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f68e2d97-2fa8-4c55-a23b-7e91e93051bd",
+          "name": "# Search Data Subject Requests\n\nFor internal use only. This endpoint lets you search for previously submitted Data Subject Requests.\n\n\n- API references\n",
+          "request": {
+            "name": "# Search Data Subject Requests\n\nFor internal use only. This endpoint lets you search for previously submitted Data Subject Requests.\n\n\n- API references\n",
+            "description": {
+              "content": "# Search Data Subject Requests\n\nFor internal use only. This endpoint lets you search for previously submitted Data Subject Requests.\n\n\n- API references\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                "data-subject-requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae2696fb-a721-4917-b364-f4f0e4eae5c8",
+              "name": "The search result\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"transactionId\": \"string\",\n      \"action\": \"<string>\",\n      \"scope\": {\n        \"Advertiser\": {\n          \"id\": 873\n        }\n      },\n      \"status\": \"string\",\n      \"emailHashes\": [\n        \"string\"\n      ],\n      \"liveIntentFpcs\": [\n        \"string\"\n      ],\n      \"createdAt\": \"string\",\n      \"jurisdiction\": null,\n      \"callback\": \"string\",\n      \"submitter\": \"string\",\n      \"userId\": 5861\n    },\n    {\n      \"transactionId\": \"string\",\n      \"action\": \"<string>\",\n      \"scope\": {\n        \"Advertiser\": {\n          \"id\": 9415\n        }\n      },\n      \"status\": \"string\",\n      \"emailHashes\": [\n        \"string\"\n      ],\n      \"liveIntentFpcs\": [\n        \"string\"\n      ],\n      \"createdAt\": \"string\",\n      \"jurisdiction\": null,\n      \"callback\": null,\n      \"submitter\": \"string\",\n      \"userId\": 808\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "420c918b-c89a-4931-a9d8-8bcaf5b60d92",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38dcd4a0-7b46-43d6-b5a1-de6cfd2f2123",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30b79cbd-da66-445b-8525-93bd3dd48c75",
+              "name": "The provided account cannot be used.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e647b1b9-5bed-4d0b-bcff-ba3efd069858",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    "data-subject-requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailHashes\": [\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1524f426-268f-4cb8-adfb-14c030a8b628",
+      "name": "Legacy",
+      "description": {
+        "content": "Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used for new integrations.\n\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "252c00d0-dcba-481f-938c-b4b36626c5cf",
+          "name": "Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT's `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+          "request": {
+            "name": "Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT's `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+            "description": {
+              "content": "Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT's `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dsr"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jwt\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ddd2ff5-70d6-4436-9baf-168423669615",
+              "name": "DSR response with reference ID and hash counts\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dsr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jwt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reference\": \"string\",\n  \"read\": 3686,\n  \"imported\": 8168\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6518db17-3313-454d-b042-b6f26b34df54",
+              "name": "Invalid request body or missing required fields.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dsr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jwt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aee890e-e6c3-45e0-895d-a07995641dee",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dsr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jwt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e73de44-0309-40ec-ae2d-748466238616",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dsr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jwt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f94745b-7e0f-48a3-b011-71be277c9423",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dsr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jwt\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f167d366-d701-4151-ac95-6f96ba6fab73",
+          "name": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+          "request": {
+            "name": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+            "description": {
+              "content": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataSubjectRequest",
+                  "value": "<string>",
+                  "description": "(Required) JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.\n\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adee4462-89cb-4e45-a3f5-f530be6057e2",
+              "name": "Returns a blank GIF response\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataSubjectRequest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f029a16a-a67c-4e16-8943-4893e1d5169e",
+              "name": "Missing dataSubjectRequest parameter.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataSubjectRequest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb1cdc1-a380-4049-a47b-56a77e94d42a",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataSubjectRequest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f041b3ee-b817-48ea-8bc9-4d5dd336d533",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataSubjectRequest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4cd16d04-d984-4db0-9160-9c57672a5091",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataSubjectRequest",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ab4f7a2-8425-4c7e-b2c6-da1e51f37310",
+          "name": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+          "request": {
+            "name": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+            "description": {
+              "content": "Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT's `dsr.scope` field and is included when the request is accepted for downstream processing.\n\n- Legacy\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dsr",
+                  "value": "<string>",
+                  "description": "(Required) JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.\n\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae1572ce-8f65-48b8-83ae-284b41554038",
+              "name": "Returns a blank GIF response\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dsr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee9b0297-b8a7-492d-b6fa-20dac27d296b",
+              "name": "Missing dsr parameter.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dsr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c2de4bb-8ad5-46aa-bb79-085aaa03dc6e",
+              "name": "Missing bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dsr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da849920-e40c-4f08-8b84-8e30d7eb76e1",
+              "name": "Invalid or expired bearer token.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dsr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "328f176a-3bc8-4093-9292-8443d1ee1e8a",
+              "name": "Internal server error.\n\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dsr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpStatus\": 9678,\n  \"message\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://privacy.liadm.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f05bb5b-9fa1-4e7e-a6b6-66d6b661f4b5",
+    "name": "LiveIntent Privacy Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n\n\n\nContact Support:\n Name: LiveIntent Support\n Email: support@liveintent.com",
+      "type": "text/plain"
+    }
+  }
+}
