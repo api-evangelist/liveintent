@@ -46,71 +46,16 @@ tags:
 - Marketers
 - Data
 apis:
-- aid: liveintent:audiences
-  name: LiveIntent Audiences API
-  description: Programmatically create and manage LiveIntent custom audiences. Partners create an
-    audience, mint a signed URL to upload member hashes out of band, poll upload status, read daily
-    total and match counts, and create event, URL and conversion trackers that build audiences
-    dynamically. Search is expressed as a composable boolean filter tree with both offset-paginated
-    (v1) and cursor-paginated (v2) endpoints. Authentication is an opaque bearer token in the
-    Authorization header, issued by the LiveIntent account team; there is no token endpoint and no
-    OAuth scopes. OpenAPI 3.0.0 with 12 operations and 48 schemas.
-  humanURL: https://audiences.liveintent.com/api-guide
-  baseURL: https://audiences.liveintent.com
-  tags:
-  - Audience
-  - Advertising
-  - AdTech
-  - Identity
-  - Data
-  properties:
-  - type: OpenAPI
-    url: openapi/liveintent-audiences-openapi.yml
-  - type: Overlay
-    url: overlays/liveintent-audiences-overlay.yaml
-  - type: APIReference
-    url: https://audiences.liveintent.com/api-guide
-- aid: liveintent:privacy
-  name: LiveIntent Privacy Management API
-  description: Submit data subject requests to LiveIntent programmatically to satisfy CCPA and GDPR
-    obligations. Supports RESTRICT (opt out of sale), ERASURE (delete) and ACCESS (produce a report)
-    actions against hashed emails and LiveIntent first-party cookie identifiers, scoped by the
-    caller's account category on the LiveIntent ad exchange (Advertiser, Publisher, MediaGroup,
-    PublisherMediaGroup or Global). Submission is asynchronous, returning 202 with a transactionId
-    the caller polls. A dedicated test-submission endpoint validates payloads without committing
-    them. Authentication is a bearer token issued by the LiveIntent account team. OpenAPI 3.0.0 with
-    8 operations and 17 schemas.
-  humanURL: https://privacy.liadm.com/api-guide
-  baseURL: https://privacy.liadm.com
-  tags:
-  - Privacy
-  - Compliance
-  - GDPR
-  - CCPA
-  - Identity
-  properties:
-  - type: OpenAPI
-    url: openapi/liveintent-privacy-openapi.yml
-  - type: Overlay
-    url: overlays/liveintent-privacy-overlay.yaml
-  - type: APIReference
-    url: https://privacy.liadm.com/api-guide
-  - type: CLI
-    url: cli/liveintent-cli.yml
-  x-domain-note: Served from liadm.com rather than liveintent.com. LiveIntent's own knowledge-base
-    article at support.liveintent.com/liveintent-privacy-management-api/ links to
-    privacy.liadm.com/api-guide as "LiveIntent's updated Privacy API documentation", and the spec's
-    info.title reads "LiveIntent Privacy Management API"; liadm.com is LiveIntent's identity-serving
-    domain.
 - aid: liveintent:reporting
   name: LiveIntent Reporting API
-  description: Query LiveIntent publisher and advertiser reporting data. A single executeQuery
-    endpoint accepts a report type, an absolute or dynamic date interval, a granularity of day, week,
-    month or all, plus splits, metrics and equals/not-equals filters, and returns an array of
-    timestamped event objects. Authentication is a username and password login endpoint that returns
-    a bearer token valid for 12 hours alongside a refresh token. LiveIntent's documentation describes
-    this as OAuth2, but no authorization endpoint, client identifier, scopes or discovery document
-    are published. No OpenAPI definition is published for this API.
+  description: >-
+    Query LiveIntent publisher and advertiser reporting data. A single executeQuery endpoint accepts a
+    report type, an absolute or dynamic date interval, a granularity of day, week, month or all, plus
+    splits, metrics and equals/not-equals filters, and returns an array of timestamped event objects.
+    Authentication is a username and password login endpoint that returns a bearer token valid for 12
+    hours alongside a refresh token. LiveIntent's documentation describes this as OAuth2, but no authorization
+    endpoint, client identifier, scopes or discovery document are published. No OpenAPI definition is
+    published for this API.
   humanURL: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
   baseURL: https://connect.liveintent.com
   tags:
@@ -124,17 +69,18 @@ apis:
     url: https://support.liveintent.com/connecting-to-liveintents-reporting-api/
   - type: AgentSkill
     url: skills/liveintent-pull-reporting-data.md
-  x-spec-status: No machine-readable definition published. The endpoints, request body fields and
-    enumerated values recorded in this repo come from LiveIntent's own knowledge-base article.
+  x-spec-status: >-
+    No machine-readable definition published. The endpoints, request body fields and enumerated values
+    recorded in this repo come from LiveIntent's own knowledge-base article.
 - aid: liveintent:programmatic-bidding
   name: LiveIntent Programmatic Bidding API
-  description: LiveIntent's exchange-side real-time bidding integration for demand-side platforms. It
-    implements a subset of the IAB OpenRTB API Specification 2.5 together with OpenRTB Native Ads 1.1
-    and 1.2, passing x-openrtb-version 2.5 on the request header and applying an implicit tmax of
-    150ms. Supported request objects include Bid Request, Impression, Banner, Site, App, Device,
-    User, Publisher, Geo, Data, Segment, PMP, Deal and Native Markup Request; responses use
-    BidResponse, SeatBid, Bid and Native Markup Response. A no-bid is signalled with HTTP 204 and an
-    empty body.
+  description: >-
+    LiveIntent's exchange-side real-time bidding integration for demand-side platforms. It implements
+    a subset of the IAB OpenRTB API Specification 2.5 together with OpenRTB Native Ads 1.1 and 1.2, passing
+    x-openrtb-version 2.5 on the request header and applying an implicit tmax of 150ms. Supported request
+    objects include Bid Request, Impression, Banner, Site, App, Device, User, Publisher, Geo, Data, Segment,
+    PMP, Deal and Native Markup Request; responses use BidResponse, SeatBid, Bid and Native Markup Response.
+    A no-bid is signalled with HTTP 204 and an empty body.
   humanURL: https://support.liveintent.com/programmatic-bidding-api/
   tags:
   - Advertising
@@ -146,9 +92,124 @@ apis:
   - type: Documentation
     url: https://support.liveintent.com/programmatic-bidding-api/
   x-base-url-status: missing-by-design
-  x-base-url-note: No LiveIntent-hosted base URL exists for this API and none is published. LiveIntent
-    is the caller on this surface — the DSP supplies a bidding URL to LiveIntent, which posts OpenRTB
-    bid requests to it. Recorded as absent rather than guessed from the domain.
+  x-base-url-note: >-
+    No LiveIntent-hosted base URL exists for this API and none is published. LiveIntent is the caller
+    on this surface — the DSP supplies a bidding URL to LiveIntent, which posts OpenRTB bid requests to
+    it. Recorded as absent rather than guessed from the domain.
+- aid: liveintent:liveintent-api-references-api
+  name: LiveIntent API references API
+  description: This API reference describes how to interact with the Privacy Management API.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - API references
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-api-references-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-audiences-api
+  name: LiveIntent Audiences API
+  description: The Audiences API from LiveIntent — 5 operation(s) for audiences.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-audiences-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-eventtrackers-api
+  name: LiveIntent Eventtrackers API
+  description: The Eventtrackers API from LiveIntent — 1 operation(s) for eventtrackers.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Eventtrackers
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-eventtrackers-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-legacy-api
+  name: LiveIntent Legacy API
+  description: >-
+    Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used
+    for new integrations.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Legacy
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-legacy-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-search-api
+  name: LiveIntent Search API
+  description: The Search API from LiveIntent — 2 operation(s) for search.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-search-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-trackers-api
+  name: LiveIntent Trackers API
+  description: The Trackers API from LiveIntent — 1 operation(s) for trackers.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Trackers
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-trackers-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
+- aid: liveintent:liveintent-urltrackers-api
+  name: LiveIntent Urltrackers API
+  description: The Urltrackers API from LiveIntent — 1 operation(s) for urltrackers.
+  humanURL: https://audiences.liveintent.com/api-guide
+  baseURL: https://audiences.liveintent.com
+  tags:
+  - Urltrackers
+  properties:
+  - type: OpenAPI
+    url: openapi/liveintent-urltrackers-api-openapi.yml
+  - type: APIReference
+    url: https://audiences.liveintent.com/api-guide
+  - type: APIReference
+    url: https://privacy.liadm.com/api-guide
+  - type: CLI
+    url: cli/liveintent-cli.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
