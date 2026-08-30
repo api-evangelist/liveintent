@@ -1,0 +1,342 @@
+openapi: 3.2.0
+info:
+  title: LiveIntent Privacy Management Legacy API
+  description: '
+
+
+    '
+  contact:
+    name: LiveIntent Support
+    email: support@liveintent.com
+  version: 1.0.0
+servers:
+- url: https://privacy.liadm.com
+  description: 'Privacy server production
+
+
+    '
+- url: privacy-test.liadm.com
+  description: 'Privacy server staging
+
+
+    '
+security:
+- Bearer: []
+tags:
+- name: Legacy
+  description: 'Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used for new integrations.
+
+
+    '
+paths:
+  /dsr:
+    description: 'Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT''s `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.
+
+
+      - Legacy
+
+      '
+    post:
+      tags:
+      - Legacy
+      description: 'Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT''s `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.
+
+
+        - Legacy
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LegacyDsrRequest'
+        required: true
+      responses:
+        '200':
+          description: 'DSR response with reference ID and hash counts
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DsrResponse'
+        '400':
+          description: 'Invalid request body or missing required fields.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request body or missing required fields.
+
+
+                  '
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /oath:
+    description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
+
+
+      - Legacy
+
+      '
+    get:
+      tags:
+      - Legacy
+      description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
+
+
+        - Legacy
+
+        '
+      parameters:
+      - name: dataSubjectRequest
+        in: query
+        description: 'JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.
+
+
+          '
+        required: true
+        schema:
+          type: string
+        allowReserved: false
+        style: form
+      responses:
+        '200':
+          description: 'Returns a blank GIF response
+
+
+            '
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '400':
+          description: 'Missing dataSubjectRequest parameter.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing dataSubjectRequest parameter.
+
+
+                  '
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /submit:
+    description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
+
+
+      - Legacy
+
+      '
+    get:
+      tags:
+      - Legacy
+      description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
+
+
+        - Legacy
+
+        '
+      parameters:
+      - name: dsr
+        in: query
+        description: 'JWT-encoded data subject request. The JWT contains a `dsr` claim with `scope` field (EU_PRIVACY or US_PRIVACY) that identifies the privacy regime for downstream processing.
+
+
+          '
+        required: true
+        schema:
+          type: string
+        allowReserved: false
+        style: form
+      responses:
+        '200':
+          description: 'Returns a blank GIF response
+
+
+            '
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '400':
+          description: 'Missing dsr parameter.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing dsr parameter.
+
+
+                  '
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+components:
+  schemas:
+    LegacyDsrRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
+    DsrResponse:
+      type: object
+      properties:
+        reference:
+          type: string
+        read:
+          type: integer
+          format: int32
+        imported:
+          type: integer
+          format: int32
+      required:
+      - reference
+      - read
+      - imported
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'To get an access token, contact your account team at LiveIntent. Then use the provided access token as a bearer token in the _Authorization_ header when sending request to any of the endpoints.
+
+
+        '
+      name: Authorization
+      in: header

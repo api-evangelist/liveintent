@@ -1,0 +1,581 @@
+openapi: 3.2.0
+info:
+  title: Audiences Search API
+  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
+
+
+    '
+  version: 1.0.0
+servers:
+- url: https://audiences-staging.bln.liveintent.com
+  description: 'staging
+
+
+    '
+- url: https://audiences.liveintent.com
+  description: 'production
+
+
+    '
+security:
+- Bearer: []
+tags:
+- name: Search
+paths:
+  /search/audiences:
+    description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+      '
+    post:
+      description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+        '
+      parameters:
+      - name: accountId
+        in: query
+        description: 'the account id
+
+
+          '
+        schema:
+          type: integer
+          format: int64
+        allowReserved: false
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceSearchRequest'
+              description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffsetPaginatedAudiences'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+      tags:
+      - Search
+  /search/audiences/v2:
+    description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+      '
+    post:
+      description: 'Search for audiences matching the provided criteria, with optional account scoping.
+
+
+        '
+      parameters:
+      - name: accountId
+        in: query
+        description: 'the account id
+
+
+          '
+        schema:
+          type: integer
+          format: int64
+        allowReserved: false
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceSearchRequestV2'
+              description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CursorPage'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+      tags:
+      - Search
+components:
+  schemas:
+    accountIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LongFilter'
+      required:
+      - value
+    status:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Value'
+      required:
+      - value
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
+    dataProviderIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/IntFilter'
+      required:
+      - value
+    AudienceData:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - createdAt
+      - updatedAt
+      - status
+      - metadata
+    Num:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+      required:
+      - value
+    CursorPage:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceData'
+        next:
+          type:
+          - string
+          - 'null'
+      required:
+      - items
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    OffsetPaginatedAudiences:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceData'
+        totalCount:
+          type: integer
+          format: int32
+      required:
+      - entries
+      - page
+      - pages
+      - pageSize
+      - totalCount
+    or:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - values
+    AudienceSearchRequest:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 1
+        pageSize:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 30
+        matches:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AudienceFilter'
+          description: If not set, this field defaults to the value of the default annotation.
+        includeInternal:
+          type: boolean
+          description: If not set, this field defaults to the value of the default annotation.
+          default: false
+    Obj:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
+      required:
+      - fields
+    StringFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    Json:
+      oneOf:
+      - type: object
+        properties:
+          Arr:
+            $ref: '#/components/schemas/Arr'
+        additionalProperties: false
+        required:
+        - Arr
+      - type: object
+        properties:
+          'Null':
+            $ref: '#/components/schemas/Null'
+        additionalProperties: false
+        required:
+        - 'Null'
+      - type: object
+        properties:
+          Bool:
+            $ref: '#/components/schemas/Bool'
+        additionalProperties: false
+        required:
+        - Bool
+      - type: object
+        properties:
+          Num:
+            $ref: '#/components/schemas/Num'
+        additionalProperties: false
+        required:
+        - Num
+      - type: object
+        properties:
+          Str:
+            $ref: '#/components/schemas/Str'
+        additionalProperties: false
+        required:
+        - Str
+      - type: object
+        properties:
+          Obj:
+            $ref: '#/components/schemas/Obj'
+        additionalProperties: false
+        required:
+        - Obj
+    AudienceSearchRequestV2:
+      type: object
+      properties:
+        next:
+          type:
+          - string
+          - 'null'
+          description: If not set, this field defaults to the value of the default annotation.
+        pageSize:
+          type: integer
+          format: int32
+          description: If not set, this field defaults to the value of the default annotation.
+          default: 30
+        matches:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/AudienceFilter'
+          description: If not set, this field defaults to the value of the default annotation.
+        includeInternal:
+          type: boolean
+          description: If not set, this field defaults to the value of the default annotation.
+          default: false
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    AudienceFilter:
+      oneOf:
+      - type: object
+        properties:
+          and:
+            $ref: '#/components/schemas/and'
+        additionalProperties: false
+        required:
+        - and
+      - type: object
+        properties:
+          or:
+            $ref: '#/components/schemas/or'
+        additionalProperties: false
+        required:
+        - or
+      - type: object
+        properties:
+          not:
+            $ref: '#/components/schemas/not'
+        additionalProperties: false
+        required:
+        - not
+      - type: object
+        properties:
+          dataProviderIdMatches:
+            $ref: '#/components/schemas/dataProviderIdMatches'
+        additionalProperties: false
+        required:
+        - dataProviderIdMatches
+      - type: object
+        properties:
+          hasMetadata:
+            $ref: '#/components/schemas/hasMetadata'
+        additionalProperties: false
+        required:
+        - hasMetadata
+      - type: object
+        properties:
+          accountIdMatches:
+            $ref: '#/components/schemas/accountIdMatches'
+        additionalProperties: false
+        required:
+        - accountIdMatches
+      - type: object
+        properties:
+          nameMatches:
+            $ref: '#/components/schemas/nameMatches'
+        additionalProperties: false
+        required:
+        - nameMatches
+      - type: object
+        properties:
+          ruleIdMatches:
+            $ref: '#/components/schemas/ruleIdMatches'
+        additionalProperties: false
+        required:
+        - ruleIdMatches
+      - type: object
+        properties:
+          status:
+            $ref: '#/components/schemas/status'
+        additionalProperties: false
+        required:
+        - status
+    ruleIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LongFilter'
+      required:
+      - value
+    Value:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    nameMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/StringFilter'
+      required:
+      - value
+    'Null':
+      type: object
+      properties: {}
+    hasMetadata:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/MetadataFilter'
+      required:
+      - value
+    eq:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+      required:
+      - value
+    Str:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    and:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - values
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    not:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - value
+    LongFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    MetadataFilter:
+      oneOf:
+      - type: object
+        properties:
+          nameMatches:
+            $ref: '#/components/schemas/nameMatches'
+        additionalProperties: false
+        required:
+        - nameMatches
+    IntFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'For accessing internal endpoints an access token is required. It needs to be sent as a Bearer token in the _Authorization_ header.
+
+
+        '
+      name: Authorization
+      in: header

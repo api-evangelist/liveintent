@@ -1,0 +1,146 @@
+openapi: 3.2.0
+info:
+  title: Audiences Trackers API
+  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
+
+
+    '
+  version: 1.0.0
+servers:
+- url: https://audiences-staging.bln.liveintent.com
+  description: 'staging
+
+
+    '
+- url: https://audiences.liveintent.com
+  description: 'production
+
+
+    '
+security:
+- Bearer: []
+tags:
+- name: Trackers
+paths:
+  /trackers:
+    description: 'Update conversion trackers and rule for audiences.
+
+
+      '
+    patch:
+      description: 'Update conversion trackers and rule for audiences.
+
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateConversionTrackersAndRulePayload'
+        required: true
+      responses:
+        '200':
+          description: 'Operation successful
+
+
+            '
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '400':
+          description: 'Invalid request parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid request parameters.
+
+
+                  '
+        '401':
+          description: 'Authentication credentials were missing or incorrect.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Authentication credentials were missing or incorrect.
+
+
+                  '
+        '500':
+          description: 'Failed to update conversion trackers and rule.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Failed to update conversion trackers and rule.
+
+
+                  '
+      tags:
+      - Trackers
+components:
+  schemas:
+    UpdateConversionTrackersAndRulePayload:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        accountId:
+          type: integer
+          format: int64
+        pvc:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        audienceId:
+          type: integer
+          format: int64
+        ruleId:
+          type: integer
+          format: int32
+        pcc:
+          type:
+          - integer
+          - 'null'
+          format: int64
+      required:
+      - accountId
+      - audienceId
+      - ruleId
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'For accessing internal endpoints an access token is required. It needs to be sent as a Bearer token in the _Authorization_ header.
+
+
+        '
+      name: Authorization
+      in: header

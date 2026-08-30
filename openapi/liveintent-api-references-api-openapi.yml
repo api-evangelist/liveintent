@@ -1,0 +1,738 @@
+openapi: 3.2.0
+info:
+  title: LiveIntent Privacy Management API references API
+  description: '
+
+
+    '
+  contact:
+    name: LiveIntent Support
+    email: support@liveintent.com
+  version: 1.0.0
+servers:
+- url: https://privacy.liadm.com
+  description: 'Privacy server production
+
+
+    '
+- url: privacy-test.liadm.com
+  description: 'Privacy server staging
+
+
+    '
+security:
+- Bearer: []
+tags:
+- name: API references
+  description: 'This API reference describes how to interact with the Privacy Management API.
+
+
+    '
+paths:
+  /data-subject-report/{transactionId}:
+    description: '# Get a customer data report URL
+
+
+      For internal use only. This endpoint redirects to the report download URL using the signed URL parameters.
+
+
+
+      - API references
+
+      '
+    get:
+      tags:
+      - API references
+      description: '# Get a customer data report URL
+
+
+        For internal use only. This endpoint redirects to the report download URL using the signed URL parameters.
+
+
+
+        - API references
+
+        '
+      parameters:
+      - name: expiresAt
+        in: query
+        description: 'Expiration timestamp for the signed URL
+
+
+          '
+        required: true
+        schema:
+          type: string
+        allowReserved: false
+        style: form
+      - name: signature
+        in: query
+        description: 'Signature for URL validation
+
+
+          '
+        required: true
+        schema:
+          type: string
+        allowReserved: false
+        style: form
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '303':
+          description: 'Redirects to the report download URL
+
+
+            '
+          content:
+            application/json:
+              schema:
+                type: 'null'
+        '400':
+          description: 'Missing required query parameters.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing required query parameters.
+
+
+                  '
+        '403':
+          description: 'Invalid signature or link expired.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid signature or link expired.
+
+
+                  '
+        '404':
+          description: 'Report not found.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Report not found.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /data-subject-requests:
+    description: "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+    post:
+      tags:
+      - API references
+      description: "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDataSubjectRequest'
+        required: true
+      responses:
+        '202':
+          description: 'Request has been accepted
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSubjectResponse'
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /data-subject-requests/test:
+    description: "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+    post:
+      tags:
+      - API references
+      description: "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDataSubjectRequest'
+        required: true
+      responses:
+        '202':
+          description: 'Request has been accepted
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSubjectResponse'
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /data-subject-requests/{transactionId}:
+    description: '# Get a customer data report
+
+
+      For internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.
+
+
+
+      - API references
+
+      '
+    get:
+      tags:
+      - API references
+      description: '# Get a customer data report
+
+
+        For internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.
+
+
+
+        - API references
+
+        '
+      parameters:
+      - name: transactionId
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          description: 'The report
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSubjectRequestWithReport'
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '404':
+          description: 'The provided account cannot be used.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'The provided account cannot be used.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+  /search/data-subject-requests:
+    description: '# Search Data Subject Requests
+
+
+      For internal use only. This endpoint lets you search for previously submitted Data Subject Requests.
+
+
+
+      - API references
+
+      '
+    post:
+      tags:
+      - API references
+      description: '# Search Data Subject Requests
+
+
+        For internal use only. This endpoint lets you search for previously submitted Data Subject Requests.
+
+
+
+        - API references
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataSubjectRequestSearch'
+        required: true
+      responses:
+        '200':
+          description: 'The search result
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSubjectRequestSearchResult'
+        '401':
+          description: 'Missing bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Missing bearer token.
+
+
+                  '
+        '403':
+          description: 'Invalid or expired bearer token.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Invalid or expired bearer token.
+
+
+                  '
+        '404':
+          description: 'The provided account cannot be used.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'The provided account cannot be used.
+
+
+                  '
+        '500':
+          description: 'Internal server error.
+
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationError'
+                description: 'Internal server error.
+
+
+                  '
+components:
+  schemas:
+    DsrAction:
+      type: string
+      enum:
+      - RESTRICT
+      - ERASURE
+      - ACCESS
+    Global:
+      type: object
+      properties: {}
+    DataSubjectRequestSearchResult:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSubjectRequest'
+      required:
+      - results
+    DataSubjectRequestSearch:
+      type: object
+      properties:
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          minItems: 1
+      required:
+      - emailHashes
+    Advertiser:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
+    DataSubjectResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+      required:
+      - transactionId
+    NewDataSubjectRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+          description: The scope of the request. Either `EU_PRIVACY`or `US_PRIVACY`
+        scope:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SimpleDsrScope'
+        liveIntentFpcs:
+          type: array
+          items:
+            type: string
+          description: 'An array of the liveIntent first party cookies (DUIDs).
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        callback:
+          type:
+          - string
+          - 'null'
+          description: For internal use only. Callback url that should be invoked when ACCESS request processing has been completed.
+        emailHashes:
+          type: array
+          items:
+            type: string
+          description: 'An array of email hashes.
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        submitter:
+          type:
+          - string
+          - 'null'
+          description: Optional freeform string that may be used to describe the request submission. This value is simply logged with the request and no additional processing is applied.
+        action:
+          $ref: '#/components/schemas/DsrAction'
+      required:
+      - action
+    Publisher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
+    DataSubjectRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+        scope:
+          $ref: '#/components/schemas/DsrScope'
+        liveIntentFpcs:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        callback:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+        submitter:
+          type:
+          - string
+          - 'null'
+        userId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        action:
+          $ref: '#/components/schemas/DsrAction'
+        transactionId:
+          type: string
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        createdAt:
+          type: string
+      required:
+      - transactionId
+      - action
+      - scope
+      - status
+      - emailHashes
+      - liveIntentFpcs
+      - createdAt
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    DsrScope:
+      oneOf:
+      - type: object
+        properties:
+          Advertiser:
+            $ref: '#/components/schemas/Advertiser'
+        additionalProperties: false
+        required:
+        - Advertiser
+      - type: object
+        properties:
+          Publisher:
+            $ref: '#/components/schemas/Publisher'
+        additionalProperties: false
+        required:
+        - Publisher
+      - type: object
+        properties:
+          MediaGroup:
+            $ref: '#/components/schemas/MediaGroup'
+        additionalProperties: false
+        required:
+        - MediaGroup
+      - type: object
+        properties:
+          PublisherMediaGroup:
+            $ref: '#/components/schemas/PublisherMediaGroup'
+        additionalProperties: false
+        required:
+        - PublisherMediaGroup
+      - type: object
+        properties:
+          Global:
+            $ref: '#/components/schemas/Global'
+        additionalProperties: false
+        required:
+        - Global
+    SimpleDsrScope:
+      oneOf:
+      - $ref: '#/components/schemas/Advertiser'
+      - $ref: '#/components/schemas/Publisher'
+      - $ref: '#/components/schemas/MediaGroup'
+      - $ref: '#/components/schemas/Global'
+      discriminator:
+        propertyName: entity_type
+        mapping:
+          advertiser: '#/components/schemas/Advertiser'
+          publisher: '#/components/schemas/Publisher'
+          media_group: '#/components/schemas/MediaGroup'
+          global: '#/components/schemas/Global'
+    PublisherMediaGroup:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int32
+        mid:
+          type: integer
+          format: int32
+      required:
+      - pid
+      - mid
+    DataSubjectRequestWithReport:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+        scope:
+          $ref: '#/components/schemas/DsrScope'
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+        callback:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+        submitter:
+          type:
+          - string
+          - 'null'
+        userId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        action:
+          $ref: '#/components/schemas/DsrAction'
+        transactionId:
+          type: string
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        createdAt:
+          type: string
+      required:
+      - transactionId
+      - action
+      - scope
+      - status
+      - emailHashes
+      - createdAt
+    MediaGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: 'To get an access token, contact your account team at LiveIntent. Then use the provided access token as a bearer token in the _Authorization_ header when sending request to any of the endpoints.
+
+
+        '
+      name: Authorization
+      in: header
