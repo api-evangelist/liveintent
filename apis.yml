@@ -114,6 +114,8 @@ apis:
   humanURL: https://audiences.liveintent.com/api-guide
   baseURL: https://audiences.liveintent.com
   tags:
+  - API References
+  tags_raw:
   - API references
   properties:
   - type: OpenAPI
