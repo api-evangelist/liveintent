@@ -53,6 +53,16 @@ tags:
 - AdTech
 - Identity
 - Email Marketing
+- Audiences
+- Publishers
+- Marketers
+- Data
+tags_raw:
+- Company
+- Advertising
+- AdTech
+- Identity
+- Email Marketing
 - Audience
 - Publishers
 - Marketers
@@ -114,7 +124,7 @@ apis:
   humanURL: https://audiences.liveintent.com/api-guide
   baseURL: https://audiences.liveintent.com
   tags:
-  - API References
+  - API Reference
   tags_raw:
   - API references
   properties:
