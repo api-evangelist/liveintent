@@ -1,10 +1,7 @@
 openapi: 3.2.0
 info:
   title: Audiences API
-  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
-
-
-    '
+  description: The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage Custom Audience. This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
   version: 1.0.0
 servers:
 - url: https://audiences-staging.bln.liveintent.com
@@ -31,10 +28,7 @@ paths:
 
       '
     get:
-      description: 'List audiences for the specified account, or all audiences if no accountId is provided.
-
-
-        '
+      description: List audiences for the specified account, or all audiences if no accountId is provided.
       parameters:
       - name: page
         in: query
@@ -116,11 +110,12 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Get audiences
+      x-summary-source: derived
+      operationId: getAudiences
+      x-operation-id-source: derived
     post:
-      description: 'Create a new audience.
-
-
-        '
+      description: Create a new audience.
       requestBody:
         content:
           application/json:
@@ -178,6 +173,10 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Create audiences
+      x-summary-source: derived
+      operationId: postAudiences
+      x-operation-id-source: derived
   /audiences/{audienceId}:
     description: 'Update the specified audience.
 
@@ -187,10 +186,7 @@ paths:
 
       '
     get:
-      description: 'Get the specified audience.
-
-
-        '
+      description: Get the specified audience.
       parameters:
       - name: audienceId
         in: path
@@ -259,11 +255,12 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Get audiences by audience id
+      x-summary-source: derived
+      operationId: getAudiencesByAudienceId
+      x-operation-id-source: derived
     patch:
-      description: 'Update the specified audience.
-
-
-        '
+      description: Update the specified audience.
       parameters:
       - name: audienceId
         in: path
@@ -338,16 +335,17 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Update audiences by audience id
+      x-summary-source: derived
+      operationId: patchAudiencesByAudienceId
+      x-operation-id-source: derived
   /audiences/{audienceId}/counts:
     description: 'Get counts for the specified audience.
 
 
       '
     get:
-      description: 'Get counts for the specified audience.
-
-
-        '
+      description: Get counts for the specified audience.
       parameters:
       - name: audienceId
         in: path
@@ -416,16 +414,17 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Get audiences by audience id counts
+      x-summary-source: derived
+      operationId: getAudiencesByAudienceIdCounts
+      x-operation-id-source: derived
   /audiences/{audienceId}/signed-urls:
     description: 'Create signed URLs for uploading audience data to the specified audience.
 
 
       '
     post:
-      description: 'Create signed URLs for uploading audience data to the specified audience.
-
-
-        '
+      description: Create signed URLs for uploading audience data to the specified audience.
       parameters:
       - name: audienceId
         in: path
@@ -494,16 +493,17 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Create audiences by audience id signed urls
+      x-summary-source: derived
+      operationId: postAudiencesByAudienceIdSignedUrls
+      x-operation-id-source: derived
   /audiences/{audienceId}/uploads:
     description: 'List uploads for the specified audience.
 
 
       '
     get:
-      description: 'List uploads for the specified audience.
-
-
-        '
+      description: List uploads for the specified audience.
       parameters:
       - name: page
         in: query
@@ -568,55 +568,18 @@ paths:
                   '
       tags:
       - Audiences
+      summary: Get audiences by audience id uploads
+      x-summary-source: derived
+      operationId: getAudiencesByAudienceIdUploads
+      x-operation-id-source: derived
 components:
   schemas:
-    AudienceMetadataDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    AudienceData:
-      type: object
-      properties:
-        accountId:
-          type: integer
-          format: int64
-        dataProviderId:
-          type: integer
-          format: int32
-        id:
-          type: integer
-          format: int64
-        status:
-          $ref: '#/components/schemas/SimpleAudienceStatus'
-        createdAt:
-          type: string
-          format: date-time
-        metadata:
-          type: object
-          properties: {}
-          additionalProperties:
-            $ref: '#/components/schemas/AudienceMetadataDTO'
-        name:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - accountId
-      - dataProviderId
-      - createdAt
-      - updatedAt
-      - status
-      - metadata
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
     Num:
       type: object
       properties:
@@ -625,54 +588,38 @@ components:
           format: double
       required:
       - value
-    OffsetPaginatedAudienceUploads:
+    AudienceCount:
       type: object
       properties:
-        pageSize:
+        date:
+          type: string
+          format: date
+        totalCount:
           type: integer
-          format: int32
-        page:
+          format: int64
+        matchCount:
           type: integer
-          format: int32
-        pages:
-          type: integer
-          format: int32
+          format: int64
+      required:
+      - date
+      - totalCount
+      - matchCount
+    AudienceCounts:
+      type: object
+      properties:
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/AudienceUpload'
-        totalCount:
-          type: integer
-          format: int32
+            $ref: '#/components/schemas/AudienceCount'
       required:
       - entries
-      - page
-      - pages
-      - pageSize
-      - totalCount
-    Arr:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
-      required:
-      - elements
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
+    UploadStatus:
+      type: string
+      enum:
+      - Pending
+      - Running
+      - Finished
+      - Error
     OffsetPaginatedAudiences:
       type: object
       properties:
@@ -720,20 +667,56 @@ components:
       - dataProviderId
       - name
       - accountId
-    AudienceCounts:
+    Obj:
       type: object
       properties:
-        entries:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/AudienceCount'
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
       required:
-      - entries
-    StatusUpdateDTO:
-      type: string
-      enum:
-      - Activate
-      - Archive
+      - fields
+    UpdateAudienceRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        status:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StatusUpdateDTO'
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    UpsertMetadataRequestDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+      required:
+      - data
+    Str:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
     AudienceUpload:
       type: object
       properties:
@@ -771,17 +754,78 @@ components:
       - estimatedDuplicateCount
       - uploadedHashesCount
       - invalidHashesCount
-    Obj:
+    AudienceMetadataDTO:
       type: object
       properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
       required:
-      - fields
+      - data
+      - updatedAt
+    CreateSignedUrlRequest:
+      type: object
+      properties:
+        uploadName:
+          type:
+          - string
+          - 'null'
+        notificationEmail:
+          type:
+          - string
+          - 'null'
+        identifierType:
+          type: string
+        action:
+          type: string
+      required:
+      - identifierType
+      - action
+    AudienceData:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - createdAt
+      - updatedAt
+      - status
+      - metadata
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
     Json:
       oneOf:
       - type: object
@@ -826,88 +870,48 @@ components:
         additionalProperties: false
         required:
         - Obj
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
-    UploadStatus:
-      type: string
-      enum:
-      - Pending
-      - Running
-      - Finished
-      - Error
-    UpdateAudienceRequest:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        status:
-          anyOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StatusUpdateDTO'
-    AudienceCount:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        totalCount:
-          type: integer
-          format: int64
-        matchCount:
-          type: integer
-          format: int64
-      required:
-      - date
-      - totalCount
-      - matchCount
     'Null':
       type: object
       properties: {}
-    Str:
+    Arr:
       type: object
       properties:
-        value:
-          type: string
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
       required:
-      - value
-    Bool:
+      - elements
+    OffsetPaginatedAudienceUploads:
       type: object
       properties:
-        value:
-          type: boolean
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceUpload'
+        totalCount:
+          type: integer
+          format: int32
       required:
-      - value
-    UpsertMetadataRequestDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-      required:
-      - data
-    CreateSignedUrlRequest:
-      type: object
-      properties:
-        uploadName:
-          type:
-          - string
-          - 'null'
-        notificationEmail:
-          type:
-          - string
-          - 'null'
-        identifierType:
-          type: string
-        action:
-          type: string
-      required:
-      - identifierType
-      - action
+      - entries
+      - page
+      - pages
+      - pageSize
+      - totalCount
+    StatusUpdateDTO:
+      type: string
+      enum:
+      - Activate
+      - Archive
     SignedUploadUrlResponse:
       type: object
       properties:

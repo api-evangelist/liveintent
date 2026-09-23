@@ -1,0 +1,54 @@
+{
+  "provider": "liveintent",
+  "sources": [
+    "_original/liveintent-audiences-openapi.json",
+    "_original/liveintent-privacy-openapi.json"
+  ],
+  "outputs": [
+    "liveintent-audiences-api-openapi.yml",
+    "liveintent-eventtrackers-api-openapi.yml",
+    "liveintent-search-api-openapi.yml",
+    "liveintent-trackers-api-openapi.yml",
+    "liveintent-urltrackers-api-openapi.yml",
+    "liveintent-api-references-api-openapi.yml",
+    "liveintent-legacy-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "liveintent-audiences-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "liveintent-audiences-openapi.json: tagged paths GET /audiences -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths POST /audiences -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths GET /audiences/{audienceId} -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths PATCH /audiences/{audienceId} -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths GET /audiences/{audienceId}/counts -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths POST /audiences/{audienceId}/signed-urls -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths GET /audiences/{audienceId}/uploads -> Audiences",
+    "liveintent-audiences-openapi.json: tagged paths POST /eventtrackers -> Eventtrackers",
+    "liveintent-audiences-openapi.json: tagged paths POST /search/audiences -> Search",
+    "liveintent-audiences-openapi.json: tagged paths POST /search/audiences/v2 -> Search",
+    "liveintent-audiences-openapi.json: tagged paths PATCH /trackers -> Trackers",
+    "liveintent-audiences-openapi.json: tagged paths POST /urltrackers -> Urltrackers",
+    "liveintent-audiences-openapi.json: declared missing tag: Audiences",
+    "liveintent-audiences-openapi.json: declared missing tag: Eventtrackers",
+    "liveintent-audiences-openapi.json: declared missing tag: Search",
+    "liveintent-audiences-openapi.json: declared missing tag: Trackers",
+    "liveintent-audiences-openapi.json: declared missing tag: Urltrackers",
+    "liveintent-privacy-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/liveintent-privacy-openapi.yml: archived document superseded by a larger archived document",
+    "_original/liveintent-audiences-openapi.yml: archived document superseded by a larger archived document",
+    "liveintent-api-references-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-audiences-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-eventtrackers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-legacy-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-trackers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "liveintent-urltrackers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

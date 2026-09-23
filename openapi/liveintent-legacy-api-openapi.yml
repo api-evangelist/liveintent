@@ -24,10 +24,7 @@ security:
 - Bearer: []
 tags:
 - name: Legacy
-  description: 'Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used for new integrations.
-
-
-    '
+  description: Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used for new integrations.
 paths:
   /dsr:
     description: 'Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT''s `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.
@@ -42,9 +39,7 @@ paths:
       description: 'Legacy endpoint for submitting data subject requests via POST body. Returns JSON response with transaction reference. The scope is read from the JWT''s `dsr.scope` field (EU_PRIVACY or US_PRIVACY) and is included when the request is accepted for downstream processing.
 
 
-        - Legacy
-
-        '
+        - Legacy'
       requestBody:
         content:
           application/json:
@@ -113,6 +108,10 @@ paths:
 
 
                   '
+      summary: Create dsr
+      x-summary-source: derived
+      operationId: postDsr
+      x-operation-id-source: derived
   /oath:
     description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
 
@@ -126,9 +125,7 @@ paths:
       description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
 
 
-        - Legacy
-
-        '
+        - Legacy'
       parameters:
       - name: dataSubjectRequest
         in: query
@@ -203,6 +200,10 @@ paths:
 
 
                   '
+      summary: Get oath
+      x-summary-source: derived
+      operationId: getOath
+      x-operation-id-source: derived
   /submit:
     description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
 
@@ -216,9 +217,7 @@ paths:
       description: 'Legacy endpoint for submitting data subject requests via query parameter. Returns a 1x1 transparent GIF. The scope is read from the JWT''s `dsr.scope` field and is included when the request is accepted for downstream processing.
 
 
-        - Legacy
-
-        '
+        - Legacy'
       parameters:
       - name: dsr
         in: query
@@ -293,15 +292,12 @@ paths:
 
 
                   '
+      summary: Get submit
+      x-summary-source: derived
+      operationId: getSubmit
+      x-operation-id-source: derived
 components:
   schemas:
-    LegacyDsrRequest:
-      type: object
-      properties:
-        jwt:
-          type: string
-      required:
-      - jwt
     DsrResponse:
       type: object
       properties:
@@ -317,6 +313,13 @@ components:
       - reference
       - read
       - imported
+    LegacyDsrRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
     ApplicationError:
       type: object
       properties:

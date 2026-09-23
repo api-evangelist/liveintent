@@ -1,10 +1,7 @@
 openapi: 3.2.0
 info:
   title: Audiences Trackers API
-  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
-
-
-    '
+  description: The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage Custom Audience. This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
   version: 1.0.0
 servers:
 - url: https://audiences-staging.bln.liveintent.com
@@ -28,10 +25,7 @@ paths:
 
       '
     patch:
-      description: 'Update conversion trackers and rule for audiences.
-
-
-        '
+      description: Update conversion trackers and rule for audiences.
       requestBody:
         content:
           application/json:
@@ -89,6 +83,10 @@ paths:
                   '
       tags:
       - Trackers
+      summary: Update trackers
+      x-summary-source: derived
+      operationId: patchTrackers
+      x-operation-id-source: derived
 components:
   schemas:
     UpdateConversionTrackersAndRulePayload:

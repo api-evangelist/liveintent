@@ -1,10 +1,7 @@
 openapi: 3.2.0
 info:
   title: Audiences Urltrackers API
-  description: 'The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage [Custom Audience](#tag/What-is-a-Custom-Audience). This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
-
-
-    '
+  description: The Audience API helps LiveIntent partners to programmatically exchange data for creating and managing audiences. The API enables a high level of automation, which helps LiveIntent partners increase efficiency, reduce labor requirements, and improve audience delivery time. As a LiveIntent partner, you can leverage the Audience API to create and manage Custom Audience. This API supports the HTTP GET, POST, and PATCH methods. The following sections describe how to call the endpoints.
   version: 1.0.0
 servers:
 - url: https://audiences-staging.bln.liveintent.com
@@ -28,10 +25,7 @@ paths:
 
       '
     post:
-      description: 'Create a new URL tracker audience.
-
-
-        '
+      description: Create a new URL tracker audience.
       requestBody:
         content:
           application/json:
@@ -85,73 +79,12 @@ paths:
                   '
       tags:
       - Urltrackers
+      summary: Create urltrackers
+      x-summary-source: derived
+      operationId: postUrltrackers
+      x-operation-id-source: derived
 components:
   schemas:
-    CreateAudiencePayload:
-      type: object
-      properties:
-        attributionWindow:
-          $ref: '#/components/schemas/AttributionWindow'
-        body:
-          $ref: '#/components/schemas/Json'
-        name:
-          type: string
-        appIds:
-          type: array
-          items:
-            type: string
-          minItems: 1
-        pixelId:
-          type: string
-        accountId:
-          type: integer
-          format: int64
-        audienceTtl:
-          type: integer
-          format: int32
-        conversionId:
-          type: integer
-          format: int64
-      required:
-      - conversionId
-      - pixelId
-      - accountId
-      - appIds
-      - name
-      - attributionWindow
-      - audienceTtl
-      - body
-    Str:
-      type: object
-      properties:
-        value:
-          type: string
-      required:
-      - value
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
-    AudienceMetadataDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    Bool:
-      type: object
-      properties:
-        value:
-          type: boolean
-      required:
-      - value
     AttributionWindow:
       type: object
       properties:
@@ -164,29 +97,61 @@ components:
       required:
       - pcc
       - pvc
-    DynamicAudienceAttributesDTO:
+    Json:
+      oneOf:
+      - type: object
+        properties:
+          Arr:
+            $ref: '#/components/schemas/Arr'
+        additionalProperties: false
+        required:
+        - Arr
+      - type: object
+        properties:
+          'Null':
+            $ref: '#/components/schemas/Null'
+        additionalProperties: false
+        required:
+        - 'Null'
+      - type: object
+        properties:
+          Bool:
+            $ref: '#/components/schemas/Bool'
+        additionalProperties: false
+        required:
+        - Bool
+      - type: object
+        properties:
+          Num:
+            $ref: '#/components/schemas/Num'
+        additionalProperties: false
+        required:
+        - Num
+      - type: object
+        properties:
+          Str:
+            $ref: '#/components/schemas/Str'
+        additionalProperties: false
+        required:
+        - Str
+      - type: object
+        properties:
+          Obj:
+            $ref: '#/components/schemas/Obj'
+        additionalProperties: false
+        required:
+        - Obj
+    'Null':
+      type: object
+      properties: {}
+    Num:
       type: object
       properties:
-        ruleId:
-          type: integer
-          format: int64
-        ttl:
-          type: integer
-          format: int32
+        value:
+          type: number
+          format: double
       required:
-      - ruleId
-      - ttl
-    CreateAudienceResponse:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int32
-        audience:
-          $ref: '#/components/schemas/AudienceWithMetadataDTO'
-      required:
-      - ruleId
-      - audience
+      - value
     AudienceWithMetadataDTO:
       type: object
       properties:
@@ -268,26 +233,41 @@ components:
       - internal
       - metadata
       - updatedAt
-    Num:
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    Str:
       type: object
       properties:
         value:
-          type: number
-          format: double
+          type: string
       required:
       - value
-    Arr:
+    CreateAudienceResponse:
       type: object
       properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
+        ruleId:
+          type: integer
+          format: int32
+        audience:
+          $ref: '#/components/schemas/AudienceWithMetadataDTO'
       required:
-      - elements
-    'Null':
+      - ruleId
+      - audience
+    AudienceMetadataDTO:
       type: object
-      properties: {}
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
     Obj:
       type: object
       properties:
@@ -299,50 +279,68 @@ components:
             - $ref: '#/components/schemas/Json'
       required:
       - fields
-    Json:
-      oneOf:
-      - type: object
-        properties:
-          Arr:
-            $ref: '#/components/schemas/Arr'
-        additionalProperties: false
-        required:
-        - Arr
-      - type: object
-        properties:
-          'Null':
-            $ref: '#/components/schemas/Null'
-        additionalProperties: false
-        required:
-        - 'Null'
-      - type: object
-        properties:
-          Bool:
-            $ref: '#/components/schemas/Bool'
-        additionalProperties: false
-        required:
-        - Bool
-      - type: object
-        properties:
-          Num:
-            $ref: '#/components/schemas/Num'
-        additionalProperties: false
-        required:
-        - Num
-      - type: object
-        properties:
-          Str:
-            $ref: '#/components/schemas/Str'
-        additionalProperties: false
-        required:
-        - Str
-      - type: object
-        properties:
-          Obj:
-            $ref: '#/components/schemas/Obj'
-        additionalProperties: false
-        required:
-        - Obj
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    DynamicAudienceAttributesDTO:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int64
+        ttl:
+          type: integer
+          format: int32
+      required:
+      - ruleId
+      - ttl
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    CreateAudiencePayload:
+      type: object
+      properties:
+        attributionWindow:
+          $ref: '#/components/schemas/AttributionWindow'
+        body:
+          $ref: '#/components/schemas/Json'
+        name:
+          type: string
+        appIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        pixelId:
+          type: string
+        accountId:
+          type: integer
+          format: int64
+        audienceTtl:
+          type: integer
+          format: int32
+        conversionId:
+          type: integer
+          format: int64
+      required:
+      - conversionId
+      - pixelId
+      - accountId
+      - appIds
+      - name
+      - attributionWindow
+      - audienceTtl
+      - body
     ApplicationError:
       type: object
       properties:

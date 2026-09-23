@@ -23,11 +23,8 @@ servers:
 security:
 - Bearer: []
 tags:
-- name: API references
-  description: 'This API reference describes how to interact with the Privacy Management API.
-
-
-    '
+- name: API References
+  description: This API reference describes how to interact with the Privacy Management API.
 paths:
   /data-subject-report/{transactionId}:
     description: '# Get a customer data report URL
@@ -42,17 +39,14 @@ paths:
       '
     get:
       tags:
-      - API references
+      - API References
       description: '# Get a customer data report URL
 
 
         For internal use only. This endpoint redirects to the report download URL using the signed URL parameters.
 
 
-
-        - API references
-
-        '
+        - API references'
       parameters:
       - name: expiresAt
         in: query
@@ -144,12 +138,24 @@ paths:
 
 
                   '
+      summary: Get data subject report by transaction id
+      x-summary-source: derived
+      operationId: getDataSubjectReportByTransactionId
+      x-operation-id-source: derived
   /data-subject-requests:
     description: "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
     post:
       tags:
-      - API references
-      description: "# Submit a request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+      - API References
+      description: '# Submit a request
+
+
+        This endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests.
+
+        To access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. The submission of _ACCESS_ requests is for internal use only. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.
+
+
+        - API references'
       requestBody:
         content:
           application/json:
@@ -205,12 +211,30 @@ paths:
 
 
                   '
+      summary: Create data subject requests
+      x-summary-source: derived
+      operationId: postDataSubjectRequests
+      x-operation-id-source: derived
   /data-subject-requests/test:
     description: "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
     post:
       tags:
-      - API references
-      description: "# Submit a test request\n\nThis endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.\nThe correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked, \nbut the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action. \nResponses will consist of randomly generated data. \nTo access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.\n\n\n- API references\n"
+      - API References
+      description: '# Submit a test request
+
+
+        This endpoint lets you submit _RESTRICT_, _ERASURE_, and _ACCESS_ requests for testing.
+
+        The correctness of submitted requests will be verified and the authority of the `access_token` to submit the type of request will be checked,
+
+        but the requests will not be persisted. Submitted requests will have no effect on privacy related settings of the submitted hashes and will not lead to a report generation in case of `_ACCESS_` action.
+
+        Responses will consist of randomly generated data.
+
+        To access any of the resources, get the `access_token` as described in the Authentication section, then call this endpoint by specifying an action. A request is considered valid if `emailhashes` set is not empty OR `liveIntentFpcs` set is not empty. If both `emailHashes` and `liveItentFpcs` are not empty, then the values are all considered as applied to the same, single data subject.
+
+
+        - API references'
       requestBody:
         content:
           application/json:
@@ -266,6 +290,10 @@ paths:
 
 
                   '
+      summary: Create data subject requests test
+      x-summary-source: derived
+      operationId: postDataSubjectRequestsTest
+      x-operation-id-source: derived
   /data-subject-requests/{transactionId}:
     description: '# Get a customer data report
 
@@ -279,17 +307,14 @@ paths:
       '
     get:
       tags:
-      - API references
+      - API References
       description: '# Get a customer data report
 
 
         For internal use only. This endpoint lets you download a report that you have already requested with the _ACCESS_ request by providing the _transactionId_.
 
 
-
-        - API references
-
-        '
+        - API references'
       parameters:
       - name: transactionId
         in: path
@@ -359,6 +384,10 @@ paths:
 
 
                   '
+      summary: Get data subject requests by transaction id
+      x-summary-source: derived
+      operationId: getDataSubjectRequestsByTransactionId
+      x-operation-id-source: derived
   /search/data-subject-requests:
     description: '# Search Data Subject Requests
 
@@ -372,17 +401,14 @@ paths:
       '
     post:
       tags:
-      - API references
+      - API References
       description: '# Search Data Subject Requests
 
 
         For internal use only. This endpoint lets you search for previously submitted Data Subject Requests.
 
 
-
-        - API references
-
-        '
+        - API references'
       requestBody:
         content:
           application/json:
@@ -451,17 +477,25 @@ paths:
 
 
                   '
+      summary: Create search data subject requests
+      x-summary-source: derived
+      operationId: postSearchDataSubjectRequests
+      x-operation-id-source: derived
 components:
   schemas:
-    DsrAction:
-      type: string
-      enum:
-      - RESTRICT
-      - ERASURE
-      - ACCESS
-    Global:
-      type: object
-      properties: {}
+    SimpleDsrScope:
+      oneOf:
+      - $ref: '#/components/schemas/Advertiser'
+      - $ref: '#/components/schemas/Publisher'
+      - $ref: '#/components/schemas/MediaGroup'
+      - $ref: '#/components/schemas/Global'
+      discriminator:
+        propertyName: entity_type
+        mapping:
+          advertiser: '#/components/schemas/Advertiser'
+          publisher: '#/components/schemas/Publisher'
+          media_group: '#/components/schemas/MediaGroup'
+          global: '#/components/schemas/Global'
     DataSubjectRequestSearchResult:
       type: object
       properties:
@@ -471,77 +505,19 @@ components:
             $ref: '#/components/schemas/DataSubjectRequest'
       required:
       - results
-    DataSubjectRequestSearch:
+    PublisherMediaGroup:
       type: object
       properties:
-        emailHashes:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-          minItems: 1
-      required:
-      - emailHashes
-    Advertiser:
-      type: object
-      properties:
-        id:
+        pid:
+          type: integer
+          format: int32
+        mid:
           type: integer
           format: int32
       required:
-      - id
-    DataSubjectResponse:
-      type: object
-      properties:
-        transactionId:
-          type: string
-      required:
-      - transactionId
-    NewDataSubjectRequest:
-      type: object
-      properties:
-        jurisdiction:
-          type:
-          - string
-          - 'null'
-          description: The scope of the request. Either `EU_PRIVACY`or `US_PRIVACY`
-        scope:
-          anyOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/SimpleDsrScope'
-        liveIntentFpcs:
-          type: array
-          items:
-            type: string
-          description: 'An array of the liveIntent first party cookies (DUIDs).
-
-            If not set, this field defaults to the value of the default annotation.'
-          default: []
-          uniqueItems: true
-        callback:
-          type:
-          - string
-          - 'null'
-          description: For internal use only. Callback url that should be invoked when ACCESS request processing has been completed.
-        emailHashes:
-          type: array
-          items:
-            type: string
-          description: 'An array of email hashes.
-
-            If not set, this field defaults to the value of the default annotation.'
-          default: []
-          uniqueItems: true
-        submitter:
-          type:
-          - string
-          - 'null'
-          description: Optional freeform string that may be used to describe the request submission. This value is simply logged with the request and no additional processing is applied.
-        action:
-          $ref: '#/components/schemas/DsrAction'
-      required:
-      - action
-    Publisher:
+      - pid
+      - mid
+    Advertiser:
       type: object
       properties:
         id:
@@ -597,20 +573,20 @@ components:
       - emailHashes
       - liveIntentFpcs
       - createdAt
-    ApplicationError:
+    DataSubjectRequestSearch:
       type: object
       properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          minItems: 1
       required:
-      - httpStatus
-      - message
-      - errorCode
+      - emailHashes
+    Global:
+      type: object
+      properties: {}
     DsrScope:
       oneOf:
       - type: object
@@ -648,31 +624,6 @@ components:
         additionalProperties: false
         required:
         - Global
-    SimpleDsrScope:
-      oneOf:
-      - $ref: '#/components/schemas/Advertiser'
-      - $ref: '#/components/schemas/Publisher'
-      - $ref: '#/components/schemas/MediaGroup'
-      - $ref: '#/components/schemas/Global'
-      discriminator:
-        propertyName: entity_type
-        mapping:
-          advertiser: '#/components/schemas/Advertiser'
-          publisher: '#/components/schemas/Publisher'
-          media_group: '#/components/schemas/MediaGroup'
-          global: '#/components/schemas/Global'
-    PublisherMediaGroup:
-      type: object
-      properties:
-        pid:
-          type: integer
-          format: int32
-        mid:
-          type: integer
-          format: int32
-      required:
-      - pid
-      - mid
     DataSubjectRequestWithReport:
       type: object
       properties:
@@ -719,6 +670,71 @@ components:
       - status
       - emailHashes
       - createdAt
+    Publisher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
+    DsrAction:
+      type: string
+      enum:
+      - RESTRICT
+      - ERASURE
+      - ACCESS
+    DataSubjectResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+      required:
+      - transactionId
+    NewDataSubjectRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+          description: The scope of the request. Either `EU_PRIVACY`or `US_PRIVACY`
+        scope:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SimpleDsrScope'
+        liveIntentFpcs:
+          type: array
+          items:
+            type: string
+          description: 'An array of the liveIntent first party cookies (DUIDs).
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        callback:
+          type:
+          - string
+          - 'null'
+          description: For internal use only. Callback url that should be invoked when ACCESS request processing has been completed.
+        emailHashes:
+          type: array
+          items:
+            type: string
+          description: 'An array of email hashes.
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        submitter:
+          type:
+          - string
+          - 'null'
+          description: Optional freeform string that may be used to describe the request submission. This value is simply logged with the request and no additional processing is applied.
+        action:
+          $ref: '#/components/schemas/DsrAction'
+      required:
+      - action
     MediaGroup:
       type: object
       properties:
@@ -727,6 +743,20 @@ components:
           format: int32
       required:
       - id
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
   securitySchemes:
     Bearer:
       type: apiKey
