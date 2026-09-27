@@ -85,18 +85,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AttributionWindow:
+    Num:
       type: object
       properties:
-        pcc:
-          type: integer
-          format: int64
-        pvc:
-          type: integer
-          format: int64
+        value:
+          type: number
+          format: double
       required:
-      - pcc
-      - pvc
+      - value
     Json:
       oneOf:
       - type: object
@@ -141,17 +137,18 @@ components:
         additionalProperties: false
         required:
         - Obj
-    'Null':
-      type: object
-      properties: {}
-    Num:
+    AttributionWindow:
       type: object
       properties:
-        value:
-          type: number
-          format: double
+        pcc:
+          type: integer
+          format: int64
+        pvc:
+          type: integer
+          format: int64
       required:
-      - value
+      - pcc
+      - pvc
     AudienceWithMetadataDTO:
       type: object
       properties:
@@ -233,12 +230,17 @@ components:
       - internal
       - metadata
       - updatedAt
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
     Str:
       type: object
       properties:
@@ -257,56 +259,20 @@ components:
       required:
       - ruleId
       - audience
-    AudienceMetadataDTO:
+    ApplicationError:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    Obj:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
-      required:
-      - fields
-    Arr:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
-      required:
-      - elements
-    DynamicAudienceAttributesDTO:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int64
-        ttl:
+        httpStatus:
           type: integer
           format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
       required:
-      - ruleId
-      - ttl
-    Bool:
-      type: object
-      properties:
-        value:
-          type: boolean
-      required:
-      - value
+      - httpStatus
+      - message
+      - errorCode
     CreateAudiencePayload:
       type: object
       properties:
@@ -341,20 +307,54 @@ components:
       - attributionWindow
       - audienceTtl
       - body
-    ApplicationError:
+    Bool:
       type: object
       properties:
-        httpStatus:
+        value:
+          type: boolean
+      required:
+      - value
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    DynamicAudienceAttributesDTO:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int64
+        ttl:
           type: integer
           format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
       required:
-      - httpStatus
-      - message
-      - errorCode
+      - ruleId
+      - ttl
+    'Null':
+      type: object
+      properties: {}
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    Obj:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
+      required:
+      - fields
   securitySchemes:
     Bearer:
       type: apiKey

@@ -149,20 +149,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
-    Num:
+    AudienceMetadataDTO:
       type: object
       properties:
-        value:
-          type: number
-          format: double
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
       required:
-      - value
+      - data
+      - updatedAt
     CursorPage:
       type: object
       properties:
@@ -176,6 +173,53 @@ components:
           - 'null'
       required:
       - items
+    ruleIdMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/LongFilter'
+      required:
+      - value
+    eq:
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int64
+      required:
+      - value
+    IntFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    StringFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    status:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Value'
+      required:
+      - value
     accountIdMatches:
       type: object
       properties:
@@ -192,15 +236,50 @@ components:
             $ref: '#/components/schemas/AudienceFilter'
       required:
       - values
-    StringFilter:
+    Json:
       oneOf:
       - type: object
         properties:
-          eq:
-            $ref: '#/components/schemas/eq'
+          Arr:
+            $ref: '#/components/schemas/Arr'
         additionalProperties: false
         required:
-        - eq
+        - Arr
+      - type: object
+        properties:
+          'Null':
+            $ref: '#/components/schemas/Null'
+        additionalProperties: false
+        required:
+        - 'Null'
+      - type: object
+        properties:
+          Bool:
+            $ref: '#/components/schemas/Bool'
+        additionalProperties: false
+        required:
+        - Bool
+      - type: object
+        properties:
+          Num:
+            $ref: '#/components/schemas/Num'
+        additionalProperties: false
+        required:
+        - Num
+      - type: object
+        properties:
+          Str:
+            $ref: '#/components/schemas/Str'
+        additionalProperties: false
+        required:
+        - Str
+      - type: object
+        properties:
+          Obj:
+            $ref: '#/components/schemas/Obj'
+        additionalProperties: false
+        required:
+        - Obj
     and:
       type: object
       properties:
@@ -210,12 +289,41 @@ components:
             $ref: '#/components/schemas/AudienceFilter'
       required:
       - values
-    Value:
+    not:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/AudienceFilter'
+      required:
+      - value
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    SimpleAudienceStatus:
       type: string
       enum:
       - Active
       - Archived
       - Deleted
+    Num:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+      required:
+      - value
     OffsetPaginatedAudiences:
       type: object
       properties:
@@ -241,21 +349,14 @@ components:
       - pages
       - pageSize
       - totalCount
-    status:
+    AudienceSearchRequestV2:
       type: object
       properties:
-        value:
-          $ref: '#/components/schemas/Value'
-      required:
-      - value
-    AudienceSearchRequest:
-      type: object
-      properties:
-        page:
-          type: integer
-          format: int32
+        next:
+          type:
+          - string
+          - 'null'
           description: If not set, this field defaults to the value of the default annotation.
-          default: 1
         pageSize:
           type: integer
           format: int32
@@ -270,6 +371,83 @@ components:
           type: boolean
           description: If not set, this field defaults to the value of the default annotation.
           default: false
+    MetadataFilter:
+      oneOf:
+      - type: object
+        properties:
+          nameMatches:
+            $ref: '#/components/schemas/nameMatches'
+        additionalProperties: false
+        required:
+        - nameMatches
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    Str:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    LongFilter:
+      oneOf:
+      - type: object
+        properties:
+          eq:
+            $ref: '#/components/schemas/eq'
+        additionalProperties: false
+        required:
+        - eq
+    nameMatches:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/StringFilter'
+      required:
+      - value
+    AudienceData:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+        createdAt:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        name:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - createdAt
+      - updatedAt
+      - status
+      - metadata
     AudienceFilter:
       oneOf:
       - type: object
@@ -335,62 +513,12 @@ components:
         additionalProperties: false
         required:
         - status
-    Obj:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
-      required:
-      - fields
-    eq:
-      type: object
-      properties:
-        value:
-          type: integer
-          format: int64
-      required:
-      - value
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
-    IntFilter:
-      oneOf:
-      - type: object
-        properties:
-          eq:
-            $ref: '#/components/schemas/eq'
-        additionalProperties: false
-        required:
-        - eq
-    hasMetadata:
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/MetadataFilter'
-      required:
-      - value
-    Str:
-      type: object
-      properties:
-        value:
-          type: string
-      required:
-      - value
+    Value:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
     dataProviderIdMatches:
       type: object
       properties:
@@ -398,154 +526,21 @@ components:
           $ref: '#/components/schemas/IntFilter'
       required:
       - value
-    AudienceMetadataDTO:
+    hasMetadata:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
+        value:
+          $ref: '#/components/schemas/MetadataFilter'
       required:
-      - data
-      - updatedAt
-    AudienceData:
+      - value
+    AudienceSearchRequest:
       type: object
       properties:
-        accountId:
-          type: integer
-          format: int64
-        dataProviderId:
+        page:
           type: integer
           format: int32
-        id:
-          type: integer
-          format: int64
-        status:
-          $ref: '#/components/schemas/SimpleAudienceStatus'
-        createdAt:
-          type: string
-          format: date-time
-        metadata:
-          type: object
-          properties: {}
-          additionalProperties:
-            $ref: '#/components/schemas/AudienceMetadataDTO'
-        name:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - id
-      - name
-      - accountId
-      - dataProviderId
-      - createdAt
-      - updatedAt
-      - status
-      - metadata
-    LongFilter:
-      oneOf:
-      - type: object
-        properties:
-          eq:
-            $ref: '#/components/schemas/eq'
-        additionalProperties: false
-        required:
-        - eq
-    Bool:
-      type: object
-      properties:
-        value:
-          type: boolean
-      required:
-      - value
-    Json:
-      oneOf:
-      - type: object
-        properties:
-          Arr:
-            $ref: '#/components/schemas/Arr'
-        additionalProperties: false
-        required:
-        - Arr
-      - type: object
-        properties:
-          'Null':
-            $ref: '#/components/schemas/Null'
-        additionalProperties: false
-        required:
-        - 'Null'
-      - type: object
-        properties:
-          Bool:
-            $ref: '#/components/schemas/Bool'
-        additionalProperties: false
-        required:
-        - Bool
-      - type: object
-        properties:
-          Num:
-            $ref: '#/components/schemas/Num'
-        additionalProperties: false
-        required:
-        - Num
-      - type: object
-        properties:
-          Str:
-            $ref: '#/components/schemas/Str'
-        additionalProperties: false
-        required:
-        - Str
-      - type: object
-        properties:
-          Obj:
-            $ref: '#/components/schemas/Obj'
-        additionalProperties: false
-        required:
-        - Obj
-    nameMatches:
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/StringFilter'
-      required:
-      - value
-    'Null':
-      type: object
-      properties: {}
-    ruleIdMatches:
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/LongFilter'
-      required:
-      - value
-    MetadataFilter:
-      oneOf:
-      - type: object
-        properties:
-          nameMatches:
-            $ref: '#/components/schemas/nameMatches'
-        additionalProperties: false
-        required:
-        - nameMatches
-    not:
-      type: object
-      properties:
-        value:
-          $ref: '#/components/schemas/AudienceFilter'
-      required:
-      - value
-    AudienceSearchRequestV2:
-      type: object
-      properties:
-        next:
-          type:
-          - string
-          - 'null'
           description: If not set, this field defaults to the value of the default annotation.
+          default: 1
         pageSize:
           type: integer
           format: int32
@@ -560,15 +555,20 @@ components:
           type: boolean
           description: If not set, this field defaults to the value of the default annotation.
           default: false
-    Arr:
+    'Null':
+      type: object
+      properties: {}
+    Obj:
       type: object
       properties:
-        elements:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Json'
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
       required:
-      - elements
+      - fields
   securitySchemes:
     Bearer:
       type: apiKey
