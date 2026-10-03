@@ -85,14 +85,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Num:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-      required:
-      - value
     Json:
       oneOf:
       - type: object
@@ -137,6 +129,61 @@ components:
         additionalProperties: false
         required:
         - Obj
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    'Null':
+      type: object
+      properties: {}
+    Str:
+      type: object
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    DynamicAudienceAttributesDTO:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int64
+        ttl:
+          type: integer
+          format: int32
+      required:
+      - ruleId
+      - ttl
+    CreateAudienceResponse:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int32
+        audience:
+          $ref: '#/components/schemas/AudienceWithMetadataDTO'
+      required:
+      - ruleId
+      - audience
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
     AttributionWindow:
       type: object
       properties:
@@ -149,6 +196,20 @@ components:
       required:
       - pcc
       - pvc
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
     AudienceWithMetadataDTO:
       type: object
       properties:
@@ -230,49 +291,6 @@ components:
       - internal
       - metadata
       - updatedAt
-    AudienceMetadataDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    Str:
-      type: object
-      properties:
-        value:
-          type: string
-      required:
-      - value
-    CreateAudienceResponse:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int32
-        audience:
-          $ref: '#/components/schemas/AudienceWithMetadataDTO'
-      required:
-      - ruleId
-      - audience
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
     CreateAudiencePayload:
       type: object
       properties:
@@ -307,43 +325,25 @@ components:
       - attributionWindow
       - audienceTtl
       - body
-    Bool:
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
+    Num:
       type: object
       properties:
         value:
-          type: boolean
+          type: number
+          format: double
       required:
       - value
-    Arr:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
-      required:
-      - elements
-    DynamicAudienceAttributesDTO:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int64
-        ttl:
-          type: integer
-          format: int32
-      required:
-      - ruleId
-      - ttl
-    'Null':
-      type: object
-      properties: {}
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
     Obj:
       type: object
       properties:
