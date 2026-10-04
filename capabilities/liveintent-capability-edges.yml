@@ -1,0 +1,48 @@
+slug: liveintent
+provider: LiveIntent
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: API References
+  spec_file: liveintent-api-references-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.88
+  evidence: POST /data-subject-requests  Create data subject requests; schemas DataSubjectRequest, DsrScope
+    — "LiveIntent Privacy Management API"
+  reason: Operations create and track data subject requests (DSRs), the core GDPR/CCPA data-subject-rights
+    mechanism, which is Privacy & Data Protection Management. Despite the generic tag name "API References",
+    the operations are unambiguously privacy/DSR handling.
+- tag: Legacy
+  spec_file: liveintent-legacy-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.75
+  evidence: POST /dsr  Create dsr; schemas DsrResponse, LegacyDsrRequest — "LiveIntent Privacy Management
+    Legacy API"
+  reason: Legacy endpoints for submitting data subject requests (DSR) under the privacy management API;
+    same privacy/data-protection capability. Lower confidence because the tag bundles undocumented /oath
+    and /submit endpoints.
+- tag: Audiences
+  spec_file: liveintent-audiences-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.72
+  evidence: '"leverage the Audience API to create and manage Custom Audience"; POST /audiences, GET /audiences/{audienceId}/counts'
+  reason: Creating and managing custom advertising audiences for targeting is digital/marketing audience
+    management. Could arguably be customer segmentation, but the vendor context is an email advertising/targeting
+    platform, so digital marketing audience targeting fits best; some ambiguity between BC-400.60 and
+    BC-420.20 lowers confidence.

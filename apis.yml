@@ -240,6 +240,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/liveintent-capability-edges.yml
+  name: LiveIntent Business Capability Map
 - type: AgenticAccess
   url: agentic-access/liveintent-agentic-access.yml
 - type: Authentication
