@@ -85,6 +85,67 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
+    CreateAudienceResponse:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int32
+        audience:
+          $ref: '#/components/schemas/AudienceWithMetadataDTO'
+      required:
+      - ruleId
+      - audience
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
+      required:
+      - value
+    'Null':
+      type: object
+      properties: {}
     Json:
       oneOf:
       - type: object
@@ -129,22 +190,6 @@ components:
         additionalProperties: false
         required:
         - Obj
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
-    'Null':
-      type: object
-      properties: {}
-    Str:
-      type: object
-      properties:
-        value:
-          type: string
-      required:
-      - value
     DynamicAudienceAttributesDTO:
       type: object
       properties:
@@ -157,59 +202,66 @@ components:
       required:
       - ruleId
       - ttl
-    CreateAudienceResponse:
+    CreateAudiencePayload:
       type: object
       properties:
-        ruleId:
+        attributionWindow:
+          $ref: '#/components/schemas/AttributionWindow'
+        body:
+          $ref: '#/components/schemas/Json'
+        name:
+          type: string
+        appIds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        pixelId:
+          type: string
+        accountId:
+          type: integer
+          format: int64
+        audienceTtl:
           type: integer
           format: int32
-        audience:
-          $ref: '#/components/schemas/AudienceWithMetadataDTO'
+        conversionId:
+          type: integer
+          format: int64
       required:
-      - ruleId
-      - audience
-    Bool:
+      - conversionId
+      - pixelId
+      - accountId
+      - appIds
+      - name
+      - attributionWindow
+      - audienceTtl
+      - body
+    Num:
       type: object
       properties:
         value:
-          type: boolean
+          type: number
+          format: double
       required:
       - value
-    Arr:
+    Obj:
       type: object
       properties:
-        elements:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/Json'
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
       required:
-      - elements
-    AttributionWindow:
+      - fields
+    Str:
       type: object
       properties:
-        pcc:
-          type: integer
-          format: int64
-        pvc:
-          type: integer
-          format: int64
-      required:
-      - pcc
-      - pvc
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
+        value:
           type: string
       required:
-      - httpStatus
-      - message
-      - errorCode
+      - value
     AudienceWithMetadataDTO:
       type: object
       properties:
@@ -291,70 +343,18 @@ components:
       - internal
       - metadata
       - updatedAt
-    CreateAudiencePayload:
+    AttributionWindow:
       type: object
       properties:
-        attributionWindow:
-          $ref: '#/components/schemas/AttributionWindow'
-        body:
-          $ref: '#/components/schemas/Json'
-        name:
-          type: string
-        appIds:
-          type: array
-          items:
-            type: string
-          minItems: 1
-        pixelId:
-          type: string
-        accountId:
+        pcc:
           type: integer
           format: int64
-        audienceTtl:
-          type: integer
-          format: int32
-        conversionId:
+        pvc:
           type: integer
           format: int64
       required:
-      - conversionId
-      - pixelId
-      - accountId
-      - appIds
-      - name
-      - attributionWindow
-      - audienceTtl
-      - body
-    AudienceMetadataDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    Num:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-      required:
-      - value
-    Obj:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
-      required:
-      - fields
+      - pcc
+      - pvc
   securitySchemes:
     Bearer:
       type: apiKey

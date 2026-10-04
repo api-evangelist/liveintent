@@ -298,6 +298,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    LegacyDsrRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
     ApplicationError:
       type: object
       properties:
@@ -327,13 +334,6 @@ components:
       - reference
       - read
       - imported
-    LegacyDsrRequest:
-      type: object
-      properties:
-        jwt:
-          type: string
-      required:
-      - jwt
   securitySchemes:
     Bearer:
       type: apiKey

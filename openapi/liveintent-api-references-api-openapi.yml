@@ -483,31 +483,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SimpleDsrScope:
-      oneOf:
-      - $ref: '#/components/schemas/Advertiser'
-      - $ref: '#/components/schemas/Publisher'
-      - $ref: '#/components/schemas/MediaGroup'
-      - $ref: '#/components/schemas/Global'
-      discriminator:
-        propertyName: entity_type
-        mapping:
-          advertiser: '#/components/schemas/Advertiser'
-          publisher: '#/components/schemas/Publisher'
-          media_group: '#/components/schemas/MediaGroup'
-          global: '#/components/schemas/Global'
-    PublisherMediaGroup:
-      type: object
-      properties:
-        pid:
-          type: integer
-          format: int32
-        mid:
-          type: integer
-          format: int32
-      required:
-      - pid
-      - mid
     MediaGroup:
       type: object
       properties:
@@ -516,116 +491,6 @@ components:
           format: int32
       required:
       - id
-    Advertiser:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-      required:
-      - id
-    DataSubjectRequestSearch:
-      type: object
-      properties:
-        emailHashes:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-          minItems: 1
-      required:
-      - emailHashes
-    DsrScope:
-      oneOf:
-      - type: object
-        properties:
-          Advertiser:
-            $ref: '#/components/schemas/Advertiser'
-        additionalProperties: false
-        required:
-        - Advertiser
-      - type: object
-        properties:
-          Publisher:
-            $ref: '#/components/schemas/Publisher'
-        additionalProperties: false
-        required:
-        - Publisher
-      - type: object
-        properties:
-          MediaGroup:
-            $ref: '#/components/schemas/MediaGroup'
-        additionalProperties: false
-        required:
-        - MediaGroup
-      - type: object
-        properties:
-          PublisherMediaGroup:
-            $ref: '#/components/schemas/PublisherMediaGroup'
-        additionalProperties: false
-        required:
-        - PublisherMediaGroup
-      - type: object
-        properties:
-          Global:
-            $ref: '#/components/schemas/Global'
-        additionalProperties: false
-        required:
-        - Global
-    DsrAction:
-      type: string
-      enum:
-      - RESTRICT
-      - ERASURE
-      - ACCESS
-    DataSubjectRequest:
-      type: object
-      properties:
-        jurisdiction:
-          type:
-          - string
-          - 'null'
-        scope:
-          $ref: '#/components/schemas/DsrScope'
-        liveIntentFpcs:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        callback:
-          type:
-          - string
-          - 'null'
-        status:
-          type: string
-        submitter:
-          type:
-          - string
-          - 'null'
-        userId:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        action:
-          $ref: '#/components/schemas/DsrAction'
-        transactionId:
-          type: string
-        emailHashes:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        createdAt:
-          type: string
-      required:
-      - transactionId
-      - action
-      - scope
-      - status
-      - emailHashes
-      - liveIntentFpcs
-      - createdAt
     ApplicationError:
       type: object
       properties:
@@ -640,50 +505,29 @@ components:
       - httpStatus
       - message
       - errorCode
-    NewDataSubjectRequest:
+    DataSubjectRequestSearch:
       type: object
       properties:
-        jurisdiction:
-          type:
-          - string
-          - 'null'
-          description: The scope of the request. Either `EU_PRIVACY`or `US_PRIVACY`
-        scope:
-          anyOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/SimpleDsrScope'
-        liveIntentFpcs:
-          type: array
-          items:
-            type: string
-          description: 'An array of the liveIntent first party cookies (DUIDs).
-
-            If not set, this field defaults to the value of the default annotation.'
-          default: []
-          uniqueItems: true
-        callback:
-          type:
-          - string
-          - 'null'
-          description: For internal use only. Callback url that should be invoked when ACCESS request processing has been completed.
         emailHashes:
           type: array
           items:
             type: string
-          description: 'An array of email hashes.
-
-            If not set, this field defaults to the value of the default annotation.'
-          default: []
           uniqueItems: true
-        submitter:
-          type:
-          - string
-          - 'null'
-          description: Optional freeform string that may be used to describe the request submission. This value is simply logged with the request and no additional processing is applied.
-        action:
-          $ref: '#/components/schemas/DsrAction'
+          minItems: 1
       required:
-      - action
+      - emailHashes
+    PublisherMediaGroup:
+      type: object
+      properties:
+        pid:
+          type: integer
+          format: int32
+        mid:
+          type: integer
+          format: int32
+      required:
+      - pid
+      - mid
     DataSubjectRequestSearchResult:
       type: object
       properties:
@@ -739,9 +583,43 @@ components:
       - status
       - emailHashes
       - createdAt
-    Global:
-      type: object
-      properties: {}
+    DsrScope:
+      oneOf:
+      - type: object
+        properties:
+          Advertiser:
+            $ref: '#/components/schemas/Advertiser'
+        additionalProperties: false
+        required:
+        - Advertiser
+      - type: object
+        properties:
+          Publisher:
+            $ref: '#/components/schemas/Publisher'
+        additionalProperties: false
+        required:
+        - Publisher
+      - type: object
+        properties:
+          MediaGroup:
+            $ref: '#/components/schemas/MediaGroup'
+        additionalProperties: false
+        required:
+        - MediaGroup
+      - type: object
+        properties:
+          PublisherMediaGroup:
+            $ref: '#/components/schemas/PublisherMediaGroup'
+        additionalProperties: false
+        required:
+        - PublisherMediaGroup
+      - type: object
+        properties:
+          Global:
+            $ref: '#/components/schemas/Global'
+        additionalProperties: false
+        required:
+        - Global
     DataSubjectResponse:
       type: object
       properties:
@@ -749,7 +627,129 @@ components:
           type: string
       required:
       - transactionId
+    DsrAction:
+      type: string
+      enum:
+      - RESTRICT
+      - ERASURE
+      - ACCESS
+    Global:
+      type: object
+      properties: {}
     Publisher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
+    NewDataSubjectRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+          description: The scope of the request. Either `EU_PRIVACY`or `US_PRIVACY`
+        scope:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/SimpleDsrScope'
+        liveIntentFpcs:
+          type: array
+          items:
+            type: string
+          description: 'An array of the liveIntent first party cookies (DUIDs).
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        callback:
+          type:
+          - string
+          - 'null'
+          description: For internal use only. Callback url that should be invoked when ACCESS request processing has been completed.
+        emailHashes:
+          type: array
+          items:
+            type: string
+          description: 'An array of email hashes.
+
+            If not set, this field defaults to the value of the default annotation.'
+          default: []
+          uniqueItems: true
+        submitter:
+          type:
+          - string
+          - 'null'
+          description: Optional freeform string that may be used to describe the request submission. This value is simply logged with the request and no additional processing is applied.
+        action:
+          $ref: '#/components/schemas/DsrAction'
+      required:
+      - action
+    DataSubjectRequest:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+        scope:
+          $ref: '#/components/schemas/DsrScope'
+        liveIntentFpcs:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        callback:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+        submitter:
+          type:
+          - string
+          - 'null'
+        userId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        action:
+          $ref: '#/components/schemas/DsrAction'
+        transactionId:
+          type: string
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        createdAt:
+          type: string
+      required:
+      - transactionId
+      - action
+      - scope
+      - status
+      - emailHashes
+      - liveIntentFpcs
+      - createdAt
+    SimpleDsrScope:
+      oneOf:
+      - $ref: '#/components/schemas/Advertiser'
+      - $ref: '#/components/schemas/Publisher'
+      - $ref: '#/components/schemas/MediaGroup'
+      - $ref: '#/components/schemas/Global'
+      discriminator:
+        propertyName: entity_type
+        mapping:
+          advertiser: '#/components/schemas/Advertiser'
+          publisher: '#/components/schemas/Publisher'
+          media_group: '#/components/schemas/MediaGroup'
+          global: '#/components/schemas/Global'
+    Advertiser:
       type: object
       properties:
         id:

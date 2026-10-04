@@ -89,6 +89,20 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
     UpdateConversionTrackersAndRulePayload:
       type: object
       properties:
@@ -119,20 +133,6 @@ components:
       - accountId
       - audienceId
       - ruleId
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
   securitySchemes:
     Bearer:
       type: apiKey
