@@ -483,14 +483,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    MediaGroup:
+    DataSubjectRequestSearchResult:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSubjectRequest'
       required:
-      - id
+      - results
     ApplicationError:
       type: object
       properties:
@@ -505,84 +506,6 @@ components:
       - httpStatus
       - message
       - errorCode
-    DataSubjectRequestSearch:
-      type: object
-      properties:
-        emailHashes:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-          minItems: 1
-      required:
-      - emailHashes
-    PublisherMediaGroup:
-      type: object
-      properties:
-        pid:
-          type: integer
-          format: int32
-        mid:
-          type: integer
-          format: int32
-      required:
-      - pid
-      - mid
-    DataSubjectRequestSearchResult:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSubjectRequest'
-      required:
-      - results
-    DataSubjectRequestWithReport:
-      type: object
-      properties:
-        jurisdiction:
-          type:
-          - string
-          - 'null'
-        scope:
-          $ref: '#/components/schemas/DsrScope'
-        downloadUrl:
-          type:
-          - string
-          - 'null'
-        callback:
-          type:
-          - string
-          - 'null'
-        status:
-          type: string
-        submitter:
-          type:
-          - string
-          - 'null'
-        userId:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        action:
-          $ref: '#/components/schemas/DsrAction'
-        transactionId:
-          type: string
-        emailHashes:
-          type: array
-          items:
-            type: string
-          uniqueItems: true
-        createdAt:
-          type: string
-      required:
-      - transactionId
-      - action
-      - scope
-      - status
-      - emailHashes
-      - createdAt
     DsrScope:
       oneOf:
       - type: object
@@ -627,16 +550,19 @@ components:
           type: string
       required:
       - transactionId
-    DsrAction:
-      type: string
-      enum:
-      - RESTRICT
-      - ERASURE
-      - ACCESS
-    Global:
+    PublisherMediaGroup:
       type: object
-      properties: {}
-    Publisher:
+      properties:
+        pid:
+          type: integer
+          format: int32
+        mid:
+          type: integer
+          format: int32
+      required:
+      - pid
+      - mid
+    MediaGroup:
       type: object
       properties:
         id:
@@ -688,6 +614,82 @@ components:
           $ref: '#/components/schemas/DsrAction'
       required:
       - action
+    Global:
+      type: object
+      properties: {}
+    SimpleDsrScope:
+      oneOf:
+      - $ref: '#/components/schemas/Advertiser'
+      - $ref: '#/components/schemas/Publisher'
+      - $ref: '#/components/schemas/MediaGroup'
+      - $ref: '#/components/schemas/Global'
+      discriminator:
+        propertyName: entity_type
+        mapping:
+          advertiser: '#/components/schemas/Advertiser'
+          publisher: '#/components/schemas/Publisher'
+          media_group: '#/components/schemas/MediaGroup'
+          global: '#/components/schemas/Global'
+    DsrAction:
+      type: string
+      enum:
+      - RESTRICT
+      - ERASURE
+      - ACCESS
+    DataSubjectRequestWithReport:
+      type: object
+      properties:
+        jurisdiction:
+          type:
+          - string
+          - 'null'
+        scope:
+          $ref: '#/components/schemas/DsrScope'
+        downloadUrl:
+          type:
+          - string
+          - 'null'
+        callback:
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+        submitter:
+          type:
+          - string
+          - 'null'
+        userId:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        action:
+          $ref: '#/components/schemas/DsrAction'
+        transactionId:
+          type: string
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+        createdAt:
+          type: string
+      required:
+      - transactionId
+      - action
+      - scope
+      - status
+      - emailHashes
+      - createdAt
+    Publisher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+      required:
+      - id
     DataSubjectRequest:
       type: object
       properties:
@@ -736,19 +738,6 @@ components:
       - emailHashes
       - liveIntentFpcs
       - createdAt
-    SimpleDsrScope:
-      oneOf:
-      - $ref: '#/components/schemas/Advertiser'
-      - $ref: '#/components/schemas/Publisher'
-      - $ref: '#/components/schemas/MediaGroup'
-      - $ref: '#/components/schemas/Global'
-      discriminator:
-        propertyName: entity_type
-        mapping:
-          advertiser: '#/components/schemas/Advertiser'
-          publisher: '#/components/schemas/Publisher'
-          media_group: '#/components/schemas/MediaGroup'
-          global: '#/components/schemas/Global'
     Advertiser:
       type: object
       properties:
@@ -757,6 +746,17 @@ components:
           format: int32
       required:
       - id
+    DataSubjectRequestSearch:
+      type: object
+      properties:
+        emailHashes:
+          type: array
+          items:
+            type: string
+          uniqueItems: true
+          minItems: 1
+      required:
+      - emailHashes
   securitySchemes:
     Bearer:
       type: apiKey

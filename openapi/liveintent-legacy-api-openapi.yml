@@ -298,27 +298,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LegacyDsrRequest:
-      type: object
-      properties:
-        jwt:
-          type: string
-      required:
-      - jwt
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
     DsrResponse:
       type: object
       properties:
@@ -334,6 +313,27 @@ components:
       - reference
       - read
       - imported
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    LegacyDsrRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+      required:
+      - jwt
   securitySchemes:
     Bearer:
       type: apiKey

@@ -85,57 +85,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApplicationError:
-      type: object
-      properties:
-        httpStatus:
-          type: integer
-          format: int32
-        message:
-          type: string
-        errorCode:
-          type: string
-      required:
-      - httpStatus
-      - message
-      - errorCode
-    AudienceMetadataDTO:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Json'
-        updatedAt:
-          type: string
-          format: date-time
-      required:
-      - data
-      - updatedAt
-    CreateAudienceResponse:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int32
-        audience:
-          $ref: '#/components/schemas/AudienceWithMetadataDTO'
-      required:
-      - ruleId
-      - audience
-    Arr:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
-      required:
-      - elements
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
     Bool:
       type: object
       properties:
@@ -143,9 +92,12 @@ components:
           type: boolean
       required:
       - value
-    'Null':
-      type: object
-      properties: {}
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
     Json:
       oneOf:
       - type: object
@@ -190,18 +142,6 @@ components:
         additionalProperties: false
         required:
         - Obj
-    DynamicAudienceAttributesDTO:
-      type: object
-      properties:
-        ruleId:
-          type: integer
-          format: int64
-        ttl:
-          type: integer
-          format: int32
-      required:
-      - ruleId
-      - ttl
     CreateAudiencePayload:
       type: object
       properties:
@@ -236,25 +176,17 @@ components:
       - attributionWindow
       - audienceTtl
       - body
-    Num:
+    CreateAudienceResponse:
       type: object
       properties:
-        value:
-          type: number
-          format: double
+        ruleId:
+          type: integer
+          format: int32
+        audience:
+          $ref: '#/components/schemas/AudienceWithMetadataDTO'
       required:
-      - value
-    Obj:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
-      required:
-      - fields
+      - ruleId
+      - audience
     Str:
       type: object
       properties:
@@ -343,6 +275,48 @@ components:
       - internal
       - metadata
       - updatedAt
+    ApplicationError:
+      type: object
+      properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    Num:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+      required:
+      - value
+    Obj:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
+      required:
+      - fields
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
     AttributionWindow:
       type: object
       properties:
@@ -355,6 +329,32 @@ components:
       required:
       - pcc
       - pvc
+    DynamicAudienceAttributesDTO:
+      type: object
+      properties:
+        ruleId:
+          type: integer
+          format: int64
+        ttl:
+          type: integer
+          format: int32
+      required:
+      - ruleId
+      - ttl
+    'Null':
+      type: object
+      properties: {}
+    AudienceMetadataDTO:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Json'
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+      - data
+      - updatedAt
   securitySchemes:
     Bearer:
       type: apiKey

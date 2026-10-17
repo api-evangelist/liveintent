@@ -574,38 +574,112 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ApplicationError:
+    SimpleAudienceStatus:
+      type: string
+      enum:
+      - Active
+      - Archived
+      - Deleted
+    UpsertMetadataRequestDTO:
       type: object
       properties:
-        httpStatus:
+        data:
+          $ref: '#/components/schemas/Json'
+      required:
+      - data
+    AudienceCounts:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceCount'
+      required:
+      - entries
+    Obj:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            allOf:
+            - type: string
+            - $ref: '#/components/schemas/Json'
+      required:
+      - fields
+    Arr:
+      type: object
+      properties:
+        elements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Json'
+      required:
+      - elements
+    AudienceData:
+      type: object
+      properties:
+        accountId:
+          type: integer
+          format: int64
+        dataProviderId:
           type: integer
           format: int32
-        message:
+        id:
+          type: integer
+          format: int64
+        status:
+          $ref: '#/components/schemas/SimpleAudienceStatus'
+        createdAt:
           type: string
-        errorCode:
+          format: date-time
+        metadata:
+          type: object
+          properties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/AudienceMetadataDTO'
+        name:
           type: string
+        updatedAt:
+          type: string
+          format: date-time
       required:
-      - httpStatus
-      - message
-      - errorCode
-    CreateSignedUrlRequest:
+      - id
+      - name
+      - accountId
+      - dataProviderId
+      - createdAt
+      - updatedAt
+      - status
+      - metadata
+    StatusUpdateDTO:
+      type: string
+      enum:
+      - Activate
+      - Archive
+    Str:
       type: object
       properties:
-        uploadName:
-          type:
-          - string
-          - 'null'
-        notificationEmail:
-          type:
-          - string
-          - 'null'
-        identifierType:
-          type: string
-        action:
+        value:
           type: string
       required:
-      - identifierType
-      - action
+      - value
+    AudienceCount:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        totalCount:
+          type: integer
+          format: int64
+        matchCount:
+          type: integer
+          format: int64
+      required:
+      - date
+      - totalCount
+      - matchCount
     Num:
       type: object
       properties:
@@ -621,15 +695,6 @@ components:
       - Running
       - Finished
       - Error
-    Arr:
-      type: object
-      properties:
-        elements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Json'
-      required:
-      - elements
     AudienceMetadataDTO:
       type: object
       properties:
@@ -641,25 +706,66 @@ components:
       required:
       - data
       - updatedAt
-    'Null':
-      type: object
-      properties: {}
-    AudienceCounts:
+    ApplicationError:
       type: object
       properties:
+        httpStatus:
+          type: integer
+          format: int32
+        message:
+          type: string
+        errorCode:
+          type: string
+      required:
+      - httpStatus
+      - message
+      - errorCode
+    OffsetPaginatedAudiences:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
         entries:
           type: array
           items:
-            $ref: '#/components/schemas/AudienceCount'
+            $ref: '#/components/schemas/AudienceData'
+        totalCount:
+          type: integer
+          format: int32
       required:
       - entries
-    UpsertMetadataRequestDTO:
+      - page
+      - pages
+      - pageSize
+      - totalCount
+    'Null':
+      type: object
+      properties: {}
+    UpdateAudienceRequest:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Json'
+        name:
+          type:
+          - string
+          - 'null'
+        status:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/StatusUpdateDTO'
+    Bool:
+      type: object
+      properties:
+        value:
+          type: boolean
       required:
-      - data
+      - value
     Json:
       oneOf:
       - type: object
@@ -704,42 +810,60 @@ components:
         additionalProperties: false
         required:
         - Obj
-    AudienceData:
+    SignedUploadUrlResponse:
       type: object
       properties:
-        accountId:
-          type: integer
-          format: int64
+        signedUrl:
+          type: string
+      required:
+      - signedUrl
+    CreateAudienceRequest:
+      type: object
+      properties:
         dataProviderId:
           type: integer
           format: int32
-        id:
+        name:
+          type: string
+        accountId:
           type: integer
           format: int64
-        status:
-          $ref: '#/components/schemas/SimpleAudienceStatus'
-        createdAt:
-          type: string
-          format: date-time
         metadata:
           type: object
           properties: {}
           additionalProperties:
-            $ref: '#/components/schemas/AudienceMetadataDTO'
-        name:
-          type: string
-        updatedAt:
-          type: string
-          format: date-time
+            $ref: '#/components/schemas/UpsertMetadataRequestDTO'
+          description: If not set, this field defaults to the value of the default annotation.
+          default: {}
       required:
-      - id
+      - dataProviderId
       - name
       - accountId
-      - dataProviderId
-      - createdAt
-      - updatedAt
-      - status
-      - metadata
+    OffsetPaginatedAudienceUploads:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        pages:
+          type: integer
+          format: int32
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudienceUpload'
+        totalCount:
+          type: integer
+          format: int32
+      required:
+      - entries
+      - page
+      - pages
+      - pageSize
+      - totalCount
     AudienceUpload:
       type: object
       properties:
@@ -777,148 +901,24 @@ components:
       - estimatedDuplicateCount
       - uploadedHashesCount
       - invalidHashesCount
-    SimpleAudienceStatus:
-      type: string
-      enum:
-      - Active
-      - Archived
-      - Deleted
-    Bool:
+    CreateSignedUrlRequest:
       type: object
       properties:
-        value:
-          type: boolean
-      required:
-      - value
-    SignedUploadUrlResponse:
-      type: object
-      properties:
-        signedUrl:
-          type: string
-      required:
-      - signedUrl
-    StatusUpdateDTO:
-      type: string
-      enum:
-      - Activate
-      - Archive
-    Obj:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            allOf:
-            - type: string
-            - $ref: '#/components/schemas/Json'
-      required:
-      - fields
-    Str:
-      type: object
-      properties:
-        value:
-          type: string
-      required:
-      - value
-    OffsetPaginatedAudiences:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        page:
-          type: integer
-          format: int32
-        pages:
-          type: integer
-          format: int32
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudienceData'
-        totalCount:
-          type: integer
-          format: int32
-      required:
-      - entries
-      - page
-      - pages
-      - pageSize
-      - totalCount
-    CreateAudienceRequest:
-      type: object
-      properties:
-        dataProviderId:
-          type: integer
-          format: int32
-        name:
-          type: string
-        accountId:
-          type: integer
-          format: int64
-        metadata:
-          type: object
-          properties: {}
-          additionalProperties:
-            $ref: '#/components/schemas/UpsertMetadataRequestDTO'
-          description: If not set, this field defaults to the value of the default annotation.
-          default: {}
-      required:
-      - dataProviderId
-      - name
-      - accountId
-    AudienceCount:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        totalCount:
-          type: integer
-          format: int64
-        matchCount:
-          type: integer
-          format: int64
-      required:
-      - date
-      - totalCount
-      - matchCount
-    UpdateAudienceRequest:
-      type: object
-      properties:
-        name:
+        uploadName:
           type:
           - string
           - 'null'
-        status:
-          anyOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/StatusUpdateDTO'
-    OffsetPaginatedAudienceUploads:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        page:
-          type: integer
-          format: int32
-        pages:
-          type: integer
-          format: int32
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudienceUpload'
-        totalCount:
-          type: integer
-          format: int32
+        notificationEmail:
+          type:
+          - string
+          - 'null'
+        identifierType:
+          type: string
+        action:
+          type: string
       required:
-      - entries
-      - page
-      - pages
-      - pageSize
-      - totalCount
+      - identifierType
+      - action
   securitySchemes:
     Bearer:
       type: apiKey
