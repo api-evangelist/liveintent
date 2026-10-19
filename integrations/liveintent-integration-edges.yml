@@ -1,7 +1,14 @@
 generated: '2026-10-14'
 method: searched
 checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
 - https://hightouch.com/docs/destinations/liveintent
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://vendor-list.consensu.org/v3/vendor-list.json
 marketplace_apps: []
 edges:
@@ -53,4 +60,43 @@ edges:
     detected: '2026-10-14'
   detected_by: sweep-adtech.py
   detected: '2026-10-14'
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/live-connect-common
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: live-connect-common
+      version: 4.1.0
+      released: '2024-10-31'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/live-connect-common
+      repo_leg: github-org:liveintent
+      publisher_leg: email:liveintent.com
+      matched_by: domain
+    - name: live-connect-handlers
+      version: 3.1.0
+      released: '2024-10-31'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/live-connect-handlers
+      repo_leg: github-org:liveintent
+      publisher_leg: email:liveintent.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source: https://hightouch.com/docs/destinations/liveintent
