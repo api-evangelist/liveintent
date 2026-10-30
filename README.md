@@ -64,19 +64,140 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-LiveIntent is a people-based email marketing, advertising and identity platform. It publishes four
-partner APIs, two of which carry machine-readable OpenAPI 3.0.0 definitions:
+LiveIntent is a people-based email marketing, advertising and identity platform serving more than 2,500 businesses. It connects marketers and publishers through email-native audience targeting, publisher inventory monetization (LiveTag and native ad blueprints), and identity resolution across the digital ecosystem, including its HIRO first-party data solution and email reactivation services. LiveIntent publishes four partner APIs — an Audiences API and a Privacy Management API, both backed by OpenAPI 3.0.0 definitions rendered through Redocly; a Reporting API for publisher and advertiser metrics; and a Programmatic Bidding API implementing a subset of IAB OpenRTB 2.5 with OpenRTB Native 1.1 and 1.2 — alongside the open-source LiveConnect first-party identity library (npm live-connect-js) and partner data integrations with Segment, Oracle, Adobe, Merkle and LiveRamp. All API access is bearer-token based and provisioned by a LiveIntent account team rather than self-service. LiveIntent has been acquired by Zeta Global. Backed by Battery Ventures and Bullpen Capital.
 
-| API | Contract | Base URL |
-|---|---|---|
-| [Audiences API](https://audiences.liveintent.com/api-guide) | OpenAPI 3.0.0 — 12 operations, 48 schemas | `https://audiences.liveintent.com` |
-| [Privacy Management API](https://privacy.liadm.com/api-guide) | OpenAPI 3.0.0 — 8 operations, 17 schemas | `https://privacy.liadm.com` |
-| [Reporting API](https://support.liveintent.com/connecting-to-liveintents-reporting-api/) | Documented only — no spec published | `https://connect.liveintent.com` |
-| [Programmatic Bidding API](https://support.liveintent.com/programmatic-bidding-api/) | IAB OpenRTB 2.5 + Native 1.1/1.2 | DSP-supplied bidding URL |
+**Areas:** Company · Advertising · AdTech · Identity · Email Marketing · Audiences · Publishers · Marketers · Data
 
-Neither OpenAPI document was published at a standalone URL — both were harvested from the Redocly
-state embedded in LiveIntent's own rendered API guides. All API access is bearer-token based and
-provisioned by a LiveIntent account team; there is no self-service signup, no published pricing, and
-no OAuth authorization server. LiveIntent has been acquired by Zeta Global.
+## LiveIntent on APIs.io
 
-Backed by: battery-ventures, bullpen-capital — https://www.liveintent.com
+Everything profiled for LiveIntent is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/liveintent/](https://apis.io/providers/liveintent/)** — or go straight to one of the APIs or properties below.
+
+### APIs (9)
+
+- [LiveIntent Reporting API](https://apis.io/apis/liveintent/reporting/) — Query LiveIntent publisher and advertiser reporting data. A single executeQuery endpoint accepts a report type, an absolute or dynamic date interval, a…
+- [LiveIntent Programmatic Bidding API](https://apis.io/apis/liveintent/programmatic-bidding/) — LiveIntent's exchange-side real-time bidding integration for demand-side platforms. It implements a subset of the IAB OpenRTB API Specification 2.5 together…
+- [LiveIntent API references API](https://apis.io/apis/liveintent/liveintent-api-references-api/) — This API reference describes how to interact with the Privacy Management API.
+- [LiveIntent Audiences API](https://apis.io/apis/liveintent/liveintent-audiences-api/) — The Audiences API from LiveIntent — 5 operation(s) for audiences.
+- [LiveIntent Eventtrackers API](https://apis.io/apis/liveintent/liveintent-eventtrackers-api/) — The Eventtrackers API from LiveIntent — 1 operation(s) for eventtrackers.
+- [LiveIntent Legacy API](https://apis.io/apis/liveintent/liveintent-legacy-api/) — Legacy endpoints for backward compatibility. These endpoints are deprecated and should not be used for new integrations.
+- [LiveIntent Search API](https://apis.io/apis/liveintent/liveintent-search-api/) — The Search API from LiveIntent — 2 operation(s) for search.
+- [LiveIntent Trackers API](https://apis.io/apis/liveintent/liveintent-trackers-api/) — The Trackers API from LiveIntent — 1 operation(s) for trackers.
+- [LiveIntent Urltrackers API](https://apis.io/apis/liveintent/liveintent-urltrackers-api/) — The Urltrackers API from LiveIntent — 1 operation(s) for urltrackers.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Liveintent Events](https://apis.io/asyncapis/liveintent/liveintent-events/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Liveintent Agentic Access](https://apis.io/agentic-access/liveintent/liveintent-agentic-access/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Audiences API](https://apis.io/collections/liveintent/open-liveintent-audiences/)
+- [LiveIntent Privacy Management API](https://apis.io/collections/liveintent/open-liveintent-privacy/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Liveintent Audiences Overlay](https://apis.io/overlays/liveintent/liveintent-audiences-overlay/)
+- [Liveintent Privacy Overlay](https://apis.io/overlays/liveintent/liveintent-privacy-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Liveintent Authentication](https://apis.io/security/liveintent/liveintent-authentication/)
+- [Liveintent Domain Security](https://apis.io/security/liveintent/liveintent-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Liveintent Plans Pricing](https://apis.io/plans/liveintent/liveintent-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Liveintent Rate Limits](https://apis.io/rate-limits/liveintent/liveintent-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.liveintent.com)
+- [Documentation](https://support.liveintent.com/hc/en-us)
+- [API reference](https://support.liveintent.com/hc/en-us/sections/360009709692-LiveIntent-APIs)
+- [Sign up](https://www.liveintent.com/get-started/)
+- [Support](https://support.liveintent.com/hc/en-us)
+- [Blog](https://www.liveintent.com/blog/)
+- [Privacy policy](https://www.liveintent.com/privacy-policy/)
+- [GitHub](https://github.com/LiveIntent)
+- [Status](https://status.liveintent.com)
+
+## API Evangelist rating
+
+**Kin Score 41.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 56.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 23.7 |
+
+**Agent readiness 30.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/liveintent/](https://apis.io/providers/liveintent/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LiveIntent: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/liveintent/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
